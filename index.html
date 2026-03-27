@@ -3,576 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khora</title>
-    <meta name="description" content="A quiet space for the woman who has done everything right and still feels something is missing.">
+    <title>Enter Khora | A sunlit space for the exhausted woman</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
     <style>
+        /* Khora Värvipalett */
         :root {
-            --white: #FAFAF7;
-            --cream: #F5F0E8;
-            --text: #3A3A32;
-            --text-light: #8A8A7A;
-            --gold: #C4A962;
-            --gold-soft: #D4C08A;
-            --green: #6B7F5E;
-            --green-light: #A8B89E;
-            --green-pale: #E8EDE4;
-            --leaf: #4A5E3C;
+            --bg-linen: #FAF9F6;      /* Päikesepestud lina */
+            --text-green: #2A3B2C;    /* Sügav džungliroheline */
+            --accent-gold: #E3C27C;   /* Frangipani kuldne */
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-            font-size: 18px;
-        }
-
-        body {
-            background-color: var(--white);
-            color: var(--text);
-            font-family: 'DM Sans', sans-serif;
+        body, html {
+            background-color: var(--bg-linen);
+            color: var(--text-green);
+            font-family: 'Inter', sans-serif;
             font-weight: 300;
-            line-height: 1.7;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Subtle leaf pattern overlay */
-        body::before {
-            content: '';
+        /* Õrn animeeritud taustavalgus (Komorebi efekt) */
+        .ambient-light {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(168, 184, 158, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(196, 169, 98, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(168, 184, 158, 0.06) 0%, transparent 50%);
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
             z-index: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(227, 194, 124, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(42, 59, 44, 0.03) 0%, transparent 50%);
+            animation: breathe 10s infinite alternate ease-in-out;
         }
 
-        .section {
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 4rem 2rem;
+        @keyframes breathe {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.05); opacity: 1; }
         }
 
-        /* === HERO === */
-        .hero {
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-ornament {
-            width: 40px;
-            height: 1px;
-            background: var(--gold);
-            margin: 0 auto 3rem;
-            opacity: 0;
-            animation: fadeGrow 2s ease 0.5s forwards;
-        }
-
-        .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 300;
-            font-size: clamp(2.8rem, 6vw, 5rem);
-            letter-spacing: 0.15em;
-            color: var(--text);
-            opacity: 0;
-            animation: fadeUp 2s ease 0.8s forwards;
-        }
-
-        .hero-sub {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 300;
-            font-style: italic;
-            font-size: clamp(1rem, 2.2vw, 1.3rem);
-            color: var(--text-light);
-            margin-top: 1.5rem;
-            letter-spacing: 0.05em;
-            opacity: 0;
-            animation: fadeUp 2s ease 1.4s forwards;
-        }
-
-        .hero-leaf {
-            margin-top: 3rem;
-            font-size: 1.4rem;
-            opacity: 0;
-            animation: fadeUp 2s ease 1.8s forwards;
-            color: var(--green-light);
-        }
-
-        .scroll-hint {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            animation: fadeUp 2s ease 2.5s forwards;
-        }
-
-        .scroll-hint span {
-            display: block;
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to bottom, var(--gold-soft), transparent);
-            margin: 0 auto;
-            animation: scrollPulse 2s ease infinite;
-        }
-
-        /* === MANIFESTO === */
-        .manifesto {
-            max-width: 680px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .manifesto-line {
+        /* Tüpograafia */
+        h1, h2, h3 {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 400;
-            font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-            line-height: 1.9;
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1.2s ease, transform 1.2s ease;
-            color: var(--text);
+            color: var(--text-green);
+            margin-bottom: 2rem;
         }
 
-        .manifesto-line.visible {
-            opacity: 1;
-            transform: translateY(0);
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.15;
         }
 
-        .manifesto-line.emphasis {
-            font-size: clamp(1.3rem, 3vw, 1.7rem);
-            font-weight: 500;
-            color: var(--leaf);
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.2;
         }
 
-        .manifesto-line.italic {
+        p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            max-width: 600px;
+            margin: 0 auto 1.5rem auto;
+            color: rgba(42, 59, 44, 0.85);
+        }
+
+        .italic {
             font-style: italic;
-            color: var(--text-light);
-            font-weight: 300;
         }
 
-        .manifesto-line.breath {
-            margin-bottom: 5rem;
-        }
-
-        .manifesto-divider {
-            width: 30px;
-            height: 1px;
-            background: var(--gold);
-            margin: 3rem auto;
-            opacity: 0;
-            transform: scaleX(0);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        .manifesto-divider.visible {
-            opacity: 1;
-            transform: scaleX(1);
-        }
-
-        /* === EMAIL CAPTURE === */
-        .capture {
-            text-align: center;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .capture-ornament {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1.2s ease, transform 1.2s ease;
-        }
-
-        .capture-ornament.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .capture-ornament .line {
-            width: 40px;
-            height: 1px;
-            background: var(--green-light);
-        }
-
-        .capture-ornament .leaf-icon {
-            color: var(--green-light);
-            font-size: 0.9rem;
-        }
-
-        .capture-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 300;
-            font-style: italic;
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-            color: var(--text-light);
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1.2s ease 0.2s, transform 1.2s ease 0.2s;
-        }
-
-        .capture-title.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .email-form {
+        /* Paigutus - Iga tekstiplokk võtab terve ekraani kõrguse, et sundida aeglustuma */
+        section {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh; 
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 1rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1.2s ease 0.4s, transform 1.2s ease 0.4s;
+            text-align: center;
+            padding: 2rem;
         }
 
-        .email-form.visible {
+        /* Kerimisel sissehajumise animatsioon */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .email-input {
+        /* E-maili vormi disain */
+        .form-container {
+            margin-top: 3rem;
             width: 100%;
-            max-width: 360px;
-            padding: 1rem 1.5rem;
-            border: 1px solid var(--green-pale);
+            max-width: 400px;
+        }
+
+        input[type="email"] {
+            width: 100%;
             background: transparent;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 300;
-            color: var(--text);
-            letter-spacing: 0.03em;
+            border: none;
+            border-bottom: 1px solid rgba(42, 59, 44, 0.2);
+            color: var(--text-green);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            margin-bottom: 2.5rem;
             text-align: center;
             outline: none;
-            transition: border-color 0.5s ease;
+            transition: border-color 0.4s ease;
         }
 
-        .email-input::placeholder {
-            color: var(--text-light);
+        input[type="email"]::placeholder {
+            color: rgba(42, 59, 44, 0.4);
             font-style: italic;
         }
 
-        .email-input:focus {
-            border-color: var(--gold-soft);
+        input[type="email"]:focus {
+            border-bottom: 1px solid var(--text-green);
         }
 
-        .email-submit {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 0.2em;
-            text-transform: lowercase;
-            color: var(--text-light);
-            background: none;
-            border: none;
+        button {
+            background-color: transparent;
+            color: var(--text-green);
+            border: 1px solid var(--accent-gold);
+            padding: 16px 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 2px;
             cursor: pointer;
-            padding: 0.8rem 2rem;
-            transition: color 0.5s ease;
-            position: relative;
+            transition: all 0.5s ease;
+            width: 100%;
         }
 
-        .email-submit::after {
-            content: '';
+        button:hover {
+            background-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .microcopy {
+            font-size: 0.85rem;
+            margin-top: 2rem;
+            color: rgba(42, 59, 44, 0.5);
+            font-style: italic;
+        }
+
+        /* Õrn animeeritud joon alla esimesel vaatel */
+        .scroll-indicator {
             position: absolute;
-            bottom: 0.4rem;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width 0.5s ease;
-        }
-
-        .email-submit:hover {
-            color: var(--leaf);
-        }
-
-        .email-submit:hover::after {
-            width: 60%;
-        }
-
-        /* === FOOTER === */
-        .footer {
-            min-height: auto;
-            padding: 6rem 2rem 3rem;
-            text-align: center;
-        }
-
-        .footer-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-weight: 300;
-            font-size: 0.85rem;
-            color: var(--text-light);
-            letter-spacing: 0.05em;
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--text-green), transparent);
+            animation: pulse 2.5s infinite;
             opacity: 0.5;
         }
 
-        /* === ANIMATIONS === */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeGrow {
-            from {
-                opacity: 0;
-                width: 0;
-            }
-            to {
-                opacity: 1;
-                width: 40px;
-            }
-        }
-
-        @keyframes scrollPulse {
-            0%, 100% {
-                opacity: 0.3;
-                height: 40px;
-            }
-            50% {
-                opacity: 0.8;
-                height: 55px;
-            }
-        }
-
-        /* === THANK YOU STATE === */
-        .thank-you {
-            display: none;
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-weight: 300;
-            font-size: 1.1rem;
-            color: var(--green);
-            text-align: center;
-            padding: 1rem;
-        }
-
-        /* === RESPONSIVE === */
-        @media (max-width: 600px) {
-            html {
-                font-size: 16px;
-            }
-
-            .section {
-                padding: 3rem 1.5rem;
-            }
-
-            .manifesto-line {
-                margin-bottom: 2rem;
-                line-height: 1.8;
-            }
-
-            .manifesto-line.breath {
-                margin-bottom: 3.5rem;
-            }
-
-            .email-input {
-                max-width: 100%;
-            }
+        @keyframes pulse {
+            0% { opacity: 0; transform: translate(-50%, -10px); }
+            50% { opacity: 0.5; }
+            100% { opacity: 0; transform: translate(-50%, 10px); }
         }
     </style>
 </head>
 <body>
 
-    <!-- HERO -->
-    <section class="section hero">
-        <div class="hero-ornament"></div>
-        <h1>KHORA</h1>
-        <p class="hero-sub">a place to rest before you begin again</p>
-        <div class="hero-leaf">🌿</div>
-        <div class="scroll-hint">
-            <span></span>
+    <div class="ambient-light"></div>
+
+    <section>
+        <div class="reveal">
+            <h1>You did everything<br>they told you to do.</h1>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <section>
+        <div class="reveal">
+            <p>You built the life. You carried the weight. You kept the world spinning.</p>
+            <p>From the outside, your architecture is flawless.</p>
+            <p class="italic">From the inside, you are profoundly tired.</p>
         </div>
     </section>
 
-    <!-- MANIFESTO -->
-    <section class="section">
-        <div class="manifesto">
-            <p class="manifesto-line breath">
-                You did everything they told you to do.
-            </p>
-
-            <p class="manifesto-line">
-                The career. The home. The relationship. The discipline.<br>
-                The skincare, the workouts, the meal plans, the morning routines.
-            </p>
-
-            <p class="manifesto-line">
-                From the outside, everything looks right.<br>
-                Every box checked. Every expectation met.
-            </p>
-
-            <p class="manifesto-line breath">
-                And still, at night, something is missing.
-            </p>
-
-            <div class="manifesto-divider"></div>
-
-            <p class="manifesto-line italic">
-                Not because you did anything wrong.
-            </p>
-
-            <p class="manifesto-line emphasis">
-                You have been strong for so long<br>
-                that you are exhausted by your own strength.
-            </p>
-
-            <p class="manifesto-line breath">
-                And what does the world offer you?<br>
-                Pink quotes. Slogans. One more routine to optimize.<br>
-                One more version of yourself to become.
-            </p>
-
-            <div class="manifesto-divider"></div>
-
-            <p class="manifesto-line emphasis" style="margin-top: 2rem;">
-                Enough.
-            </p>
-
-            <p class="manifesto-line">
-                Khora is not another place that tells you<br>
-                what to do or who to be.
-            </p>
-
-            <p class="manifesto-line">
-                It is a place where you can finally stop performing.<br>
-                Where softness is not weakness.<br>
-                Where rest is not giving up.<br>
-                Where starting over does not mean starting from nothing.
-            </p>
-
-            <p class="manifesto-line italic breath">
-                A garden, not a lecture hall.<br>
-                A breath, not a task.
-            </p>
-
-            <div class="manifesto-divider"></div>
-
-            <p class="manifesto-line">
-                We are building something here.<br>
-                Slowly. Honestly. In plain sight.
-            </p>
-
-            <p class="manifesto-line emphasis">
-                A quiet place for the woman who has done everything right<br>
-                and still feels something is missing.
-            </p>
-
-            <p class="manifesto-line italic">
-                You found it.
-            </p>
+    <section>
+        <div class="reveal">
+            <p>Not the kind of tired a weekend getaway can fix.</p>
+            <p>It is the heavy, nameless fatigue of always being the strong one.</p>
+            <br>
+            <p>The world will tell you to push harder. To optimize. To fight.</p>
+            <p>We built this space because true luxury is the permission to stop fighting.</p>
         </div>
     </section>
 
-    <!-- EMAIL CAPTURE -->
-    <section class="section capture-section">
-        <div class="capture">
-            <div class="capture-ornament">
-                <div class="line"></div>
-                <span class="leaf-icon">🌿</span>
-                <div class="line"></div>
-            </div>
-
-            <p class="capture-title">Leave your name in the quiet.</p>
-
-            <div class="email-form" id="emailForm">
-                <input 
-                    type="email" 
-                    class="email-input" 
-                    id="emailInput"
-                    placeholder="your email"
-                    required
-                >
-                <button type="button" class="email-submit" onclick="handleSubmit()">
-                    enter
-                </button>
-            </div>
-
-            <div class="thank-you" id="thankYou">
-                You are here now. We will find you when it is time.
-            </div>
+    <section>
+        <div class="reveal">
+            <h2>Welcome to Khora.</h2>
+            <p>A sunlit space for the exhausted woman.</p>
+            <p>No slogans. No hustle.</p>
+            <p>Just room to breathe, the quiet science of resting, and the dignity of a soft life.</p>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <section class="footer">
-        <p class="footer-text">Khora — coming soon</p>
+    <section>
+        <div class="reveal">
+            <h2>Leave your name<br>in the morning light.</h2>
+            
+            <div class="form-container">
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Siia taha saame hiljem ühe klikiga ühendada sinu uudiskirja mootori (nt MailerLite või Substack). Praegu aga lihtsalt tunneta, kas see aed sai õige.');">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Step into the garden</button>
+                </form>
+                <p class="microcopy">We protect your peace. No spam, ever.<br>Only quiet letters when it matters.</p>
+            </div>
+        </div>
     </section>
 
     <script>
-        // Scroll reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.3 // Tekst hakkab ilmuma siis, kui 30% sellest jõuab ekraanile
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
             });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        document.querySelectorAll('.manifesto-line, .manifesto-divider, .capture-ornament, .capture-title, .email-form').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Email handling
-        function handleSubmit() {
-            const email = document.getElementById('emailInput').value;
-            if (email && email.includes('@')) {
-                document.getElementById('emailForm').style.display = 'none';
-                document.getElementById('thankYou').style.display = 'block';
-                
-                // Here you would send to your email service
-                console.log('Email captured:', email);
-            }
-        }
-
-        // Enter key support
-        document.getElementById('emailInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                handleSubmit();
-            }
-        });
-
-        // Hide scroll hint on scroll
-        window.addEventListener('scroll', function() {
-            const hint = document.querySelector('.scroll-hint');
-            if (window.scrollY > 100) {
-                hint.style.opacity = '0';
-                hint.style.transition = 'opacity 1s ease';
-            }
+            
+            // Esimene lause ilmub kohe peale lehe laadimist
+            setTimeout(() => {
+                if(reveals[0]) reveals[0].classList.add('active');
+            }, 300);
         });
     </script>
-
 </body>
 </html>
