@@ -1,269 +1,760 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enter Khora | A sunlit space for the exhausted woman</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khora</title>
+  <meta
+    name="description"
+    content="Khora is a new kind of women’s space for rest, self-return, and beginning again."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
 
-    <style>
-        /* Khora Värvipalett */
-        :root {
-            --bg-linen: #FAF9F6;      /* Päikesepestud lina */
-            --text-green: #2A3B2C;    /* Sügav džungliroheline */
-            --accent-gold: #E3C27C;   /* Frangipani kuldne */
-        }
+  <style>
+    :root {
+      --bg: #faf8f3;
+      --bg-soft: #f4efe6;
+      --paper: rgba(255, 255, 255, 0.55);
+      --text: #2f312c;
+      --text-soft: #6b6d66;
+      --line: #d8cfbf;
+      --gold: #b79a5a;
+      --gold-soft: #d3c098;
+      --green: #5f7354;
+      --green-deep: #46573d;
+      --green-pale: #e5ebdf;
+      --shadow: 0 20px 60px rgba(63, 57, 41, 0.08);
+      --max: 1120px;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body, html {
-            background-color: var(--bg-linen);
-            color: var(--text-green);
-            font-family: 'Inter', sans-serif;
-            font-weight: 300;
-            line-height: 1.8;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+    html {
+      scroll-behavior: smooth;
+      font-size: 18px;
+    }
 
-        /* Õrn animeeritud taustavalgus (Komorebi efekt) */
-        .ambient-light {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(227, 194, 124, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(42, 59, 44, 0.03) 0%, transparent 50%);
-            animation: breathe 10s infinite alternate ease-in-out;
-        }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(211, 192, 152, 0.13), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(95, 115, 84, 0.09), transparent 38%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-        @keyframes breathe {
-            0% { transform: scale(1); opacity: 0.6; }
-            100% { transform: scale(1.05); opacity: 1; }
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.35), transparent 40%),
+        radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.22), transparent 35%);
+      z-index: 0;
+    }
 
-        /* Tüpograafia */
-        h1, h2, h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
-            color: var(--text-green);
-            margin-bottom: 2rem;
-        }
+    .container {
+      width: min(var(--max), calc(100% - 2.5rem));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
 
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            line-height: 1.15;
-        }
+    .section {
+      padding: 6rem 0;
+    }
 
-        h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            line-height: 1.2;
-        }
+    .center {
+      text-align: center;
+    }
 
-        p {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
-            max-width: 600px;
-            margin: 0 auto 1.5rem auto;
-            color: rgba(42, 59, 44, 0.85);
-        }
+    .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
 
-        .italic {
-            font-style: italic;
-        }
+    .ornament {
+      width: 56px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+    }
 
-        /* Paigutus - Iga tekstiplokk võtab terve ekraani kõrguse, et sundida aeglustuma */
-        section {
-            position: relative;
-            z-index: 1;
-            min-height: 100vh; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-        }
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
 
-        /* Kerimisel sissehajumise animatsioon */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+    }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      margin-bottom: 1.2rem;
+    }
 
-        /* E-maili vormi disain */
-        .form-container {
-            margin-top: 3rem;
-            width: 100%;
-            max-width: 400px;
-        }
+    h3 {
+      font-size: clamp(1.45rem, 2.5vw, 2rem);
+      margin-bottom: 1rem;
+    }
 
-        input[type="email"] {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(42, 59, 44, 0.2);
-            color: var(--text-green);
-            font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
-            padding: 12px 0;
-            margin-bottom: 2.5rem;
-            text-align: center;
-            outline: none;
-            transition: border-color 0.4s ease;
-        }
+    p {
+      color: var(--text-soft);
+      font-size: 1rem;
+    }
 
-        input[type="email"]::placeholder {
-            color: rgba(42, 59, 44, 0.4);
-            font-style: italic;
-        }
+    .lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+      color: var(--text);
+      line-height: 1.45;
+    }
 
-        input[type="email"]:focus {
-            border-bottom: 1px solid var(--text-green);
-        }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 3rem 0 5rem;
+    }
 
-        button {
-            background-color: transparent;
-            color: var(--text-green);
-            border: 1px solid var(--accent-gold);
-            padding: 16px 40px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            border-radius: 2px;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            width: 100%;
-        }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+    }
 
-        button:hover {
-            background-color: var(--accent-gold);
-            transform: translateY(-2px);
-        }
+    .hero-copy {
+      max-width: 680px;
+    }
 
-        .microcopy {
-            font-size: 0.85rem;
-            margin-top: 2rem;
-            color: rgba(42, 59, 44, 0.5);
-            font-style: italic;
-        }
+    .hero-subtitle {
+      margin-top: 1.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      color: var(--text);
+      line-height: 1.45;
+    }
 
-        /* Õrn animeeritud joon alla esimesel vaatel */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            height: 50px;
-            background: linear-gradient(to bottom, var(--text-green), transparent);
-            animation: pulse 2.5s infinite;
-            opacity: 0.5;
-        }
+    .hero-text {
+      margin-top: 1.4rem;
+      max-width: 640px;
+    }
 
-        @keyframes pulse {
-            0% { opacity: 0; transform: translate(-50%, -10px); }
-            50% { opacity: 0.5; }
-            100% { opacity: 0; transform: translate(-50%, 10px); }
-        }
-    </style>
+    .hero-actions {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0.9rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--green-deep);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: #394731;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      color: var(--green-deep);
+      border-color: var(--line);
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(6px);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--text);
+    }
+
+    .hero-card {
+      background: var(--paper);
+      border: 1px solid rgba(183, 154, 90, 0.16);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .hero-card p {
+      margin-bottom: 1rem;
+    }
+
+    .hero-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .text-block p + p {
+      margin-top: 1rem;
+    }
+
+    .quote-block {
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(95, 115, 84, 0.14);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .quote-block .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.45rem, 2.5vw, 2rem);
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.52);
+      border: 1px solid rgba(183, 154, 90, 0.12);
+      border-radius: 24px;
+      padding: 1.6rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .manifesto {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .manifesto p {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--text);
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      line-height: 1.7;
+      text-align: center;
+      margin-bottom: 1.6rem;
+    }
+
+    .manifesto .emphasis {
+      font-size: clamp(1.5rem, 2.8vw, 2rem);
+      color: var(--green-deep);
+    }
+
+    .manifesto .soft {
+      color: var(--text-soft);
+      font-style: italic;
+    }
+
+    .founder-note {
+      max-width: 760px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.52);
+      border: 1px solid rgba(183, 154, 90, 0.14);
+      border-radius: 30px;
+      padding: 2.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .founder-note p + p {
+      margin-top: 1rem;
+    }
+
+    .capture {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.54) 0%,
+        rgba(244,239,230,0.72) 100%
+      );
+      border: 1px solid rgba(183, 154, 90, 0.14);
+      border-radius: 30px;
+      padding: 2.5rem 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .capture p {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-wrap {
+      margin-top: 1.8rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .email-form {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .email-input {
+      flex: 1 1 320px;
+      min-height: 54px;
+      padding: 0 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.9);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+    }
+
+    .email-input:focus {
+      border-color: var(--gold);
+    }
+
+    .email-note {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .thank-you {
+      display: none;
+      margin-top: 1.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--green-deep);
+    }
+
+    .footer {
+      padding: 2rem 0 3rem;
+      text-align: center;
+    }
+
+    .footer p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--text-soft);
+    }
+
+    .divider {
+      width: 100%;
+      max-width: 220px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-soft), transparent);
+      margin: 0 auto 2.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .split,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 5rem;
+      }
+
+      .hero-copy,
+      .hero-card {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      html {
+        font-size: 16px;
+      }
+
+      .section {
+        padding: 4.5rem 0;
+      }
+
+      .container {
+        width: min(var(--max), calc(100% - 1.4rem));
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="ambient-light"></div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">A new women’s space</div>
+        <div class="ornament"></div>
+        <h1>KHORA</h1>
 
-    <section>
-        <div class="reveal">
-            <h1>You did everything<br>they told you to do.</h1>
+        <p class="hero-subtitle">
+          For the woman who became everything she was supposed to be
+          and still feels something is missing.
+        </p>
+
+        <p class="hero-text">
+          A new kind of women’s space for rest, self-return, and beginning again.
+          Not self-optimization. Not healing theater. Not another performance.
+          A quieter, truer place to come back to yourself.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#enter" class="btn btn-primary">Enter Khora</a>
+          <a href="#founder" class="btn btn-secondary">Read the founder note</a>
         </div>
-        <div class="scroll-indicator"></div>
-    </section>
+      </div>
 
-    <section>
-        <div class="reveal">
-            <p>You built the life. You carried the weight. You kept the world spinning.</p>
-            <p>From the outside, your architecture is flawless.</p>
-            <p class="italic">From the inside, you are profoundly tired.</p>
+      <div class="hero-card">
+        <div class="card-title">What is Khora?</div>
+        <p>
+          Khora is an emerging global space for women who are tired of performing strength all the time.
+        </p>
+        <p>
+          It begins with letters, reflections, thought, beauty, honesty, and a different kind of conversation.
+        </p>
+        <p>
+          Not the language of hustle. Not the language of pink slogans. Not the language of fixing yourself again.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE TRUTH -->
+  <section class="section">
+    <div class="container split">
+      <div class="text-block">
+        <div class="eyebrow">The quiet truth</div>
+        <h2>You can be doing everything right and still feel far away from yourself.</h2>
+        <p>
+          The work may be there. The home may be there. The family may be there.
+          The responsibilities are certainly there.
+        </p>
+        <p>
+          From the outside, life can look complete. And yet something inside feels overused,
+          overmanaged, overadapted.
+        </p>
+        <p>
+          Not broken. Not weak. Just tired in a way that modern language barely knows how to describe.
+        </p>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote">
+          “You may not need another version of yourself.
+          You may need your own self back.”
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <section>
-        <div class="reveal">
-            <p>Not the kind of tired a weekend getaway can fix.</p>
-            <p>It is the heavy, nameless fatigue of always being the strong one.</p>
-            <br>
-            <p>The world will tell you to push harder. To optimize. To fight.</p>
-            <p>We built this space because true luxury is the permission to stop fighting.</p>
+  <!-- PAIN / RECOGNITION -->
+  <section class="section">
+    <div class="container center">
+      <div class="eyebrow">Recognition</div>
+      <h2>A different kind of female exhaustion</h2>
+      <div class="manifesto">
+        <p>
+          There is a kind of exhaustion that does not come from one bad week.
+        </p>
+        <p>
+          It comes from years of holding, adjusting, carrying, smoothing,
+          enduring, staying functional, staying pleasant, staying needed.
+        </p>
+        <p class="soft">
+          And the world keeps offering the same tired answers:
+          optimize more, glow more, heal faster, become better, become new.
+        </p>
+        <p class="emphasis">
+          Khora begins with a different premise.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT KHORA IS NOT -->
+  <section class="section">
+    <div class="container">
+      <div class="center">
+        <div class="eyebrow">What this is not</div>
+        <h2>Khora is not built on performance.</h2>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h3>No pink-quote therapy</h3>
+          <p>
+            No sugary slogans. No fake empowerment language. No emotional wallpaper pretending to be truth.
+          </p>
         </div>
-    </section>
-
-    <section>
-        <div class="reveal">
-            <h2>Welcome to Khora.</h2>
-            <p>A sunlit space for the exhausted woman.</p>
-            <p>No slogans. No hustle.</p>
-            <p>Just room to breathe, the quiet science of resting, and the dignity of a soft life.</p>
+        <div class="card">
+          <h3>No spiritual manipulation</h3>
+          <p>
+            No pressure to heal beautifully. No trend-driven softness. No demand to turn your pain into content.
+          </p>
         </div>
-    </section>
-
-    <section>
-        <div class="reveal">
-            <h2>Leave your name<br>in the morning light.</h2>
-            
-            <div class="form-container">
-                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Siia taha saame hiljem ühe klikiga ühendada sinu uudiskirja mootori (nt MailerLite või Substack). Praegu aga lihtsalt tunneta, kas see aed sai õige.');">
-                    <input type="email" placeholder="Your email address" required>
-                    <button type="submit">Step into the garden</button>
-                </form>
-                <p class="microcopy">We protect your peace. No spam, ever.<br>Only quiet letters when it matters.</p>
-            </div>
+        <div class="card">
+          <h3>No more performance</h3>
+          <p>
+            Khora is not here to sell women another polished identity. It is here to create room to exhale.
+          </p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const reveals = document.querySelectorAll('.reveal');
+  <!-- WHAT KHORA WILL BECOME -->
+  <section class="section">
+    <div class="container split">
+      <div class="text-block">
+        <div class="eyebrow">What Khora will become</div>
+        <h2>A place with light in it. Beauty in it. Humor in it. Truth in it.</h2>
+        <p>
+          Khora will unfold through letters, essays, reflections, conversations,
+          and eventually a deeper private world for women who want more than motivation
+          and less than ideology.
+        </p>
+        <p>
+          It is being built in public, slowly and honestly. Not as a brand that arrives fully packaged,
+          but as a real place with a pulse.
+        </p>
+      </div>
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.3 // Tekst hakkab ilmuma siis, kui 30% sellest jõuab ekraanile
-            };
+      <div class="text-block">
+        <p>
+          A place where women can exhale without disappearing.
+          A place where softness is not stupidity.
+          Where rest is not failure.
+          Where clarity is allowed to come slowly.
+        </p>
+        <p>
+          Where beginning again is not shameful.
+        </p>
+        <p class="lead">
+          Khora is not a costume. It is a return.
+        </p>
+      </div>
+    </div>
+  </section>
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, observerOptions);
+  <!-- WHO IT IS FOR -->
+  <section class="section">
+    <div class="container">
+      <div class="center">
+        <div class="eyebrow">Who it is for</div>
+        <h2>Khora is for you if...</h2>
+      </div>
 
-            reveals.forEach(reveal => {
-                observer.observe(reveal);
-            });
-            
-            // Esimene lause ilmub kohe peale lehe laadimist
-            setTimeout(() => {
-                if(reveals[0]) reveals[0].classList.add('active');
-            }, 300);
-        });
-    </script>
+      <div class="cards">
+        <div class="card">
+          <h3>You are competent, but tired</h3>
+          <p>
+            You know how to function, deliver, care, hold everything together, and you are exhausted by how well you do it.
+          </p>
+        </div>
+        <div class="card">
+          <h3>You are strong, but finished with proving it</h3>
+          <p>
+            You no longer want louder advice, sharper routines, or another role to perform beautifully.
+          </p>
+        </div>
+        <div class="card">
+          <h3>You want something truer</h3>
+          <p>
+            Beauty without manipulation. Warmth without performance. Depth without dogma. A more honest female space.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY NOW -->
+  <section class="section">
+    <div class="container center">
+      <div class="eyebrow">Why now</div>
+      <h2>Because women everywhere are carrying too much.</h2>
+      <div class="manifesto">
+        <p>
+          Because the nervous system has become a silent battlefield.
+        </p>
+        <p>
+          Because modern life keeps demanding output while starving meaning.
+        </p>
+        <p>
+          Because millions of women are quietly asking the same question in different languages:
+        </p>
+        <p class="emphasis">
+          “Is this really all life gets to feel like?”
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER NOTE -->
+  <section class="section" id="founder">
+    <div class="container">
+      <div class="center">
+        <div class="eyebrow">Founder note</div>
+        <h2>Khora did not begin in a boardroom. It began in silence.</h2>
+      </div>
+
+      <div class="founder-note">
+        <p>
+          It began in the jungle, beside a small shrine. Heat in the air.
+          Flowers already left there by someone else. That strange kind of stillness
+          where a real thought finally has room to appear.
+        </p>
+        <p>
+          I did not walk away with a business plan. I walked away with a recognition:
+          that something is missing for women right now, and that what is missing cannot
+          be solved by louder branding, prettier manipulation, or one more trendy identity.
+        </p>
+        <p>
+          So I am building this carefully. In public. Step by step.
+          Not because I already know exactly what it will become,
+          but because I know the absence is real. And I know many women feel it too.
+        </p>
+        <p>
+          If you feel it, you are early. And you are exactly where you are meant to be.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMAIL CAPTURE -->
+  <section class="section" id="enter">
+    <div class="container">
+      <div class="capture">
+        <div class="eyebrow">Enter Khora</div>
+        <h2>Receive the first private letters from Khora.</h2>
+        <p>
+          No noise. No spam. No fake intimacy.
+          Just the first writings, invitations, and opening notes as this world begins to take shape.
+        </p>
+
+        <div class="form-wrap">
+          <form class="email-form" id="emailForm">
+            <input
+              type="email"
+              class="email-input"
+              id="emailInput"
+              placeholder="Your email"
+              required
+            />
+            <button type="submit" class="btn btn-primary">Enter Khora</button>
+          </form>
+        </div>
+
+        <p class="email-note">
+          For women who are tired of performing and ready to return to themselves.
+        </p>
+
+        <div class="thank-you" id="thankYou">
+          You are in. The first letter will find you.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="section">
+    <div class="container center">
+      <div class="divider"></div>
+      <h2>You do not have to become someone else to begin again.</h2>
+      <p class="lead" style="max-width: 720px; margin: 1rem auto 0;">
+        You may only need a truer place to stand.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>Khora — built slowly, honestly, in plain sight.</p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('emailForm');
+    const thankYou = document.getElementById('thankYou');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('emailInput').value.trim();
+
+      if (email && email.includes('@')) {
+        form.style.display = 'none';
+        thankYou.style.display = 'block';
+
+        // Replace this with your real email capture integration
+        console.log('Email captured:', email);
+      }
+    });
+  </script>
 </body>
 </html>
