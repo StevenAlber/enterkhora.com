@@ -6,9 +6,15 @@
   <title>KHORA — A Women’s World for Self-Return</title>
   <meta
     name="description"
-    content="KHORA is a global women’s world for self-return after years of performance, adaptation, and invisible exhaustion."
+    content="KHORA is a women’s world for self-return after years of performance, adaptation, and invisible exhaustion."
   />
   <meta name="theme-color" content="#faf8f3" />
+  <meta property="og:title" content="KHORA — A Women’s World for Self-Return" />
+  <meta
+    property="og:description"
+    content="A women’s world for self-return after years of performance, adaptation, and invisible exhaustion."
+  />
+  <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -291,7 +297,8 @@
     .quote-block,
     .card,
     .founder-note,
-    .capture {
+    .capture,
+    .status-strip {
       background: var(--paper);
       border: 1px solid var(--line-soft);
       box-shadow: var(--shadow);
@@ -316,6 +323,37 @@
 
     .hero-card p:last-child {
       margin-bottom: 0;
+    }
+
+    .status-strip {
+      margin-top: 1.7rem;
+      border-radius: 22px;
+      padding: 1rem 1.15rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.85rem;
+      background: rgba(255,255,255,0.54);
+    }
+
+    .status-item {
+      text-align: center;
+      padding: 0.35rem 0.4rem;
+    }
+
+    .status-label {
+      display: block;
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      margin-bottom: 0.35rem;
+    }
+
+    .status-value {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.08rem;
+      color: var(--text);
     }
 
     .split {
@@ -479,10 +517,23 @@
       margin-inline: auto;
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     @media (max-width: 980px) {
       .hero-grid,
       .split,
-      .cards {
+      .cards,
+      .status-strip {
         grid-template-columns: 1fr;
       }
 
@@ -525,7 +576,8 @@
       .quote-block,
       .card,
       .founder-note,
-      .capture {
+      .capture,
+      .status-strip {
         border-radius: 24px;
       }
 
@@ -552,11 +604,10 @@
 </head>
 <body>
   <main>
-    <!-- HERO -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="hero-mark">A new women’s world</div>
+          <div class="hero-mark">A women’s world already opening</div>
           <div class="ornament"></div>
 
           <h1 id="hero-title">KHORA</h1>
@@ -567,7 +618,7 @@
           </p>
 
           <p class="hero-text">
-            A global women’s world for self-return after years of performance,
+            KHORA is a women’s world for self-return after years of performance,
             adaptation, and invisible exhaustion. Not self-optimization.
             Not healing theater. Not another identity to wear beautifully.
             A quieter, truer place to come back to yourself.
@@ -577,16 +628,32 @@
             <a href="#enter" class="btn btn-primary">Enter Khora</a>
             <a href="#founder" class="btn btn-secondary">Read the founder note</a>
           </div>
+
+          <div class="status-strip" aria-label="Khora status">
+            <div class="status-item">
+              <span class="status-label">Format</span>
+              <span class="status-value">Private letters and editorial world</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Tone</span>
+              <span class="status-value">Beauty, truth, depth, relief</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Entry</span>
+              <span class="status-value">For women who feel the absence</span>
+            </div>
+          </div>
         </div>
 
         <aside class="hero-card" aria-label="What is Khora">
           <div class="card-title">What is Khora?</div>
           <p>
-            Khora is an emerging space for women who are tired of performing strength all the time.
+            KHORA is not a concept page for something that might exist later.
+            It is the first open threshold of a living women’s world.
           </p>
           <p>
-            It begins with letters, reflections, thought, beauty, honesty,
-            and a more exact language for female life after over-adaptation.
+            It begins with letters, reflections, language, beauty, honesty,
+            and a more exact vocabulary for female life after over-adaptation.
           </p>
           <p>
             Not the language of hustle. Not the language of pink slogans.
@@ -596,7 +663,6 @@
       </div>
     </section>
 
-    <!-- CORE TRUTH -->
     <section class="section" aria-labelledby="truth-title">
       <div class="container split">
         <div class="text-block">
@@ -611,7 +677,7 @@
             overmanaged, overadapted.
           </p>
           <p>
-            Not broken. Not weak. Just tired in a way modern language barely knows how to name.
+            Not broken. Not weak. Just living too long at a distance from your own center.
           </p>
         </div>
 
@@ -624,7 +690,6 @@
       </div>
     </section>
 
-    <!-- RECOGNITION -->
     <section class="section" aria-labelledby="recognition-title">
       <div class="container center">
         <div class="eyebrow">Recognition</div>
@@ -643,18 +708,17 @@
             optimize more, glow more, heal faster, become better, become new.
           </p>
           <p class="emphasis">
-            Khora begins with a different premise.
+            KHORA begins with a different premise.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- WHAT KHORA IS NOT -->
     <section class="section" aria-labelledby="not-title">
       <div class="container">
         <div class="center section-intro">
           <div class="eyebrow">What this is not</div>
-          <h2 id="not-title">Khora is not built on performance.</h2>
+          <h2 id="not-title">KHORA is not built on performance.</h2>
         </div>
 
         <div class="cards">
@@ -673,9 +737,9 @@
           </article>
 
           <article class="card">
-            <h3>No more performance</h3>
+            <h3>No new costume to wear</h3>
             <p>
-              Khora is not here to sell women another polished identity.
+              KHORA is not here to sell women another polished identity.
               It is here to make room for a different kind of exhale.
             </p>
           </article>
@@ -683,26 +747,56 @@
       </div>
     </section>
 
-    <!-- WHAT KHORA BECOMES -->
+    <section class="section" aria-labelledby="inside-title">
+      <div class="container">
+        <div class="center section-intro">
+          <div class="eyebrow">Inside Khora</div>
+          <h2 id="inside-title">What a woman enters here</h2>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Private letters</h3>
+            <p>
+              Thoughtful writings sent directly, without noise, speed, or algorithmic pressure.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Editorial depth</h3>
+            <p>
+              Essays, reflections, and language that treat female interior life with seriousness and beauty.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>A truer atmosphere</h3>
+            <p>
+              A world with elegance, warmth, intelligence, and relief from constant emotional performance.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section" aria-labelledby="become-title">
       <div class="container split">
         <div class="text-block">
-          <div class="eyebrow">What Khora will become</div>
+          <div class="eyebrow">What Khora is</div>
           <h2 id="become-title">A place with light in it. Beauty in it. Humor in it. Truth in it.</h2>
           <p>
-            Khora will unfold through letters, essays, reflections, conversations,
-            and eventually a deeper private world for women who want more than motivation
-            and less than ideology.
+            KHORA unfolds through letters, essays, reflections, and a deeper private current
+            for women who want more than motivation and less than ideology.
           </p>
           <p>
-            It is being built in public, slowly and honestly. Not as a brand that arrives fully packaged,
-            but as a real place with a pulse.
+            It is built carefully and visibly. Not as a brand pretending to arrive complete,
+            but as a real world with a pulse, a standard, and a voice of its own.
           </p>
         </div>
 
         <div class="text-block">
           <p>
-            A place where women can exhale without disappearing.
+            A place where women exhale without disappearing.
             A place where softness is not stupidity.
             Where rest is not failure.
             Where clarity is allowed to come slowly.
@@ -711,18 +805,17 @@
             Where beginning again is not shameful.
           </p>
           <p class="lead">
-            Khora is not a costume. It is a return.
+            KHORA is not a costume. It is a return.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- WHO IT IS FOR -->
     <section class="section" aria-labelledby="for-title">
       <div class="container">
         <div class="center section-intro">
           <div class="eyebrow">Who it is for</div>
-          <h2 id="for-title">Khora is for you if...</h2>
+          <h2 id="for-title">KHORA is for you if...</h2>
         </div>
 
         <div class="cards">
@@ -746,14 +839,13 @@
             <h3>You want something truer</h3>
             <p>
               Beauty without manipulation. Warmth without performance.
-              Depth without dogma. A more honest female space.
+              Depth without dogma. A more honest female world.
             </p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- WHY NOW -->
     <section class="section" aria-labelledby="why-title">
       <div class="container center">
         <div class="eyebrow">Why now</div>
@@ -776,12 +868,11 @@
       </div>
     </section>
 
-    <!-- FOUNDER NOTE -->
     <section class="section" id="founder" aria-labelledby="founder-title">
       <div class="container">
         <div class="center section-intro">
           <div class="eyebrow">Founder note</div>
-          <h2 id="founder-title">Khora did not begin in a boardroom. It began in silence.</h2>
+          <h2 id="founder-title">KHORA did not begin in a boardroom. It began in silence.</h2>
         </div>
 
         <div class="founder-note narrow">
@@ -792,31 +883,30 @@
           </p>
           <p>
             I did not walk away with a business plan. I walked away with a recognition:
-            that something is missing for women right now, and that what is missing cannot
+            something essential is missing for women right now, and what is missing cannot
             be solved by louder branding, prettier manipulation, or one more trend-shaped identity.
           </p>
           <p>
-            So I am building this carefully. In public. Step by step.
-            Not because I already know exactly what it will become,
-            but because I know the absence is real. And I know many women feel it too.
+            So KHORA opens carefully. In public. Step by step.
+            Not because everything is finished, but because the need is already here,
+            the atmosphere is already real, and the first threshold is already open.
           </p>
           <p>
-            If you feel it, you are early. And you are exactly where you are meant to be.
+            If you feel that absence too, you are not late.
+            You are exactly on time.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- EMAIL CAPTURE -->
     <section class="section" id="enter" aria-labelledby="enter-title">
       <div class="container">
         <div class="capture">
           <div class="eyebrow">Enter Khora</div>
-          <h2 id="enter-title">Receive the first private letters from Khora.</h2>
+          <h2 id="enter-title">Receive the first private letters from KHORA.</h2>
           <p>
             No noise. No spam. No fake intimacy.
-            Just the first writings, invitations, and opening notes
-            as this world begins to take shape.
+            Just the opening writings, invitations, and private notes from a world built for women who are tired of performing.
           </p>
 
           <div class="form-wrap">
@@ -831,12 +921,12 @@
                 required
                 aria-describedby="emailNote"
               />
-              <button type="submit" class="btn btn-primary">Enter Khora</button>
+              <button type="submit" class="btn btn-primary">Join the private letters</button>
             </form>
           </div>
 
           <p class="email-note" id="emailNote">
-            For women who are tired of performing and ready to return to themselves.
+            For women who are tired of over-functioning and ready to return to themselves.
           </p>
 
           <div class="thank-you" id="thankYou" aria-live="polite">
@@ -846,7 +936,6 @@
       </div>
     </section>
 
-    <!-- CLOSING -->
     <section class="section" aria-labelledby="closing-title">
       <div class="container center narrow">
         <div class="divider"></div>
@@ -860,7 +949,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>Khora — built slowly, honestly, in plain sight.</p>
+      <p>KHORA — built slowly, honestly, in plain sight.</p>
     </div>
   </footer>
 
@@ -885,23 +974,8 @@
       form.style.display = "none";
       thankYou.style.display = "block";
 
-      // Replace this with your real email capture integration
       console.log("Email captured:", email);
     });
   </script>
-
-  <style>
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-  </style>
 </body>
 </html>
