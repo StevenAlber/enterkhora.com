@@ -1073,10 +1073,20 @@
       }
 
       emailInput.removeAttribute("aria-invalid");
-      form.style.display = "none";
-      thankYou.style.display = "block";
 
-      console.log("Email captured:", email);
+      fetch("https://formspree.io/f/xgopodnz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ email: email, _subject: "New Khora letter signup" })
+      }).then(function(response) {
+        if (response.ok) {
+          form.style.display = "none";
+          thankYou.style.display = "block";
+        }
+      }).catch(function() {
+        form.style.display = "none";
+        thankYou.style.display = "block";
+      });
     });
   </script>
 </body>
