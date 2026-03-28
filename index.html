@@ -422,6 +422,44 @@
       color: var(--text-soft);
     }
 
+    /* Letter cards — clickable */
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      min-height: 100%;
+      border-radius: 24px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.3s ease;
+    }
+
+    .card-link .card {
+      transition: border-color 0.3s ease;
+    }
+
+    .card-link:hover {
+      transform: translateY(-3px);
+    }
+
+    .card-link:hover .card {
+      border-color: var(--gold-soft);
+      box-shadow: 0 24px 64px rgba(63, 57, 41, 0.12);
+    }
+
+    .card-link .read-more {
+      display: inline-block;
+      margin-top: 0.85rem;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      transition: color 0.25s;
+    }
+
+    .card-link:hover .read-more {
+      color: var(--green-deep);
+    }
+
     /* Letter cards — sequence label above title */
     .card .letter-label {
       display: block;
@@ -606,7 +644,9 @@
         scroll-behavior: auto;
       }
 
-      .btn {
+      .btn,
+      .card-link,
+      .card-link .card {
         transition: none;
       }
     }
@@ -922,32 +962,41 @@
         </div>
 
         <div class="cards">
-          <article class="card">
-            <span class="letter-label">Letter One</span>
-            <h3>You Are Not Tired Because You Are Weak</h3>
-            <p>
-              A first recognition for the woman whose exhaustion has been mistaken for fragility,
-              when in truth it may be the cost of carrying too much for too long.
-            </p>
-          </article>
+          <a href="/letter-01.html" class="card-link">
+            <article class="card">
+              <span class="letter-label">Letter One</span>
+              <h3>You Are Not Tired Because You Are Weak</h3>
+              <p>
+                A first recognition for the woman whose exhaustion has been mistaken for fragility,
+                when in truth it may be the cost of carrying too much for too long.
+              </p>
+              <span class="read-more">Read letter &#8594;</span>
+            </article>
+          </a>
 
-          <article class="card">
-            <span class="letter-label">Letter Two</span>
-            <h3>The Female Life of Constant Adjustment</h3>
-            <p>
-              A letter about the quiet violence of over-adaptation and the way capable women
-              slowly disappear inside lives that continue to look completely fine.
-            </p>
-          </article>
+          <a href="/letter-02.html" class="card-link">
+            <article class="card">
+              <span class="letter-label">Letter Two</span>
+              <h3>The Female Life of Constant Adjustment</h3>
+              <p>
+                A letter about the quiet violence of over-adaptation and the way capable women
+                slowly disappear inside lives that continue to look completely fine.
+              </p>
+              <span class="read-more">Read letter &#8594;</span>
+            </article>
+          </a>
 
-          <article class="card">
-            <span class="letter-label">Letter Three</span>
-            <h3>You Do Not Need Another Identity</h3>
-            <p>
-              A refusal of the endless self-improvement marketplace and a return to something
-              rarer than reinvention: your own center.
-            </p>
-          </article>
+          <a href="/letter-03.html" class="card-link">
+            <article class="card">
+              <span class="letter-label">Letter Three</span>
+              <h3>You Do Not Need Another Identity</h3>
+              <p>
+                A refusal of the endless self-improvement marketplace and a return to something
+                rarer than reinvention: your own center.
+              </p>
+              <span class="read-more">Read letter &#8594;</span>
+            </article>
+          </a>
         </div>
       </div>
     </section>
