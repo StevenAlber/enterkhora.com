@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KHORA — The Cost of Being Easy to Live With</title>
+  <meta name="description" content="A letter about the invisible price women pay for making everyone else's life smooth." />
+  <meta name="theme-color" content="#faf8f3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#F7F3EC;--text:#2E302B;--text-soft:#66685F;--text-faint:#8A8A80;--line:#d8cfbf;--line-soft:rgba(168,140,87,0.16);--gold:#A88C57;--gold-soft:#C2AD84;--green-deep:#475542;--reading:720px;--max:1160px}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;font-size:18px}body{font-family:"DM Sans",sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(196,175,132,0.13),transparent 34%),radial-gradient(circle at bottom right,rgba(80,100,72,0.08),transparent 38%),linear-gradient(180deg,#F9F5EF 0%,#F7F3EC 100%);line-height:1.72;-webkit-font-smoothing:antialiased}body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 18% 18%,rgba(255,255,255,0.36),transparent 40%),radial-gradient(ellipse at 78% 78%,rgba(255,255,255,0.22),transparent 34%);z-index:0}main{position:relative;z-index:1}.letter-nav{display:flex;justify-content:space-between;align-items:center;max-width:var(--max);margin:0 auto;padding:1.4rem 1.2rem}.letter-nav a{font-family:"Cormorant Garamond",serif;font-size:1.05rem;color:var(--text-soft);text-decoration:none;transition:color 0.25s}.letter-nav a:hover{color:var(--gold)}.letter-mark{font-size:1.35rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--text)}.letter-hero{padding:5rem 0 3rem;text-align:center}.letter-hero .eyebrow{font-size:0.78rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}.letter-hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;line-height:1.12;letter-spacing:-0.02em;color:var(--text);max-width:700px;margin:0 auto}.ornament{width:62px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:2rem auto;opacity:0.9}.letter-body{max-width:var(--reading);margin:0 auto;padding:0 1.2rem 5rem}.letter-body p{font-family:"Cormorant Garamond",serif;font-size:clamp(1.08rem,1.6vw,1.22rem);line-height:1.78;color:var(--text);margin-bottom:1.4rem;text-align:justify}.letter-body p.emphasis{font-size:clamp(1.24rem,2vw,1.48rem);color:var(--green-deep);text-align:center;margin:2.2rem auto;max-width:600px}.letter-body p.soft{color:var(--text-soft);font-style:italic}.letter-end{max-width:var(--reading);margin:0 auto;padding:0 1.2rem 4rem;text-align:center}.letter-end .divider{width:140px;height:1px;background:linear-gradient(to right,transparent,var(--gold-soft),transparent);margin:0 auto 2rem}.letter-end a.next-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:"DM Sans",sans-serif;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-deep);text-decoration:none;padding:0.75rem 1.5rem;border:1px solid var(--line);border-radius:999px;transition:all 0.25s;margin:0.5rem}.letter-end a.next-link:hover{border-color:var(--gold);transform:translateY(-1px)}.footer{padding:1.5rem 0 3rem;text-align:center}.footer p{font-family:"Cormorant Garamond",serif;font-size:1rem;color:var(--text-soft)}@media(max-width:640px){html{font-size:16px}.letter-body{padding:0 0.7rem 4rem}}
+  </style>
+</head>
+<body>
+  <nav class="letter-nav">
+    <a href="/" class="letter-mark">Khora</a>
+    <a href="/letters.html">← Back to letters</a>
+  </nav>
+  <main>
+    <section class="letter-hero">
+      <div class="eyebrow">Private Letter Four</div>
+      <h1>The Cost of Being Easy to Live With</h1>
+    </section>
+    <div class="ornament"></div>
+    <article class="letter-body">
+
+      <p>There is a kind of woman the world loves to be around.</p>
+
+      <p>She does not make scenes. She does not demand attention at inconvenient moments. She adjusts quickly, forgives easily, smooths over tension before anyone else even registers it. She is the one who says "it's fine" so naturally that people have long since stopped asking whether it really is.</p>
+
+      <p>She is easy to live with. And that ease has cost her more than anyone knows.</p>
+
+      <p>Because being easy to live with, for many women, is not a personality trait. It is a survival strategy that began so early it became invisible. It began when she learned that her needs created inconvenience. That her anger made people uncomfortable. That her sadness was too much for the room. That the smoothest way through a difficult world was to become someone who never disturbed its surface.</p>
+
+      <p class="emphasis">She did not decide to become easy. She was shaped into it, one silenced impulse at a time.</p>
+
+      <p>And here is what no one tells her: the world will never voluntarily give back what it has benefited from taking. If you are the one who absorbs tension, who manages the emotional temperature of every room, who translates your own pain into something more palatable for others — no one will tap you on the shoulder and say, "You can stop now."</p>
+
+      <p>The system that benefits from your agreeableness will not dismantle itself. That dismantling has to come from you.</p>
+
+      <p>But this is where it becomes difficult. Because the woman who has spent years making herself easy to live with often experiences her own boundaries as acts of aggression. Saying no feels like cruelty. Having a need feels like selfishness. Expressing displeasure feels like a violation of an unwritten contract she signed before she was old enough to understand its terms.</p>
+
+      <p class="soft">She is not afraid of other people's reactions. She is afraid of her own honesty.</p>
+
+      <p>That fear is real. It was learned in real situations with real consequences. And it should not be dismissed with a motivational sentence about self-worth. The woman who has been easy to live with for decades cannot simply flip a switch and start prioritizing herself. The architecture of her life — her relationships, her routines, her identity — has been built on the premise of her availability.</p>
+
+      <p>To change that premise is to shake every structure that rests on it. And that is terrifying. Not because she is weak. But because she is intelligent enough to understand what honesty will cost.</p>
+
+      <p>I want to say something precise about this.</p>
+
+      <p>The cost of being easy to live with is not one dramatic moment. It is thousands of small erasures. It is the opinion you did not share at dinner. The preference you did not mention when plans were being made. The hurt you translated into understanding before anyone had to apologize. The desire you let go of quietly because pursuing it would have required someone else to adjust.</p>
+
+      <p>Each one was small. Together, they formed a life in which you are present for everyone and absent from yourself.</p>
+
+      <p class="emphasis">The question is not whether you can become more difficult. The question is whether you can begin to become more honest.</p>
+
+      <p>Honesty, in this context, does not mean confrontation. It does not mean loudness. It means letting the people around you experience, even briefly, the reality of who you are rather than the curated version you have been offering for their comfort.</p>
+
+      <p>It means saying "actually, I would prefer something else" when you would normally say "whatever you want is fine." It means allowing a silence to exist where you would normally rush to fill it with accommodation. It means tolerating the brief discomfort of being a woman with preferences, edges, limits, and truths that do not always make the room easier.</p>
+
+      <p>This is not selfishness. This is the beginning of presence.</p>
+
+      <p>Because the woman who is easy to live with is often, quietly, impossible to truly know. She has made herself so available, so adaptable, so responsive to everyone else's needs that her own interior has become a rumor even to herself.</p>
+
+      <p>If this is where you are, you do not need to burn anything down. You do not need a dramatic reinvention. You need to begin, gently and persistently, to let yourself be slightly less easy. To let a true thing exist in the room, even if it changes the temperature.</p>
+
+      <p class="soft">Not for the performance of boundaries. Not because a book told you to. But because a woman who never inconveniences anyone eventually becomes no one at all.</p>
+
+      <p>You have been easy to live with for long enough. The question now is whether you are still easy to live as.</p>
+
+    </article>
+    <div class="letter-end">
+      <div class="divider"></div>
+      <a href="/companion.html" class="next-link">Reflect with the Companion →</a>
+      <a href="/letter-05.html" class="next-link">Next letter →</a>
+    </div>
+  </main>
+  <footer class="footer"><div><p>KHORA — built slowly, honestly, in plain sight.</p></div></footer>
+</body>
+</html>
