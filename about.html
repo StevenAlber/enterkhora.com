@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KHORA — About</title>
+  <meta name="description" content="KHORA is a women's world for self-return. Not self-optimization. Not healing theater. A quieter, truer place." />
+  <meta name="theme-color" content="#faf8f3" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #F7F3EC;
+      --bg-soft: #EFE8DD;
+      --paper: rgba(255, 255, 255, 0.62);
+      --paper-strong: rgba(255, 255, 255, 0.76);
+      --text: #2E302B;
+      --text-soft: #66685F;
+      --text-faint: #8A8A80;
+      --line: #d8cfbf;
+      --line-soft: rgba(168, 140, 87, 0.16);
+      --gold: #A88C57;
+      --gold-soft: #C2AD84;
+      --green: #6A7A63;
+      --green-deep: #475542;
+      --green-pale: #E4E9DF;
+      --shadow: 0 20px 60px rgba(63, 57, 41, 0.08);
+      --shadow-soft: 0 10px 30px rgba(63, 57, 41, 0.05);
+      --radius: 28px;
+      --max: 1160px;
+      --reading: 720px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 18px; }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(196, 175, 132, 0.13), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(80, 100, 72, 0.08), transparent 38%),
+        linear-gradient(180deg, #F9F5EF 0%, #F7F3EC 100%);
+      line-height: 1.72;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 18% 18%, rgba(255,255,255,0.36), transparent 40%),
+        radial-gradient(ellipse at 78% 78%, rgba(255,255,255,0.22), transparent 34%);
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image:
+        linear-gradient(to right, rgba(47,49,44,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(47,49,44,0.04) 1px, transparent 1px);
+      background-size: 26px 26px;
+      mix-blend-mode: multiply;
+      z-index: 0;
+    }
+
+    main, footer { position: relative; z-index: 1; }
+
+    .container {
+      width: min(var(--max), calc(100% - 2.4rem));
+      margin: 0 auto;
+    }
+
+    .narrow {
+      max-width: var(--reading);
+      margin-inline: auto;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 1.2rem;
+      transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(247, 243, 236, 0.88);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 var(--line-soft);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: var(--text);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      text-decoration: none;
+      transition: color 0.25s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--gold); }
+    .nav-links a.active::after { width: 100%; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      margin: 5px 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1, h2, h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.05rem;
+    }
+
+    .ornament {
+      width: 62px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto 1.9rem;
+      opacity: 0.9;
+    }
+
+    /* ─── HERO ─── */
+    .about-hero {
+      padding: 9.5rem 0 5rem;
+      text-align: center;
+    }
+
+    .about-hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.4rem;
+      max-width: 800px;
+      margin-inline: auto;
+    }
+
+    .about-hero-sub {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.12rem, 1.8vw, 1.38rem);
+      color: var(--text-soft);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ─── CONTENT SECTIONS ─── */
+    .about-section {
+      padding: 4rem 0;
+    }
+
+    .about-body {
+      max-width: var(--reading);
+      margin: 0 auto;
+    }
+
+    .about-body p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.08rem, 1.6vw, 1.22rem);
+      line-height: 1.78;
+      color: var(--text);
+      margin-bottom: 1.3rem;
+    }
+
+    .about-body p.soft {
+      color: var(--text-soft);
+      font-style: italic;
+    }
+
+    .about-body p.emphasis {
+      font-size: clamp(1.28rem, 2vw, 1.55rem);
+      color: var(--green-deep);
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-divider {
+      width: 100%;
+      max-width: 140px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-soft), transparent);
+      margin: 3.5rem auto;
+    }
+
+    /* ─── QUOTE BLOCK ─── */
+    .about-quote {
+      max-width: 680px;
+      margin: 3rem auto;
+      background: var(--paper);
+      border: 1px solid var(--line-soft);
+      border-radius: 28px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      padding: 2.2rem 2rem;
+      text-align: center;
+    }
+
+    .about-quote p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+      line-height: 1.38;
+      color: var(--text);
+    }
+
+    /* ─── VALUES GRID ─── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      max-width: 920px;
+      margin: 2.5rem auto 0;
+    }
+
+    .value-card {
+      background: var(--paper);
+      border: 1px solid var(--line-soft);
+      border-radius: 22px;
+      padding: 1.5rem 1.3rem;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(8px);
+    }
+
+    .value-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .value-card p {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    /* ─── CTA ─── */
+    .about-cta {
+      padding: 3rem 0 5rem;
+      text-align: center;
+    }
+
+    .about-cta h2 {
+      font-size: clamp(1.65rem, 3vw, 2.4rem);
+      margin-bottom: 1rem;
+    }
+
+    .about-cta p {
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      margin-bottom: 1.8rem;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+
+    .about-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0.9rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.84rem;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--green-deep);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: #394830;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.46);
+      color: var(--green-deep);
+      border-color: var(--line);
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      padding: 1.5rem 0 3rem;
+      text-align: center;
+    }
+
+    .footer p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1rem;
+      color: var(--text-soft);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(247, 243, 236, 0.96);
+        backdrop-filter: blur(20px);
+        padding: 1.5rem 1.2rem;
+        gap: 1.2rem;
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .nav-toggle { display: block; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      html { font-size: 16px; }
+      .container { width: min(var(--max), calc(100% - 1.35rem)); }
+      .about-hero { padding: 7.5rem 0 3.5rem; }
+      .about-quote { padding: 1.6rem 1.25rem; border-radius: 22px; }
+      .value-card { border-radius: 18px; padding: 1.2rem 1rem; }
+      .about-actions { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 320px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-mark">Khora</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/letters.html">Letters</a></li>
+        <li><a href="/companion.html">Companion</a></li>
+        <li><a href="/about.html" class="active">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="eyebrow">About Khora</div>
+        <div class="ornament"></div>
+        <h1>A world, not a product.</h1>
+        <p class="about-hero-sub">
+          KHORA exists because something essential has been missing for women for a long time, and what is missing cannot be solved by louder branding or prettier manipulation.
+        </p>
+      </div>
+    </section>
+
+    <!-- WHAT KHORA IS -->
+    <section class="about-section">
+      <div class="container">
+        <div class="about-body">
+          <p>
+            KHORA is a women's world for self-return after years of performance, adaptation, and invisible exhaustion.
+          </p>
+          <p>
+            It is not self-optimization. It is not healing theater. It is not another identity to wear beautifully. It is a quieter, truer place to come back to yourself.
+          </p>
+          <p>
+            The name comes from ancient Greek. Khora is the space that holds things before they take form. A receptive ground. A place where something can appear that did not have room to appear before.
+          </p>
+          <p class="emphasis">
+            That is what this world offers: room.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="about-divider"></div>
+
+    <!-- THE PREMISE -->
+    <section class="about-section">
+      <div class="container">
+        <div class="about-body">
+          <p>
+            Modern life keeps rewarding female over-functioning and quietly draining female interiority. Women are being offered endless improvement when what many of them need is relief from performance.
+          </p>
+          <p>
+            There is a kind of exhaustion that does not come from one bad week. It comes from years of holding, adjusting, carrying, smoothing, enduring, staying functional, staying pleasant, staying needed.
+          </p>
+          <p class="soft">
+            And the world keeps offering the same tired answers: optimize more, glow more, heal faster, become better, become new.
+          </p>
+          <p>
+            KHORA begins with a different premise. You may not need another version of yourself. You may need your own self back.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <div class="about-quote">
+      <p>&#8220;Most women's media publishes at women. KHORA responds with them.&#8221;</p>
+    </div>
+
+    <div class="about-divider"></div>
+
+    <!-- WHAT IT CONTAINS -->
+    <section class="about-section">
+      <div class="container">
+        <div class="about-body" style="text-align: center;">
+          <div class="eyebrow">Inside this world</div>
+          <h2 style="font-size: clamp(1.65rem, 3vw, 2.4rem); margin-bottom: 0.6rem;">Three layers that work together</h2>
+          <p class="soft" style="max-width: 540px; margin: 0 auto 1rem;">Not a feed. Not an app. An editorial world with a living intelligence inside it.</p>
+        </div>
+
+        <div class="values-grid">
+          <article class="value-card">
+            <h3>Letters and essays</h3>
+            <p>
+              Thoughtful, serious writing about the interior life of women. Not content. Not advice. Language that meets you where you are.
+            </p>
+          </article>
+          <article class="value-card">
+            <h3>Pulse</h3>
+            <p>
+              A living layer that asks one exact question, notices patterns, and gives the world movement. Your interior signal system.
+            </p>
+          </article>
+          <article class="value-card">
+            <h3>Companion</h3>
+            <p>
+              A quiet intelligence that reflects what you write with precision, not flattery. One recognition. One truth. One next door.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="about-divider"></div>
+
+    <!-- WHAT IT IS NOT -->
+    <section class="about-section">
+      <div class="container">
+        <div class="about-body">
+          <p>
+            KHORA is not a chatbot. It is not a therapy imitation. It is not a coaching app. It is not a self-help generator. It is not a pink emotional vending machine.
+          </p>
+          <p>
+            It is an editorial world with a standard, a voice, and a living intelligence inside it. Built slowly, honestly, in plain sight.
+          </p>
+          <p>
+            Every letter, every question, every response is written to be psychologically exact, emotionally non-invasive, elegant rather than therapeutic, and strong enough to create recognition.
+          </p>
+          <p class="emphasis">
+            Beauty matters. But not above truth.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="about-divider"></div>
+
+    <!-- ORIGIN -->
+    <section class="about-section">
+      <div class="container">
+        <div class="about-body">
+          <div class="eyebrow">Origin</div>
+          <p>
+            KHORA did not begin in a boardroom. It began in silence. In the jungle, beside a small shrine. Heat in the air. Flowers already left there by someone else. That strange kind of stillness where a real thought finally has room to appear.
+          </p>
+          <p>
+            The recognition was simple: something essential is missing for women right now, and what is missing cannot be solved by louder branding, prettier manipulation, or one more trend-shaped identity.
+          </p>
+          <p>
+            So KHORA opens carefully. Not because everything is finished, but because the need is already here, the atmosphere is already real, and the first threshold is already open.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+      <div class="container">
+        <div class="about-divider"></div>
+        <h2>You do not have to become someone else to begin.</h2>
+        <p>
+          Enter the world. Read the first letters. Let the Companion meet you where you are.
+        </p>
+        <div class="about-actions">
+          <a href="/companion.html" class="btn btn-primary">Begin with the Companion</a>
+          <a href="/" class="btn btn-secondary">Read the letters</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>KHORA — built slowly, honestly, in plain sight.</p>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById("nav");
+    const toggle = document.getElementById("navToggle");
+    const links = document.getElementById("navLinks");
+
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 20);
+    });
+
+    toggle.addEventListener("click", () => {
+      links.classList.toggle("open");
+    });
+
+    links.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => links.classList.remove("open"));
+    });
+  </script>
+</body>
+</html>
