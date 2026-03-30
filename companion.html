@@ -882,6 +882,7 @@
               maxlength="1000"
             ></textarea>
             <p class="write-hint">Answer in your own language. There is no wrong way to begin.</p>
+            <p class="write-hint" id="reflectionCounter" style="margin-top: 0.4rem; color: var(--gold-soft);"></p>
           </div>
 
           <button class="pulse-submit" id="submitBtn">
@@ -903,6 +904,32 @@
     <div class="error-msg" id="errorMsg">
       The Companion is resting. Please try again in a moment.
     </div>
+
+    <!-- PAYWALL -->
+    <section class="reflection-section" id="paywallSection">
+      <div class="container">
+        <div class="reflection-card" id="paywallCard">
+          <div class="reflection-label">Your five reflections were a gift</div>
+          <div class="reflection-text">
+            Something in you brought you here five times. That is not coincidence. That is the beginning of return. KHORA Companion continues for women who are ready for an ongoing, private relationship with a quiet intelligence that truly listens.
+          </div>
+          <div class="reflection-divider"></div>
+          <div class="next-door">
+            <div class="next-door-label">Continue with KHORA</div>
+            <div class="next-door-pause" style="margin-bottom: 1.2rem;">
+              €39 per month. Cancel anytime.<br />
+              Unlimited reflections. Full Companion access. Private letters.
+            </div>
+            <a href="#" id="subscribeBtn" class="btn-continue" style="background: var(--green-deep); color: #fff; border-color: var(--green-deep); padding: 0.85rem 2rem;">
+              Enter Khora — €39/month
+            </a>
+          </div>
+          <div style="margin-top: 1.4rem;">
+            <a href="/letters.html" class="btn-continue">Read the free letters instead</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- REFLECTION -->
     <section class="reflection-section" id="reflectionSection">
@@ -1121,8 +1148,22 @@
     const nextDoor = $q("#nextDoor");
     const closingQuestion = $q("#closingQuestion");
 
+    function updateReflectionCounter(count) {
+      const el = $q("#reflectionCounter");
+      const remaining = FREE_LIMIT - count;
+      if (remaining > 0 && count > 0) {
+        el.textContent = remaining + " free reflection" + (remaining !== 1 ? "s" : "") + " remaining";
+      } else if (remaining <= 0) {
+        el.textContent = "";
+      } else {
+        el.textContent = FREE_LIMIT + " free reflections to begin with";
+      }
+    }
+
     // ── INITIALIZE ──
     function init() {
+      // Show initial counter
+      updateReflectionCounter(getReflectionCount());
       // Set daily question
       const idx = dayIndex() % ALL_QUESTIONS.length;
       setQuestion(ALL_QUESTIONS[idx]);
@@ -1253,10 +1294,43 @@
       });
     }
 
+    // ── FREEMIUM ──
+    const FREE_LIMIT = 5;
+
+    function getReflectionCount() {
+      return parseInt(localStorage.getItem("khora-reflection-count") || "0", 10);
+    }
+
+    function incrementReflectionCount() {
+      const count = getReflectionCount() + 1;
+      localStorage.setItem("khora-reflection-count", String(count));
+      return count;
+    }
+
+    function showPaywall() {
+      loadingState.classList.remove("visible");
+      reflectionSection.classList.remove("visible");
+
+      const paywall = $q("#paywallSection");
+      paywall.classList.add("visible");
+      paywall.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      submitBtn.disabled = false;
+      writeField.value = "";
+      selectedChip = null;
+      submitBtn.classList.remove("visible");
+    }
+
     // ── SUBMIT ──
     async function submit() {
       const message = writeField.value.trim() || selectedChip;
       if (!message) return;
+
+      // Check free limit
+      if (getReflectionCount() >= FREE_LIMIT) {
+        showPaywall();
+        return;
+      }
 
       submitBtn.disabled = true;
       errorMsg.classList.remove("visible");
@@ -1287,6 +1361,8 @@
 
         // Show reflection
         renderReflection(data);
+        const count = incrementReflectionCount();
+        updateReflectionCounter(count);
 
       } catch (err) {
         console.error("Companion error:", err);
