@@ -18,364 +18,166 @@
 
   <style>
     :root {
-      --bg: #F7F3EC;
-      --bg-soft: #EFE8DD;
-      --paper: rgba(255, 255, 255, 0.62);
-      --paper-strong: rgba(255, 255, 255, 0.76);
-      --text: #2E302B;
-      --text-soft: #66685F;
-      --text-faint: #8A8A80;
-      --line: #d8cfbf;
-      --line-soft: rgba(168, 140, 87, 0.16);
-      --gold: #A88C57;
-      --gold-soft: #C2AD84;
-      --green: #6A7A63;
-      --green-deep: #475542;
-      --green-pale: #E4E9DF;
-      --shadow: 0 20px 60px rgba(63, 57, 41, 0.08);
-      --shadow-soft: 0 10px 30px rgba(63, 57, 41, 0.05);
-      --radius: 28px;
-      --max: 1160px;
-      --reading: 720px;
+      --bg: #F7F3EC; --bg-soft: #EFE8DD;
+      --paper: rgba(255,255,255,0.62); --paper-strong: rgba(255,255,255,0.76);
+      --text: #2E302B; --text-soft: #66685F; --text-faint: #8A8A80;
+      --line: #d8cfbf; --line-soft: rgba(168,140,87,0.16);
+      --gold: #A88C57; --gold-soft: #C2AD84;
+      --green: #6A7A63; --green-deep: #475542; --green-pale: #E4E9DF;
+      --shadow: 0 20px 60px rgba(63,57,41,0.08); --shadow-soft: 0 10px 30px rgba(63,57,41,0.05);
+      --radius: 28px; --max: 1160px; --reading: 720px;
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:18px}
+    body{font-family:"DM Sans",sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(196,175,132,0.13),transparent 34%),radial-gradient(circle at bottom right,rgba(80,100,72,0.08),transparent 38%),linear-gradient(180deg,#F9F5EF 0%,#F7F3EC 100%);line-height:1.72;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;min-height:100vh}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 18% 18%,rgba(255,255,255,0.36),transparent 40%),radial-gradient(ellipse at 78% 78%,rgba(255,255,255,0.22),transparent 34%);z-index:0}
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:0.045;background-image:linear-gradient(to right,rgba(47,49,44,0.05)1px,transparent 1px),linear-gradient(to bottom,rgba(47,49,44,0.04)1px,transparent 1px);background-size:26px 26px;mix-blend-mode:multiply;z-index:0}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 18px; }
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 1.2rem;transition:background .4s,box-shadow .4s,backdrop-filter .4s}
+    .nav.scrolled{background:rgba(247,243,236,0.88);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--line-soft)}
+    .nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+    .nav-mark{font-family:"Cormorant Garamond",serif;font-size:1.35rem;font-weight:400;letter-spacing:.18em;color:var(--text);text-decoration:none;text-transform:uppercase}
+    .nav-links{display:flex;gap:2.2rem;list-style:none}
+    .nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-soft);text-decoration:none;transition:color .25s;position:relative}
+    .nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+    .nav-links a:hover{color:var(--text)}.nav-links a:hover::after{width:100%}
+    .nav-links a.active{color:var(--gold)}.nav-links a.active::after{width:100%}
+    .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
+    .nav-toggle span{display:block;width:22px;height:1.5px;background:var(--text);margin:5px 0;transition:transform .3s,opacity .3s}
 
-    body {
-      font-family: "DM Sans", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(196, 175, 132, 0.13), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(80, 100, 72, 0.08), transparent 38%),
-        linear-gradient(180deg, #F9F5EF 0%, #F7F3EC 100%);
-      line-height: 1.72;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      min-height: 100vh;
-    }
+    main,footer{position:relative;z-index:1}
+    .container{width:min(var(--max),calc(100% - 2.4rem));margin:0 auto}
+    .narrow{max-width:var(--reading);margin-inline:auto}
+    h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:400;line-height:1.08;letter-spacing:-.02em;color:var(--text)}
+    .eyebrow{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.05rem}
+    .ornament{width:62px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:0 auto 1.9rem;opacity:.9}
 
-    body::before {
-      content: "";
-      position: fixed; inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse at 18% 18%, rgba(255,255,255,0.36), transparent 40%),
-        radial-gradient(ellipse at 78% 78%, rgba(255,255,255,0.22), transparent 34%);
-      z-index: 0;
-    }
+    .atmosphere{padding:9rem 0 3.5rem;text-align:center}
+    .atmosphere h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:300;letter-spacing:-.01em;margin-bottom:1rem}
+    .atmosphere-sub{font-family:"Cormorant Garamond",serif;font-size:clamp(1.08rem,1.8vw,1.32rem);color:var(--text-soft);font-style:italic;max-width:560px;margin:0 auto;line-height:1.55}
 
-    body::after {
-      content: "";
-      position: fixed; inset: 0;
-      pointer-events: none;
-      opacity: 0.045;
-      background-image:
-        linear-gradient(to right, rgba(47,49,44,0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(47,49,44,0.04) 1px, transparent 1px);
-      background-size: 26px 26px;
-      mix-blend-mode: multiply;
-      z-index: 0;
-    }
+    .pulse-thread{display:none;text-align:center;padding:0 0 1.5rem}.pulse-thread.visible{display:block}
+    .pulse-thread-text{font-family:"Cormorant Garamond",serif;font-size:1.08rem;font-style:italic;color:var(--gold);max-width:540px;margin:0 auto;line-height:1.5}
 
-    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 1.2rem; transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease; }
-    .nav.scrolled { background: rgba(247, 243, 236, 0.88); backdrop-filter: blur(20px); box-shadow: 0 1px 0 var(--line-soft); }
-    .nav-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .nav-mark { font-family: "Cormorant Garamond", serif; font-size: 1.35rem; font-weight: 400; letter-spacing: 0.18em; color: var(--text); text-decoration: none; text-transform: uppercase; }
-    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
-    .nav-links a { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-soft); text-decoration: none; transition: color 0.25s ease; position: relative; }
-    .nav-links a::after { content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a.active { color: var(--gold); }
-    .nav-links a.active::after { width: 100%; }
-    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
-    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--text); margin: 5px 0; transition: transform 0.3s ease, opacity 0.3s ease; }
+    .pulse-section{padding:2rem 0 4rem}
+    .pulse-card{max-width:780px;margin:0 auto;background:var(--paper-strong);border:1px solid var(--line-soft);border-radius:32px;box-shadow:var(--shadow);backdrop-filter:blur(12px);padding:2.8rem 2.4rem;text-align:center;transition:box-shadow .4s}
+    .pulse-question{font-family:"Cormorant Garamond",serif;font-size:clamp(1.55rem,3vw,2.2rem);font-weight:400;line-height:1.32;color:var(--text);margin-bottom:2rem;font-style:italic}
 
-    main, footer { position: relative; z-index: 1; }
-    .container { width: min(var(--max), calc(100% - 2.4rem)); margin: 0 auto; }
-    .narrow { max-width: var(--reading); margin-inline: auto; }
-    h1, h2, h3 { font-family: "Cormorant Garamond", serif; font-weight: 400; line-height: 1.08; letter-spacing: -0.02em; color: var(--text); }
-    .eyebrow { font-size: 0.78rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.05rem; }
-    .ornament { width: 62px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 0 auto 1.9rem; opacity: 0.9; }
+    .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-bottom:1.5rem}
+    .chip{display:inline-block;padding:.55rem 1.15rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,0.7);font-family:"DM Sans",sans-serif;font-size:.84rem;color:var(--text-soft);cursor:pointer;transition:all .25s;white-space:nowrap}
+    .chip:hover{border-color:var(--gold-soft);color:var(--text);background:rgba(255,255,255,0.92);transform:translateY(-1px)}
+    .chip.selected{border-color:var(--gold);color:var(--green-deep);background:rgba(255,255,255,0.95);box-shadow:0 2px 12px rgba(168,140,87,0.12)}
 
-    .atmosphere { padding: 9rem 0 3.5rem; text-align: center; }
-    .atmosphere h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 300; letter-spacing: -0.01em; margin-bottom: 1rem; }
-    .atmosphere-sub { font-family: "Cormorant Garamond", serif; font-size: clamp(1.08rem, 1.8vw, 1.32rem); color: var(--text-soft); font-style: italic; max-width: 560px; margin: 0 auto; line-height: 1.55; }
+    .or-divider{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding:0 2rem}
+    .or-divider::before,.or-divider::after{content:"";flex:1;height:1px;background:linear-gradient(to right,transparent,var(--line),transparent)}
+    .or-divider span{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint)}
 
-    .pulse-thread { display: none; text-align: center; padding: 0 0 1.5rem; }
-    .pulse-thread.visible { display: block; }
-    .pulse-thread-text { font-family: "Cormorant Garamond", serif; font-size: 1.08rem; font-style: italic; color: var(--gold); max-width: 540px; margin: 0 auto; line-height: 1.5; }
+    .write-area{position:relative;max-width:600px;margin:0 auto}
+    .write-field{width:100%;min-height:100px;padding:1.1rem 1.2rem;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,0.9);font-family:"Cormorant Garamond",serif;font-size:1.12rem;line-height:1.55;color:var(--text);resize:none;outline:none;transition:border-color .3s,box-shadow .3s}
+    .write-field::placeholder{color:var(--text-faint);font-style:italic}
+    .write-field:focus{border-color:var(--gold-soft);box-shadow:0 0 0 4px rgba(183,154,90,0.06)}
+    .write-hint{margin-top:.65rem;font-size:.78rem;color:var(--text-faint);font-style:italic}
 
-    .pulse-section { padding: 2rem 0 4rem; }
-    .pulse-card { max-width: 780px; margin: 0 auto; background: var(--paper-strong); border: 1px solid var(--line-soft); border-radius: 32px; box-shadow: var(--shadow); backdrop-filter: blur(12px); padding: 2.8rem 2.4rem; text-align: center; transition: box-shadow 0.4s ease; }
-    .pulse-question { font-family: "Cormorant Garamond", serif; font-size: clamp(1.55rem, 3vw, 2.2rem); font-weight: 400; line-height: 1.32; color: var(--text); margin-bottom: 2rem; font-style: italic; }
+    .pulse-submit{display:inline-flex;align-items:center;justify-content:center;margin-top:1.5rem;min-height:50px;padding:.85rem 2rem;border-radius:999px;border:none;background:var(--green-deep);color:#fff;font-family:"DM Sans",sans-serif;font-size:.84rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;box-shadow:var(--shadow);transition:all .25s;opacity:0;transform:translateY(6px);pointer-events:none}
+    .pulse-submit.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+    .pulse-submit:hover{background:#394830;transform:translateY(-1px)}
+    .pulse-submit:disabled{opacity:.5;pointer-events:none}
 
-    .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-bottom: 1.5rem; }
-    .chip { display: inline-block; padding: 0.55rem 1.15rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,0.7); font-family: "DM Sans", sans-serif; font-size: 0.84rem; color: var(--text-soft); cursor: pointer; transition: all 0.25s ease; white-space: nowrap; }
-    .chip:hover { border-color: var(--gold-soft); color: var(--text); background: rgba(255,255,255,0.92); transform: translateY(-1px); }
-    .chip.selected { border-color: var(--gold); color: var(--green-deep); background: rgba(255,255,255,0.95); box-shadow: 0 2px 12px rgba(168,140,87,0.12); }
+    .reflection-section{padding:0 0 4rem;display:none}.reflection-section.visible{display:block}
+    .reflection-card{max-width:700px;margin:0 auto;background:rgba(255,255,255,0.72);border:1px solid var(--line-soft);border-radius:28px;box-shadow:var(--shadow);backdrop-filter:blur(12px);padding:2.6rem 2.4rem;opacity:0;transform:translateY(16px);animation:reflectionIn .8s cubic-bezier(.22,1,.36,1) forwards}
+    @keyframes reflectionIn{to{opacity:1;transform:translateY(0)}}
+    .reflection-label{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+    .reflection-text{font-family:"Cormorant Garamond",serif;font-size:clamp(1.22rem,2vw,1.52rem);line-height:1.58;color:var(--text)}
+    .reflection-divider{width:48px;height:1px;background:linear-gradient(to right,var(--gold-soft),transparent);margin:1.6rem 0}
+    .next-door{margin-top:.4rem}
+    .next-door-label{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.65rem}
+    .next-door-link{display:inline-flex;align-items:center;gap:.5rem;font-family:"Cormorant Garamond",serif;font-size:1.15rem;color:var(--green-deep);text-decoration:none;transition:color .25s;cursor:pointer}
+    .next-door-link:hover{color:var(--gold)}.next-door-link .arrow{display:inline-block;transition:transform .25s}.next-door-link:hover .arrow{transform:translateX(3px)}
+    .next-door-question{font-family:"Cormorant Garamond",serif;font-size:1.12rem;font-style:italic;color:var(--text);line-height:1.5}
+    .next-door-pause{font-family:"DM Sans",sans-serif;font-size:.88rem;color:var(--text-soft);line-height:1.55}
+    .reflection-thread{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--line-soft)}
+    .reflection-thread-text{font-family:"Cormorant Garamond",serif;font-size:.95rem;font-style:italic;color:var(--gold-soft);line-height:1.5}
+    .continue-actions{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:1.8rem}
+    .btn-continue{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:.75rem 1.4rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,0.65);font-family:"DM Sans",sans-serif;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green-deep);cursor:pointer;transition:all .25s;text-decoration:none;backdrop-filter:blur(8px)}
+    .btn-continue:hover{border-color:var(--gold-soft);transform:translateY(-1px);box-shadow:var(--shadow-soft)}
 
-    .or-divider { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding: 0 2rem; }
-    .or-divider::before, .or-divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--line), transparent); }
-    .or-divider span { font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); }
-
-    .write-area { position: relative; max-width: 600px; margin: 0 auto; }
-    .write-field { width: 100%; min-height: 100px; padding: 1.1rem 1.2rem; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,0.9); font-family: "Cormorant Garamond", serif; font-size: 1.12rem; line-height: 1.55; color: var(--text); resize: none; outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
-    .write-field::placeholder { color: var(--text-faint); font-style: italic; }
-    .write-field:focus { border-color: var(--gold-soft); box-shadow: 0 0 0 4px rgba(183, 154, 90, 0.06); }
-    .write-hint { margin-top: 0.65rem; font-size: 0.78rem; color: var(--text-faint); font-style: italic; }
-
-    .pulse-submit { display: inline-flex; align-items: center; justify-content: center; margin-top: 1.5rem; min-height: 50px; padding: 0.85rem 2rem; border-radius: 999px; border: none; background: var(--green-deep); color: #fff; font-family: "DM Sans", sans-serif; font-size: 0.84rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; box-shadow: var(--shadow); transition: all 0.25s ease; opacity: 0; transform: translateY(6px); pointer-events: none; }
-    .pulse-submit.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    .pulse-submit:hover { background: #394830; transform: translateY(-1px); }
-    .pulse-submit:disabled { opacity: 0.5; pointer-events: none; }
-
-    .reflection-section { padding: 0 0 4rem; display: none; }
-    .reflection-section.visible { display: block; }
-    .reflection-card { max-width: 700px; margin: 0 auto; background: rgba(255,255,255,0.72); border: 1px solid var(--line-soft); border-radius: 28px; box-shadow: var(--shadow); backdrop-filter: blur(12px); padding: 2.6rem 2.4rem; opacity: 0; transform: translateY(16px); animation: reflectionIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-    @keyframes reflectionIn { to { opacity: 1; transform: translateY(0); } }
-    .reflection-label { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
-    .reflection-text { font-family: "Cormorant Garamond", serif; font-size: clamp(1.22rem, 2vw, 1.52rem); line-height: 1.58; color: var(--text); }
-    .reflection-divider { width: 48px; height: 1px; background: linear-gradient(to right, var(--gold-soft), transparent); margin: 1.6rem 0; }
-
-    .next-door { margin-top: 0.4rem; }
-    .next-door-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.65rem; }
-    .next-door-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: "Cormorant Garamond", serif; font-size: 1.15rem; color: var(--green-deep); text-decoration: none; transition: color 0.25s ease; cursor: pointer; }
-    .next-door-link:hover { color: var(--gold); }
-    .next-door-link .arrow { display: inline-block; transition: transform 0.25s ease; }
-    .next-door-link:hover .arrow { transform: translateX(3px); }
-    .next-door-question { font-family: "Cormorant Garamond", serif; font-size: 1.12rem; font-style: italic; color: var(--text); line-height: 1.5; }
-    .next-door-pause { font-family: "DM Sans", sans-serif; font-size: 0.88rem; color: var(--text-soft); line-height: 1.55; }
-
-    .reflection-thread { margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--line-soft); }
-    .reflection-thread-text { font-family: "Cormorant Garamond", serif; font-size: 0.95rem; font-style: italic; color: var(--gold-soft); line-height: 1.5; }
-
-    .continue-actions { display: flex; gap: 0.85rem; flex-wrap: wrap; margin-top: 1.8rem; }
-    .btn-continue { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0.75rem 1.4rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,0.65); font-family: "DM Sans", sans-serif; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-deep); cursor: pointer; transition: all 0.25s ease; text-decoration: none; backdrop-filter: blur(8px); }
-    .btn-continue:hover { border-color: var(--gold-soft); transform: translateY(-1px); box-shadow: var(--shadow-soft); }
-
-    .loading-state { display: none; text-align: center; padding: 3rem 0; }
-    .loading-state.visible { display: block; }
-    .loading-dots { display: inline-flex; gap: 6px; align-items: center; }
-    .loading-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-soft); animation: dotPulse 1.4s ease-in-out infinite; }
-    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes dotPulse { 0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
-    .loading-text { font-family: "Cormorant Garamond", serif; font-size: 1rem; font-style: italic; color: var(--text-faint); margin-top: 0.85rem; }
-
-    .error-msg { display: none; text-align: center; padding: 1.5rem; margin: 1rem auto; max-width: 500px; font-size: 0.88rem; color: var(--text-soft); background: rgba(255,255,255,0.5); border: 1px solid var(--line-soft); border-radius: 16px; }
-    .error-msg.visible { display: block; }
-
-    .deeper-section { padding: 0 0 4rem; display: none; }
-    .deeper-section.visible { display: block; }
-    .deeper-card { max-width: 700px; margin: 0 auto; background: rgba(255,255,255,0.72); border: 1px solid var(--line-soft); border-radius: 28px; box-shadow: var(--shadow); backdrop-filter: blur(12px); padding: 2.6rem 2.4rem; opacity: 0; transform: translateY(16px); animation: reflectionIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .loading-state{display:none;text-align:center;padding:3rem 0}.loading-state.visible{display:block}
+    .loading-dots{display:inline-flex;gap:6px;align-items:center}
+    .loading-dots span{width:6px;height:6px;border-radius:50%;background:var(--gold-soft);animation:dotPulse 1.4s ease-in-out infinite}
+    .loading-dots span:nth-child(2){animation-delay:.2s}.loading-dots span:nth-child(3){animation-delay:.4s}
+    @keyframes dotPulse{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+    .loading-text{font-family:"Cormorant Garamond",serif;font-size:1rem;font-style:italic;color:var(--text-faint);margin-top:.85rem}
+    .error-msg{display:none;text-align:center;padding:1.5rem;margin:1rem auto;max-width:500px;font-size:.88rem;color:var(--text-soft);background:rgba(255,255,255,0.5);border:1px solid var(--line-soft);border-radius:16px}.error-msg.visible{display:block}
+    .deeper-section{padding:0 0 4rem;display:none}.deeper-section.visible{display:block}
+    .deeper-card{max-width:700px;margin:0 auto;background:rgba(255,255,255,0.72);border:1px solid var(--line-soft);border-radius:28px;box-shadow:var(--shadow);backdrop-filter:blur(12px);padding:2.6rem 2.4rem;opacity:0;transform:translateY(16px);animation:reflectionIn .8s cubic-bezier(.22,1,.36,1) forwards}
 
     /* ─── FEATURED VISUAL CARDS ─── */
-    .featured-section {
-      padding: 1rem 0 5rem;
-    }
+    .featured-section{padding:1rem 0 5rem}
+    .featured-header{text-align:center;margin-bottom:2.2rem}
+    .featured-header h2{font-size:clamp(1.65rem,3vw,2.4rem);margin-bottom:.4rem}
+    .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:1000px;margin:0 auto}
 
-    .featured-header {
-      text-align: center;
-      margin-bottom: 2.2rem;
-    }
+    .feat-card{position:relative;border-radius:24px;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;color:#fff;transition:transform .35s,box-shadow .35s;box-shadow:0 12px 40px rgba(40,36,28,0.12);cursor:pointer}
+    .feat-card:hover{transform:translateY(-4px);box-shadow:0 20px 56px rgba(40,36,28,0.18)}
+    .feat-card-bg{position:absolute;inset:0;z-index:0}
+    .feat-bg-morning{background:linear-gradient(160deg,#e8ddd0 0%,#c4b59a 30%,#8a7d6a 65%,#5c544a 100%)}
+    .feat-bg-evening{background:linear-gradient(145deg,#d4c4a8 0%,#a89070 30%,#6b5d4f 60%,#3d3630 100%)}
+    .feat-bg-forest{background:linear-gradient(155deg,#c8d4c0 0%,#7a8f6f 35%,#4a5e42 65%,#2e3b28 100%)}
+    .feat-bg-dusk{background:linear-gradient(150deg,#d8cfc4 0%,#b09e8a 30%,#7a6b5c 60%,#4a3f36 100%)}
+    .feat-bg-mist{background:linear-gradient(160deg,#e0ddd8 0%,#b5ada4 35%,#8a8078 65%,#5a524c 100%)}
+    .feat-bg-warmth{background:linear-gradient(145deg,#e4d5c0 0%,#c4a880 30%,#8a7050 60%,#5a4430 100%)}
+    .feat-bg-ivory{background:linear-gradient(155deg,#f0e8dc 0%,#d4c4a8 30%,#a08c6e 60%,#6a5a44 100%)}
+    .feat-bg-sage{background:linear-gradient(150deg,#d4dac8 0%,#98a88a 35%,#5e7050 65%,#3a4830 100%)}
+    .feat-bg-stone{background:linear-gradient(160deg,#dcd6cc 0%,#b0a898 30%,#7a7268 60%,#4e4840 100%)}
+    .feat-card-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(30,28,24,0.72)0%,rgba(30,28,24,0.15)55%,transparent 100%);z-index:1}
+    .feat-card-bg::before{content:"";position:absolute;inset:0;opacity:.08;background-image:radial-gradient(circle at 20% 30%,rgba(255,255,255,0.4)0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(255,255,255,0.2)0%,transparent 40%);z-index:1}
 
-    .featured-header h2 {
-      font-size: clamp(1.65rem, 3vw, 2.4rem);
-      margin-bottom: 0.4rem;
-    }
+    /* SVG Ornament Layer */
+    .feat-card-ornament{position:absolute;top:0;right:0;width:65%;height:65%;z-index:1;opacity:.12;pointer-events:none}
+    .feat-card-ornament svg{width:100%;height:100%}
+    .feat-card:hover .feat-card-ornament{opacity:.18;transition:opacity .5s}
 
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+    .feat-card-content{position:relative;z-index:2;padding:1.6rem 1.4rem}
+    .feat-card-type{font-family:"DM Sans",sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:.55rem}
+    .feat-card-title{font-family:"Cormorant Garamond",serif;font-size:clamp(1.25rem,2vw,1.55rem);font-weight:400;line-height:1.22;color:#fff;margin-bottom:.5rem}
+    .feat-card-desc{font-family:"DM Sans",sans-serif;font-size:.8rem;line-height:1.5;color:rgba(255,255,255,0.7)}
+    .feat-card-arrow{position:absolute;top:1.2rem;right:1.2rem;z-index:2;font-family:"Cormorant Garamond",serif;font-size:1.2rem;color:rgba(255,255,255,0.4);transition:color .25s,transform .25s}
+    .feat-card:hover .feat-card-arrow{color:rgba(255,255,255,0.8);transform:translateX(3px)}
 
-    .feat-card {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      min-height: 340px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      text-decoration: none;
-      color: #fff;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      box-shadow: 0 12px 40px rgba(40, 36, 28, 0.12);
-      cursor: pointer;
-    }
+    .themes-section{padding:2rem 0 5rem}
+    .themes-header{text-align:center;margin-bottom:2rem}
+    .themes-header h2{font-size:clamp(1.65rem,3vw,2.4rem);margin-bottom:.6rem}
+    .themes-header p{font-family:"DM Sans",sans-serif;font-size:.92rem;color:var(--text-soft)}
+    .theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;max-width:880px;margin:0 auto}
+    .theme-card{background:var(--paper);border:1px solid var(--line-soft);border-radius:20px;padding:1.3rem 1.15rem;text-align:center;cursor:pointer;transition:all .3s;backdrop-filter:blur(8px);box-shadow:var(--shadow-soft)}
+    .theme-card:hover{border-color:var(--gold-soft);transform:translateY(-2px);box-shadow:var(--shadow)}
+    .theme-card.active{border-color:var(--gold);background:rgba(255,255,255,0.82);box-shadow:0 8px 32px rgba(168,140,87,0.14)}
+    .theme-icon{font-size:1.5rem;margin-bottom:.5rem;opacity:.8}
+    .theme-name{font-family:"Cormorant Garamond",serif;font-size:1.05rem;color:var(--text);line-height:1.3}
 
-    .feat-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 56px rgba(40, 36, 28, 0.18);
-    }
+    .todays-path{padding:0 0 5rem}
+    .path-card{max-width:620px;margin:0 auto;background:rgba(255,255,255,0.58);border:1px solid var(--line-soft);border-radius:28px;padding:2.2rem 2rem;box-shadow:var(--shadow-soft);backdrop-filter:blur(10px)}
+    .path-title{font-family:"DM Sans",sans-serif;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem}
+    .path-steps{list-style:none}
+    .path-step{display:flex;gap:1rem;align-items:flex-start;padding:.85rem 0}
+    .path-step+.path-step{border-top:1px solid var(--line-soft)}
+    .path-step-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--green-pale);color:var(--green-deep);font-family:"DM Sans",sans-serif;font-size:.72rem;font-weight:600;display:flex;align-items:center;justify-content:center}
+    .path-step-label{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.2rem}
+    .path-step-text{font-family:"Cormorant Garamond",serif;font-size:1.06rem;color:var(--text);line-height:1.45}
+    .path-step-text a{color:var(--green-deep);text-decoration:none;border-bottom:1px solid var(--line-soft);transition:border-color .25s}
+    .path-step-text a:hover{border-color:var(--gold)}
 
-    .feat-card-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
+    .closing{padding:2rem 0 5rem;text-align:center}
+    .closing-divider{width:100%;max-width:180px;height:1px;background:linear-gradient(to right,transparent,var(--gold-soft),transparent);margin:0 auto 2rem}
+    .closing-question{font-family:"Cormorant Garamond",serif;font-size:clamp(1.2rem,2.2vw,1.7rem);font-style:italic;color:var(--text);line-height:1.45;max-width:580px;margin:0 auto}
 
-    /* Atmospheric gradient backgrounds */
-    .feat-bg-morning {
-      background: linear-gradient(160deg, #e8ddd0 0%, #c4b59a 30%, #8a7d6a 65%, #5c544a 100%);
-    }
-    .feat-bg-evening {
-      background: linear-gradient(145deg, #d4c4a8 0%, #a89070 30%, #6b5d4f 60%, #3d3630 100%);
-    }
-    .feat-bg-forest {
-      background: linear-gradient(155deg, #c8d4c0 0%, #7a8f6f 35%, #4a5e42 65%, #2e3b28 100%);
-    }
-    .feat-bg-dusk {
-      background: linear-gradient(150deg, #d8cfc4 0%, #b09e8a 30%, #7a6b5c 60%, #4a3f36 100%);
-    }
-    .feat-bg-mist {
-      background: linear-gradient(160deg, #e0ddd8 0%, #b5ada4 35%, #8a8078 65%, #5a524c 100%);
-    }
-    .feat-bg-warmth {
-      background: linear-gradient(145deg, #e4d5c0 0%, #c4a880 30%, #8a7050 60%, #5a4430 100%);
-    }
-    .feat-bg-ivory {
-      background: linear-gradient(155deg, #f0e8dc 0%, #d4c4a8 30%, #a08c6e 60%, #6a5a44 100%);
-    }
-    .feat-bg-sage {
-      background: linear-gradient(150deg, #d4dac8 0%, #98a88a 35%, #5e7050 65%, #3a4830 100%);
-    }
-    .feat-bg-stone {
-      background: linear-gradient(160deg, #dcd6cc 0%, #b0a898 30%, #7a7268 60%, #4e4840 100%);
-    }
+    .footer{padding:1.5rem 0 3rem;text-align:center}
+    .footer p{font-family:"Cormorant Garamond",serif;font-size:1rem;color:var(--text-soft)}
 
-    .feat-card-bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(30, 28, 24, 0.72) 0%, rgba(30, 28, 24, 0.15) 55%, transparent 100%);
-      z-index: 1;
-    }
-
-    /* Subtle texture overlay */
-    .feat-card-bg::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: 0.08;
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.2) 0%, transparent 40%);
-      z-index: 1;
-    }
-
-    .feat-card-content {
-      position: relative;
-      z-index: 2;
-      padding: 1.6rem 1.4rem;
-    }
-
-    .feat-card-type {
-      font-family: "DM Sans", sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.65);
-      margin-bottom: 0.55rem;
-    }
-
-    .feat-card-title {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(1.25rem, 2vw, 1.55rem);
-      font-weight: 400;
-      line-height: 1.22;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-
-    .feat-card-desc {
-      font-family: "DM Sans", sans-serif;
-      font-size: 0.8rem;
-      line-height: 1.5;
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    .feat-card-arrow {
-      position: absolute;
-      top: 1.2rem;
-      right: 1.2rem;
-      z-index: 2;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.2rem;
-      color: rgba(255,255,255,0.4);
-      transition: color 0.25s, transform 0.25s;
-    }
-
-    .feat-card:hover .feat-card-arrow {
-      color: rgba(255,255,255,0.8);
-      transform: translateX(3px);
-    }
-
-    /* THEME SELECTOR */
-    .themes-section { padding: 2rem 0 5rem; }
-    .themes-header { text-align: center; margin-bottom: 2rem; }
-    .themes-header h2 { font-size: clamp(1.65rem, 3vw, 2.4rem); margin-bottom: 0.6rem; }
-    .themes-header p { font-family: "DM Sans", sans-serif; font-size: 0.92rem; color: var(--text-soft); }
-    .theme-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; max-width: 880px; margin: 0 auto; }
-    .theme-card { background: var(--paper); border: 1px solid var(--line-soft); border-radius: 20px; padding: 1.3rem 1.15rem; text-align: center; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(8px); box-shadow: var(--shadow-soft); }
-    .theme-card:hover { border-color: var(--gold-soft); transform: translateY(-2px); box-shadow: var(--shadow); }
-    .theme-card.active { border-color: var(--gold); background: rgba(255,255,255,0.82); box-shadow: 0 8px 32px rgba(168,140,87,0.14); }
-    .theme-icon { font-size: 1.5rem; margin-bottom: 0.5rem; opacity: 0.8; }
-    .theme-name { font-family: "Cormorant Garamond", serif; font-size: 1.05rem; color: var(--text); line-height: 1.3; }
-
-    .todays-path { padding: 0 0 5rem; }
-    .path-card { max-width: 620px; margin: 0 auto; background: rgba(255,255,255,0.58); border: 1px solid var(--line-soft); border-radius: 28px; padding: 2.2rem 2rem; box-shadow: var(--shadow-soft); backdrop-filter: blur(10px); }
-    .path-title { font-family: "DM Sans", sans-serif; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; }
-    .path-steps { list-style: none; }
-    .path-step { display: flex; gap: 1rem; align-items: flex-start; padding: 0.85rem 0; }
-    .path-step + .path-step { border-top: 1px solid var(--line-soft); }
-    .path-step-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--green-pale); color: var(--green-deep); font-family: "DM Sans", sans-serif; font-size: 0.72rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
-    .path-step-label { font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.2rem; }
-    .path-step-text { font-family: "Cormorant Garamond", serif; font-size: 1.06rem; color: var(--text); line-height: 1.45; }
-    .path-step-text a { color: var(--green-deep); text-decoration: none; border-bottom: 1px solid var(--line-soft); transition: border-color 0.25s; }
-    .path-step-text a:hover { border-color: var(--gold); }
-
-    .closing { padding: 2rem 0 5rem; text-align: center; }
-    .closing-divider { width: 100%; max-width: 180px; height: 1px; background: linear-gradient(to right, transparent, var(--gold-soft), transparent); margin: 0 auto 2rem; }
-    .closing-question { font-family: "Cormorant Garamond", serif; font-size: clamp(1.2rem, 2.2vw, 1.7rem); font-style: italic; color: var(--text); line-height: 1.45; max-width: 580px; margin: 0 auto; }
-
-    .footer { padding: 1.5rem 0 3rem; text-align: center; }
-    .footer p { font-family: "Cormorant Garamond", serif; font-size: 1rem; color: var(--text-soft); }
-
-    @media (max-width: 980px) {
-      .theme-grid { grid-template-columns: repeat(2, 1fr); }
-      .featured-grid { grid-template-columns: 1fr; max-width: 480px; }
-      .feat-card { min-height: 280px; }
-    }
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(247, 243, 236, 0.96); backdrop-filter: blur(20px); padding: 1.5rem 1.2rem; gap: 1.2rem; border-bottom: 1px solid var(--line-soft); }
-      .nav-toggle { display: block; }
-    }
-    @media (max-width: 640px) {
-      html { font-size: 16px; }
-      .container { width: min(var(--max), calc(100% - 1.35rem)); }
-      .atmosphere { padding: 7.5rem 0 2.5rem; }
-      .pulse-card, .reflection-card, .deeper-card { padding: 2rem 1.25rem; border-radius: 24px; }
-      .theme-grid { grid-template-columns: 1fr 1fr; gap: 0.65rem; }
-      .theme-card { padding: 1rem 0.85rem; border-radius: 16px; }
-      .path-card { padding: 1.6rem 1.25rem; border-radius: 24px; }
-      .chips { gap: 0.45rem; }
-      .chip { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
-      .feat-card { min-height: 260px; }
-      .feat-card-content { padding: 1.3rem 1.1rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .reflection-card, .deeper-card { animation: none; opacity: 1; transform: none; }
-      *, *::before, *::after { transition: none !important; animation-duration: 0.01ms !important; }
-    }
+    @media(max-width:980px){.theme-grid{grid-template-columns:repeat(2,1fr)}.featured-grid{grid-template-columns:1fr;max-width:480px}.feat-card{min-height:280px}}
+    @media(max-width:768px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(247,243,236,0.96);backdrop-filter:blur(20px);padding:1.5rem 1.2rem;gap:1.2rem;border-bottom:1px solid var(--line-soft)}.nav-toggle{display:block}}
+    @media(max-width:640px){html{font-size:16px}.container{width:min(var(--max),calc(100% - 1.35rem))}.atmosphere{padding:7.5rem 0 2.5rem}.pulse-card,.reflection-card,.deeper-card{padding:2rem 1.25rem;border-radius:24px}.theme-grid{grid-template-columns:1fr 1fr;gap:.65rem}.theme-card{padding:1rem .85rem;border-radius:16px}.path-card{padding:1.6rem 1.25rem;border-radius:24px}.chips{gap:.45rem}.chip{padding:.45rem .9rem;font-size:.8rem}.feat-card{min-height:260px}.feat-card-content{padding:1.3rem 1.1rem}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reflection-card,.deeper-card{animation:none;opacity:1;transform:none}*,*::before,*::after{transition:none!important;animation-duration:.01ms!important}}
   </style>
 </head>
 <body>
@@ -383,9 +185,7 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="/" class="nav-mark">Khora</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
       <ul class="nav-links" id="navLinks">
         <li><a href="/">Home</a></li>
         <li><a href="/pulse.html" class="active">Pulse</a></li>
@@ -396,143 +196,82 @@
   </nav>
 
   <main>
-    <section class="atmosphere">
-      <div class="container">
-        <div class="eyebrow">Your interior pulse</div>
-        <div class="ornament"></div>
-        <h1>Begin here.</h1>
-        <p class="atmosphere-sub">
-          A quiet intelligence that meets you in one exact place<br />
-          and opens the right next door.
-        </p>
-      </div>
-    </section>
+    <section class="atmosphere"><div class="container"><div class="eyebrow">Your interior pulse</div><div class="ornament"></div><h1>Begin here.</h1><p class="atmosphere-sub">A quiet intelligence that meets you in one exact place<br/>and opens the right next door.</p></div></section>
 
-    <div class="pulse-thread" id="pulseThread">
-      <div class="container">
-        <p class="pulse-thread-text" id="pulseThreadText"></p>
-      </div>
-    </div>
+    <div class="pulse-thread" id="pulseThread"><div class="container"><p class="pulse-thread-text" id="pulseThreadText"></p></div></div>
 
-    <section class="pulse-section" id="pulseSection">
-      <div class="container">
-        <div class="pulse-card" id="pulseCard">
-          <div class="pulse-question" id="pulseQuestion"></div>
-          <div class="chips" id="chips"></div>
-          <div class="or-divider"><span>or write your own</span></div>
-          <div class="write-area">
-            <textarea class="write-field" id="writeField" placeholder="Say only what feels true…" rows="3" maxlength="1000"></textarea>
-            <p class="write-hint">Answer in your own language. There is no wrong way to begin.</p>
-          </div>
-          <button class="pulse-submit" id="submitBtn">Reflect with me</button>
-        </div>
-      </div>
-    </section>
+    <section class="pulse-section" id="pulseSection"><div class="container"><div class="pulse-card" id="pulseCard">
+      <div class="pulse-question" id="pulseQuestion"></div>
+      <div class="chips" id="chips"></div>
+      <div class="or-divider"><span>or write your own</span></div>
+      <div class="write-area"><textarea class="write-field" id="writeField" placeholder="Say only what feels true…" rows="3" maxlength="1000"></textarea><p class="write-hint">Answer in your own language. There is no wrong way to begin.</p></div>
+      <button class="pulse-submit" id="submitBtn">Reflect with me</button>
+    </div></div></section>
 
-    <div class="loading-state" id="loadingState">
-      <div class="loading-dots"><span></span><span></span><span></span></div>
-      <p class="loading-text">Listening…</p>
-    </div>
-
+    <div class="loading-state" id="loadingState"><div class="loading-dots"><span></span><span></span><span></span></div><p class="loading-text">Listening…</p></div>
     <div class="error-msg" id="errorMsg">The Companion is resting. Please try again in a moment.</div>
 
-    <section class="deeper-section" id="deeperSection">
-      <div class="container">
-        <div class="deeper-card">
-          <div class="reflection-label">Something is forming here</div>
-          <div class="reflection-text">
-            You have been returning. That is not small. The reflections you have given KHORA are beginning to form a thread — and the deeper layer keeps that thread alive.
-          </div>
-          <div class="reflection-divider"></div>
-          <div class="next-door">
-            <div class="next-door-label">The private layer</div>
-            <div class="next-door-pause" style="margin-bottom: 0.6rem;">
-              Persistent Pulse memory. Saved reflections across sessions. Deeper correspondence. Guided paths over 7 and 21 days. A quieter, more continuous interior space.
-            </div>
-            <div class="next-door-pause" style="margin-bottom: 1.2rem;">€39 per month. Cancel anytime.</div>
-            <a href="#" id="subscribeBtn" class="btn-continue" style="background: var(--green-deep); color: #fff; border-color: var(--green-deep); padding: 0.85rem 2rem;">Enter the private layer</a>
-          </div>
-          <div style="margin-top: 1.4rem;">
-            <a href="/letters.html" class="btn-continue">Continue with the free letters</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section class="deeper-section" id="deeperSection"><div class="container"><div class="deeper-card">
+      <div class="reflection-label">Something is forming here</div>
+      <div class="reflection-text">You have been returning. That is not small. The reflections you have given KHORA are beginning to form a thread — and the deeper layer keeps that thread alive.</div>
+      <div class="reflection-divider"></div>
+      <div class="next-door"><div class="next-door-label">The private layer</div><div class="next-door-pause" style="margin-bottom:.6rem">Persistent Pulse memory. Saved reflections across sessions. Deeper correspondence. Guided paths over 7 and 21 days. A quieter, more continuous interior space.</div><div class="next-door-pause" style="margin-bottom:1.2rem">€39 per month. Cancel anytime.</div><a href="#" id="subscribeBtn" class="btn-continue" style="background:var(--green-deep);color:#fff;border-color:var(--green-deep);padding:.85rem 2rem">Enter the private layer</a></div>
+      <div style="margin-top:1.4rem"><a href="/letters.html" class="btn-continue">Continue with the free letters</a></div>
+    </div></div></section>
 
-    <section class="reflection-section" id="reflectionSection">
-      <div class="container">
-        <div class="reflection-card" id="reflectionCard">
-          <div class="reflection-label">Khora reflects</div>
-          <div class="reflection-text" id="reflectionText"></div>
-          <div class="reflection-divider"></div>
-          <div class="next-door" id="nextDoor"></div>
-          <div class="reflection-thread" id="reflectionThread" style="display:none;">
-            <p class="reflection-thread-text" id="reflectionThreadText"></p>
-          </div>
-          <div class="continue-actions">
-            <button class="btn-continue" id="newQuestionBtn">Another question</button>
-            <button class="btn-continue" id="saveReflectionBtn">Save this reflection</button>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section class="reflection-section" id="reflectionSection"><div class="container"><div class="reflection-card" id="reflectionCard">
+      <div class="reflection-label">Khora reflects</div>
+      <div class="reflection-text" id="reflectionText"></div>
+      <div class="reflection-divider"></div>
+      <div class="next-door" id="nextDoor"></div>
+      <div class="reflection-thread" id="reflectionThread" style="display:none"><p class="reflection-thread-text" id="reflectionThreadText"></p></div>
+      <div class="continue-actions"><button class="btn-continue" id="newQuestionBtn">Another question</button><button class="btn-continue" id="saveReflectionBtn">Save this reflection</button></div>
+    </div></div></section>
 
-    <!-- ═══ FEATURED VISUAL CARDS ═══ -->
-    <section class="featured-section" id="featuredSection">
-      <div class="container">
-        <div class="featured-header">
-          <div class="eyebrow">Inside Khora today</div>
-          <h2>Where to go from here</h2>
-        </div>
-        <div class="featured-grid" id="featuredGrid"></div>
-      </div>
-    </section>
+    <section class="featured-section" id="featuredSection"><div class="container">
+      <div class="featured-header"><div class="eyebrow">Inside Khora today</div><h2>Where to go from here</h2></div>
+      <div class="featured-grid" id="featuredGrid"></div>
+    </div></section>
 
-    <section class="themes-section">
-      <div class="container">
-        <div class="themes-header">
-          <div class="eyebrow">What is moving in you?</div>
-          <h2>Choose the theme closest to your current state</h2>
-          <p>The question above will change to match.</p>
-        </div>
-        <div class="theme-grid" id="themeGrid">
-          <div class="theme-card" data-theme="over-functioning"><div class="theme-icon">◯</div><div class="theme-name">Over-functioning</div></div>
-          <div class="theme-card" data-theme="adjustment"><div class="theme-icon">◌</div><div class="theme-name">Constant adjustment</div></div>
-          <div class="theme-card" data-theme="invisibility"><div class="theme-icon">◍</div><div class="theme-name">Emotional invisibility</div></div>
-          <div class="theme-card" data-theme="identity"><div class="theme-icon">◎</div><div class="theme-name">Identity fatigue</div></div>
-          <div class="theme-card" data-theme="rest"><div class="theme-icon">○</div><div class="theme-name">Need for rest</div></div>
-          <div class="theme-card" data-theme="boundaries"><div class="theme-icon">◈</div><div class="theme-name">Need for boundaries</div></div>
-          <div class="theme-card" data-theme="truth"><div class="theme-icon">◇</div><div class="theme-name">Need for truth</div></div>
-          <div class="theme-card" data-theme="return"><div class="theme-icon">◆</div><div class="theme-name">Self-return</div></div>
-        </div>
+    <section class="themes-section"><div class="container">
+      <div class="themes-header"><div class="eyebrow">What is moving in you?</div><h2>Choose the theme closest to your current state</h2><p>The question above will change to match.</p></div>
+      <div class="theme-grid" id="themeGrid">
+        <div class="theme-card" data-theme="over-functioning"><div class="theme-icon">◯</div><div class="theme-name">Over-functioning</div></div>
+        <div class="theme-card" data-theme="adjustment"><div class="theme-icon">◌</div><div class="theme-name">Constant adjustment</div></div>
+        <div class="theme-card" data-theme="invisibility"><div class="theme-icon">◍</div><div class="theme-name">Emotional invisibility</div></div>
+        <div class="theme-card" data-theme="identity"><div class="theme-icon">◎</div><div class="theme-name">Identity fatigue</div></div>
+        <div class="theme-card" data-theme="rest"><div class="theme-icon">○</div><div class="theme-name">Need for rest</div></div>
+        <div class="theme-card" data-theme="boundaries"><div class="theme-icon">◈</div><div class="theme-name">Need for boundaries</div></div>
+        <div class="theme-card" data-theme="truth"><div class="theme-icon">◇</div><div class="theme-name">Need for truth</div></div>
+        <div class="theme-card" data-theme="return"><div class="theme-icon">◆</div><div class="theme-name">Self-return</div></div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="todays-path" id="todaysPath">
-      <div class="container">
-        <div class="path-card">
-          <div class="path-title" id="pathTitle">Today's path</div>
-          <ul class="path-steps" id="pathSteps"></ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="closing">
-      <div class="container">
-        <div class="closing-divider"></div>
-        <p class="closing-question" id="closingQuestion"></p>
-      </div>
-    </section>
+    <section class="todays-path" id="todaysPath"><div class="container"><div class="path-card"><div class="path-title" id="pathTitle">Today's path</div><ul class="path-steps" id="pathSteps"></ul></div></div></section>
+    <section class="closing"><div class="container"><div class="closing-divider"></div><p class="closing-question" id="closingQuestion"></p></div></section>
   </main>
 
-  <footer class="footer">
-    <div class="container"><p>KHORA — built slowly, honestly, in plain sight.</p></div>
-  </footer>
+  <footer class="footer"><div class="container"><p>KHORA — built slowly, honestly, in plain sight.</p></div></footer>
 
   <script>
     const API_ENDPOINT = "https://khora-companion.khorasystems.workers.dev";
 
-    // ── 25 PULSE QUESTIONS ──
+    // ── SVG ORNAMENTS ──
+    const ORNAMENTS = {
+      branch: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M25 175 Q65 130 95 85 Q115 55 175 25" stroke="white" fill="none" stroke-width="0.9" stroke-linecap="round"/><ellipse cx="50" cy="148" rx="7" ry="13" transform="rotate(-35 50 148)" stroke="white" fill="none" stroke-width="0.6"/><ellipse cx="72" cy="118" rx="6" ry="11" transform="rotate(-42 72 118)" stroke="white" fill="none" stroke-width="0.6"/><ellipse cx="95" cy="82" rx="6" ry="11" transform="rotate(-50 95 82)" stroke="white" fill="none" stroke-width="0.6"/><ellipse cx="120" cy="55" rx="5" ry="10" transform="rotate(-55 120 55)" stroke="white" fill="none" stroke-width="0.6"/><ellipse cx="150" cy="35" rx="5" ry="9" transform="rotate(-60 150 35)" stroke="white" fill="none" stroke-width="0.6"/><path d="M55 155 Q40 145 45 130" stroke="white" fill="none" stroke-width="0.5" stroke-linecap="round"/><path d="M100 78 Q115 68 120 75" stroke="white" fill="none" stroke-width="0.5" stroke-linecap="round"/></svg>`,
+      bloom: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="10" stroke="white" fill="none" stroke-width="0.7"/><path d="M100 90 Q92 65 100 48 Q108 65 100 90" stroke="white" fill="none" stroke-width="0.6"/><path d="M110 100 Q135 92 152 100 Q135 108 110 100" stroke="white" fill="none" stroke-width="0.6"/><path d="M100 110 Q108 135 100 152 Q92 135 100 110" stroke="white" fill="none" stroke-width="0.6"/><path d="M90 100 Q65 108 48 100 Q65 92 90 100" stroke="white" fill="none" stroke-width="0.6"/><path d="M107 93 Q125 72 140 62" stroke="white" fill="none" stroke-width="0.5"/><path d="M107 107 Q125 128 140 138" stroke="white" fill="none" stroke-width="0.5"/><path d="M93 107 Q75 128 60 138" stroke="white" fill="none" stroke-width="0.5"/><path d="M93 93 Q75 72 60 62" stroke="white" fill="none" stroke-width="0.5"/><circle cx="140" cy="62" r="3" stroke="white" fill="none" stroke-width="0.4"/><circle cx="140" cy="138" r="3" stroke="white" fill="none" stroke-width="0.4"/><circle cx="60" cy="138" r="3" stroke="white" fill="none" stroke-width="0.4"/><circle cx="60" cy="62" r="3" stroke="white" fill="none" stroke-width="0.4"/></svg>`,
+      wreath: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="55" stroke="white" fill="none" stroke-width="0.5"/><circle cx="100" cy="100" r="62" stroke="white" fill="none" stroke-width="0.3" stroke-dasharray="4 8"/><ellipse cx="100" cy="42" rx="4" ry="9" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="140" cy="55" rx="4" ry="9" transform="rotate(55 140 55)" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="155" cy="100" rx="4" ry="9" transform="rotate(90 155 100)" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="140" cy="145" rx="4" ry="9" transform="rotate(125 140 145)" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="100" cy="158" rx="4" ry="9" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="60" cy="145" rx="4" ry="9" transform="rotate(-125 60 145)" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="45" cy="100" rx="4" ry="9" transform="rotate(-90 45 100)" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="60" cy="55" rx="4" ry="9" transform="rotate(-55 60 55)" stroke="white" fill="none" stroke-width="0.5"/></svg>`,
+      tendril: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M15 185 Q50 150 70 110 Q90 70 130 45 Q155 30 185 15" stroke="white" fill="none" stroke-width="0.8" stroke-linecap="round"/><path d="M55 145 Q42 132 48 118" stroke="white" fill="none" stroke-width="0.5" stroke-linecap="round"/><circle cx="46" cy="115" r="2.5" stroke="white" fill="none" stroke-width="0.4"/><path d="M78 100 Q90 85 105 82" stroke="white" fill="none" stroke-width="0.5" stroke-linecap="round"/><circle cx="108" cy="80" r="2.5" stroke="white" fill="none" stroke-width="0.4"/><path d="M115 58 Q130 48 142 52" stroke="white" fill="none" stroke-width="0.5" stroke-linecap="round"/><circle cx="145" cy="50" r="2" stroke="white" fill="none" stroke-width="0.4"/><path d="M65 130 Q80 138 78 155" stroke="white" fill="none" stroke-width="0.4" stroke-linecap="round"/><path d="M95 78 Q82 72 85 58" stroke="white" fill="none" stroke-width="0.4" stroke-linecap="round"/></svg>`
+    };
+
+    const ORNAMENT_MAP = {
+      "Letter of the day": "branch",
+      "Quiet truth": "bloom",
+      "Return note": "wreath",
+      "Interior signal": "tendril"
+    };
+
+    // ── QUESTIONS ──
     const QUESTIONS = {
       "over-functioning": [
         { q: "What feels over-managed in you today?", chips: ["Everything at once", "My emotions", "Other people's needs", "The way I appear"] },
@@ -577,10 +316,9 @@
         { q: "If you stopped managing yourself for one hour, what might finally become clear?", chips: ["How tired I am", "What I really want", "What I need to leave", "Who I really am"] },
       ],
     };
-
     const ALL_QUESTIONS = Object.entries(QUESTIONS).flatMap(([theme, qs]) => qs.map(q => ({ ...q, theme })));
 
-    // ── FEATURED CARDS (12 cards, show 3 per day) ──
+    // ── FEATURED CARDS ──
     const FEATURED_CARDS = [
       { type: "Letter of the day", title: "You Are Not Tired Because You Are Weak", desc: "A first recognition for the woman whose exhaustion has been mistaken for fragility.", link: "/letter-01.html", bg: "feat-bg-morning" },
       { type: "Quiet truth", title: "Functioning Is Not the Same as Being Inwardly Alive", desc: "The world assumes you are well because you have never given it a reason to wonder otherwise.", link: "/letter-01.html", bg: "feat-bg-mist" },
@@ -597,277 +335,53 @@
     ];
 
     const PATHS = [
-      { title: "Today's path: Over-functioning", steps: [
-        { label: "Read", text: '<a href="/letter-01.html">You Are Not Tired Because You Are Weak</a>' },
-        { label: "Reflect", text: "<em>Where have you been strong for too long without relief?</em>" },
-        { label: "Return tonight", text: "<em>What did you carry today that no one saw?</em>" },
-      ]},
-      { title: "Today's path: Boundaries", steps: [
-        { label: "Read", text: '<a href="/letter-02.html">The Female Life of Constant Adjustment</a>' },
-        { label: "Reflect", text: "<em>Where did you become easy to keep peace?</em>" },
-        { label: "Return tonight", text: "<em>What did you not say today?</em>" },
-      ]},
-      { title: "Today's path: Return", steps: [
-        { label: "Read", text: '<a href="/letter-03.html">You Do Not Need Another Identity</a>' },
-        { label: "Reflect", text: "<em>What role have you been performing that no longer fits?</em>" },
-        { label: "Return tonight", text: "<em>What would become quieter if you stopped trying to impress?</em>" },
-      ]},
-      { title: "Today's path: Truth", steps: [
-        { label: "Read", text: '<a href="/letter-01.html">You Are Not Tired Because You Are Weak</a>' },
-        { label: "Reflect", text: "<em>What truth in you has been waiting for a calmer room?</em>" },
-        { label: "Return tonight", text: "<em>What part of you is asking to come back into the center?</em>" },
-      ]},
+      { title: "Today's path: Over-functioning", steps: [{ label: "Read", text: '<a href="/letter-01.html">You Are Not Tired Because You Are Weak</a>' },{ label: "Reflect", text: "<em>Where have you been strong for too long without relief?</em>" },{ label: "Return tonight", text: "<em>What did you carry today that no one saw?</em>" }]},
+      { title: "Today's path: Boundaries", steps: [{ label: "Read", text: '<a href="/letter-02.html">The Female Life of Constant Adjustment</a>' },{ label: "Reflect", text: "<em>Where did you become easy to keep peace?</em>" },{ label: "Return tonight", text: "<em>What did you not say today?</em>" }]},
+      { title: "Today's path: Return", steps: [{ label: "Read", text: '<a href="/letter-03.html">You Do Not Need Another Identity</a>' },{ label: "Reflect", text: "<em>What role have you been performing that no longer fits?</em>" },{ label: "Return tonight", text: "<em>What would become quieter if you stopped trying to impress?</em>" }]},
+      { title: "Today's path: Truth", steps: [{ label: "Read", text: '<a href="/letter-01.html">You Are Not Tired Because You Are Weak</a>' },{ label: "Reflect", text: "<em>What truth in you has been waiting for a calmer room?</em>" },{ label: "Return tonight", text: "<em>What part of you is asking to come back into the center?</em>" }]},
     ];
 
-    const CLOSING_QUESTIONS = [
-      "What did you carry today that no one saw?",
-      "What part of you is asking not to be managed tonight?",
-      "What would become quieter in you if you stopped performing for one hour?",
-      "What truth in you has been waiting for a calmer room?",
-      "What in you needs less performance today?",
-    ];
+    const CLOSING_QUESTIONS = ["What did you carry today that no one saw?","What part of you is asking not to be managed tonight?","What would become quieter in you if you stopped performing for one hour?","What truth in you has been waiting for a calmer room?","What in you needs less performance today?"];
 
-    let currentTheme = null;
-    let currentQuestion = null;
-    let selectedChip = null;
-    let sessionReflectionCount = 0;
+    let currentTheme=null,currentQuestion=null,selectedChip=null,sessionReflectionCount=0;
+    function dayIndex(){return Math.floor(Date.now()/86400000)}
+    const $q=s=>document.querySelector(s),$qa=s=>document.querySelectorAll(s);
+    const FREE_LIMIT=7;
 
-    function dayIndex() { return Math.floor(Date.now() / 86400000); }
-
-    const $q = s => document.querySelector(s);
-    const $qa = s => document.querySelectorAll(s);
-
-    const FREE_LIMIT = 7;
-
-    function init() {
-      const idx = dayIndex() % ALL_QUESTIONS.length;
-      setQuestion(ALL_QUESTIONS[idx]);
-      const pathIdx = dayIndex() % PATHS.length;
-      renderPath(PATHS[pathIdx]);
-      const cIdx = dayIndex() % CLOSING_QUESTIONS.length;
-      $q("#closingQuestion").textContent = CLOSING_QUESTIONS[cIdx];
-      renderFeaturedCards();
-      setupNav();
-      setupThemes();
-      setupInput();
-      setupActions();
+    function init(){
+      const idx=dayIndex()%ALL_QUESTIONS.length;setQuestion(ALL_QUESTIONS[idx]);
+      renderPath(PATHS[dayIndex()%PATHS.length]);
+      $q("#closingQuestion").textContent=CLOSING_QUESTIONS[dayIndex()%CLOSING_QUESTIONS.length];
+      renderFeaturedCards();setupNav();setupThemes();setupInput();setupActions();
     }
 
-    // ── FEATURED CARDS RENDERING ──
-    function renderFeaturedCards() {
-      const grid = $q("#featuredGrid");
-      const day = dayIndex();
-      // Show 3 cards, rotating through the pool
-      const startIdx = (day * 3) % FEATURED_CARDS.length;
-      const cards = [];
-      for (let i = 0; i < 3; i++) {
-        cards.push(FEATURED_CARDS[(startIdx + i) % FEATURED_CARDS.length]);
-      }
-
-      grid.innerHTML = cards.map(card => `
-        <a href="${card.link}" class="feat-card">
-          <div class="feat-card-bg ${card.bg}"></div>
-          <span class="feat-card-arrow">→</span>
-          <div class="feat-card-content">
-            <div class="feat-card-type">${card.type}</div>
-            <div class="feat-card-title">${card.title}</div>
-            <div class="feat-card-desc">${card.desc}</div>
-          </div>
-        </a>
-      `).join("");
+    function renderFeaturedCards(){
+      const grid=$q("#featuredGrid"),day=dayIndex(),startIdx=(day*3)%FEATURED_CARDS.length,cards=[];
+      for(let i=0;i<3;i++)cards.push(FEATURED_CARDS[(startIdx+i)%FEATURED_CARDS.length]);
+      grid.innerHTML=cards.map(card=>{
+        const ornKey=ORNAMENT_MAP[card.type]||"branch";
+        const ornSvg=ORNAMENTS[ornKey];
+        return `<a href="${card.link}" class="feat-card"><div class="feat-card-bg ${card.bg}"></div><div class="feat-card-ornament">${ornSvg}</div><span class="feat-card-arrow">→</span><div class="feat-card-content"><div class="feat-card-type">${card.type}</div><div class="feat-card-title">${card.title}</div><div class="feat-card-desc">${card.desc}</div></div></a>`;
+      }).join("");
     }
 
-    function setQuestion(qObj) {
-      currentQuestion = qObj;
-      $q("#pulseQuestion").textContent = qObj.q;
-      const chipsEl = $q("#chips");
-      chipsEl.innerHTML = "";
-      (qObj.chips || []).forEach(text => {
-        const chip = document.createElement("button");
-        chip.className = "chip";
-        chip.textContent = text;
-        chip.addEventListener("click", () => selectChip(chip, text));
-        chipsEl.appendChild(chip);
-      });
-      selectedChip = null;
-      $q("#writeField").value = "";
-      $q("#submitBtn").classList.remove("visible");
-      $q("#reflectionSection").classList.remove("visible");
-      $q("#loadingState").classList.remove("visible");
-      $q("#errorMsg").classList.remove("visible");
-    }
+    function setQuestion(qObj){currentQuestion=qObj;$q("#pulseQuestion").textContent=qObj.q;const c=$q("#chips");c.innerHTML="";(qObj.chips||[]).forEach(t=>{const ch=document.createElement("button");ch.className="chip";ch.textContent=t;ch.addEventListener("click",()=>selectChip(ch,t));c.appendChild(ch)});selectedChip=null;$q("#writeField").value="";$q("#submitBtn").classList.remove("visible");$q("#reflectionSection").classList.remove("visible");$q("#loadingState").classList.remove("visible");$q("#errorMsg").classList.remove("visible")}
+    function selectChip(el,t){$qa(".chip").forEach(c=>c.classList.remove("selected"));el.classList.add("selected");selectedChip=t;$q("#writeField").value="";$q("#submitBtn").classList.add("visible")}
+    function renderPath(p){$q("#pathTitle").textContent=p.title;$q("#pathSteps").innerHTML=p.steps.map((s,i)=>`<li class="path-step"><div class="path-step-num">${i+1}</div><div><div class="path-step-label">${s.label}</div><div class="path-step-text">${s.text}</div></div></li>`).join("")}
 
-    function selectChip(el, text) {
-      $qa(".chip").forEach(c => c.classList.remove("selected"));
-      el.classList.add("selected");
-      selectedChip = text;
-      $q("#writeField").value = "";
-      $q("#submitBtn").classList.add("visible");
-    }
+    function setupNav(){const n=$q("#nav"),t=$q("#navToggle"),l=$q("#navLinks");window.addEventListener("scroll",()=>n.classList.toggle("scrolled",window.scrollY>20));t.addEventListener("click",()=>{const o=l.classList.toggle("open");t.setAttribute("aria-expanded",o)});l.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>l.classList.remove("open")))}
+    function setupThemes(){$qa(".theme-card").forEach(card=>{card.addEventListener("click",()=>{const th=card.dataset.theme;$qa(".theme-card").forEach(c=>c.classList.remove("active"));card.classList.add("active");currentTheme=th;const tq=QUESTIONS[th];if(tq?.length){setQuestion({...tq[dayIndex()%tq.length],theme:th})}$q("#pulseSection").scrollIntoView({behavior:"smooth",block:"center"})})})}
+    function setupInput(){const w=$q("#writeField"),s=$q("#submitBtn");w.addEventListener("input",()=>{const h=w.value.trim().length>0;if(h){selectedChip=null;$qa(".chip").forEach(c=>c.classList.remove("selected"))}s.classList.toggle("visible",h||!!selectedChip)});s.addEventListener("click",submit);w.addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.metaKey||e.ctrlKey)){e.preventDefault();submit()}})}
 
-    function renderPath(path) {
-      $q("#pathTitle").textContent = path.title;
-      $q("#pathSteps").innerHTML = path.steps.map((s, i) => `
-        <li class="path-step"><div class="path-step-num">${i + 1}</div><div><div class="path-step-label">${s.label}</div><div class="path-step-text">${s.text}</div></div></li>
-      `).join("");
-    }
+    async function submit(){const message=$q("#writeField").value.trim()||selectedChip;if(!message)return;if(sessionReflectionCount>=FREE_LIMIT){showDeeperLayer();return}$q("#submitBtn").disabled=true;$q("#errorMsg").classList.remove("visible");$q("#reflectionSection").classList.remove("visible");$q("#loadingState").classList.add("visible");$q("#loadingState").scrollIntoView({behavior:"smooth",block:"center"});try{const res=await fetch(API_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},credentials:"include",body:JSON.stringify({message,theme:currentTheme||currentQuestion?.theme||null,question:currentQuestion?.q||null})});if(!res.ok)throw new Error("API error");const data=await res.json();$q("#loadingState").classList.remove("visible");sessionReflectionCount=data.pulse?.reflectionCount||(sessionReflectionCount+1);renderReflection(data)}catch(err){console.error("Companion error:",err);$q("#loadingState").classList.remove("visible");sessionReflectionCount++;renderFallback(message)}$q("#submitBtn").disabled=false;$q("#writeField").value="";selectedChip=null;$q("#submitBtn").classList.remove("visible")}
 
-    function setupNav() {
-      const nav = $q("#nav"), toggle = $q("#navToggle"), links = $q("#navLinks");
-      window.addEventListener("scroll", () => nav.classList.toggle("scrolled", window.scrollY > 20));
-      toggle.addEventListener("click", () => { const open = links.classList.toggle("open"); toggle.setAttribute("aria-expanded", open); });
-      links.querySelectorAll("a").forEach(a => a.addEventListener("click", () => links.classList.remove("open")));
-    }
+    function renderReflection(data){$q("#reflectionText").textContent=data.reflection||"";let h="";const s=data.nextStep;if(s){if(s.type==="letter"&&s.link)h=`<div class="next-door-label">Read next</div><a href="${s.link}" class="next-door-link">${s.text} <span class="arrow">→</span></a>`;else if(s.type==="question")h=`<div class="next-door-label">Continue with</div><div class="next-door-question">${s.text}</div>`;else h=`<div class="next-door-label">Next</div><div class="next-door-pause">${s.text}</div>`}$q("#nextDoor").innerHTML=h;const te=$q("#reflectionThread"),tt=$q("#reflectionThreadText");if(data.pulse?.thread){tt.textContent=data.pulse.thread;te.style.display="block";$q("#pulseThreadText").textContent=data.pulse.thread;$q("#pulseThread").classList.add("visible")}else{te.style.display="none"}$q("#reflectionSection").classList.add("visible");const c=$q("#reflectionCard");c.style.animation="none";c.offsetHeight;c.style.animation="";setTimeout(()=>$q("#reflectionSection").scrollIntoView({behavior:"smooth",block:"center"}),100)}
 
-    function setupThemes() {
-      $qa(".theme-card").forEach(card => {
-        card.addEventListener("click", () => {
-          const theme = card.dataset.theme;
-          $qa(".theme-card").forEach(c => c.classList.remove("active"));
-          card.classList.add("active");
-          currentTheme = theme;
-          const themeQs = QUESTIONS[theme];
-          if (themeQs?.length) {
-            const idx = dayIndex() % themeQs.length;
-            setQuestion({ ...themeQs[idx], theme });
-          }
-          $q("#pulseSection").scrollIntoView({ behavior: "smooth", block: "center" });
-        });
-      });
-    }
+    function renderFallback(m){const f=[{reflection:"What you describe does not sound like weakness. It sounds like prolonged carrying. Sometimes the life that looks calm from the outside is the one asking most urgently for relief.",nextStep:{type:"letter",text:"You Are Not Tired Because You Are Weak",link:"/letter-01.html"}},{reflection:"Too much adjustment can make a woman disappear in very polite ways. When your attention is always turned outward, your own center begins to feel far away.",nextStep:{type:"letter",text:"The Female Life of Constant Adjustment",link:"/letter-02.html"}},{reflection:"Composure can become a role long after it stops feeling true. What once protected you may now be costing you contact with yourself.",nextStep:{type:"letter",text:"You Do Not Need Another Identity",link:"/letter-03.html"}},{reflection:"That is already enough for a beginning. Clarity does not always arrive first. Sometimes the first real movement is simply no longer agreeing inwardly with what is draining you.",nextStep:{type:"question",text:"What part of you is asking to come back into the center?"}}];renderReflection(f[Math.floor(Math.random()*f.length)])}
 
-    function setupInput() {
-      const wf = $q("#writeField"), sb = $q("#submitBtn");
-      wf.addEventListener("input", () => {
-        const hasText = wf.value.trim().length > 0;
-        if (hasText) { selectedChip = null; $qa(".chip").forEach(c => c.classList.remove("selected")); }
-        sb.classList.toggle("visible", hasText || !!selectedChip);
-      });
-      sb.addEventListener("click", submit);
-      wf.addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); submit(); } });
-    }
+    function showDeeperLayer(){$q("#loadingState").classList.remove("visible");$q("#reflectionSection").classList.remove("visible");$q("#deeperSection").classList.add("visible");$q("#deeperSection").scrollIntoView({behavior:"smooth",block:"center"});$q("#submitBtn").disabled=false;$q("#writeField").value="";selectedChip=null;$q("#submitBtn").classList.remove("visible")}
 
-    async function submit() {
-      const message = $q("#writeField").value.trim() || selectedChip;
-      if (!message) return;
-
-      if (sessionReflectionCount >= FREE_LIMIT) {
-        showDeeperLayer();
-        return;
-      }
-
-      $q("#submitBtn").disabled = true;
-      $q("#errorMsg").classList.remove("visible");
-      $q("#reflectionSection").classList.remove("visible");
-      $q("#loadingState").classList.add("visible");
-      $q("#loadingState").scrollIntoView({ behavior: "smooth", block: "center" });
-
-      try {
-        const res = await fetch(API_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify({
-            message,
-            theme: currentTheme || currentQuestion?.theme || null,
-            question: currentQuestion?.q || null,
-          }),
-        });
-
-        if (!res.ok) throw new Error("API error");
-        const data = await res.json();
-
-        $q("#loadingState").classList.remove("visible");
-        sessionReflectionCount = data.pulse?.reflectionCount || (sessionReflectionCount + 1);
-        renderReflection(data);
-
-      } catch (err) {
-        console.error("Companion error:", err);
-        $q("#loadingState").classList.remove("visible");
-        sessionReflectionCount++;
-        renderFallback(message);
-      }
-
-      $q("#submitBtn").disabled = false;
-      $q("#writeField").value = "";
-      selectedChip = null;
-      $q("#submitBtn").classList.remove("visible");
-    }
-
-    function renderReflection(data) {
-      $q("#reflectionText").textContent = data.reflection || "";
-
-      let nextHtml = "";
-      const step = data.nextStep;
-      if (step) {
-        if (step.type === "letter" && step.link) {
-          nextHtml = `<div class="next-door-label">Read next</div><a href="${step.link}" class="next-door-link">${step.text} <span class="arrow">→</span></a>`;
-        } else if (step.type === "question") {
-          nextHtml = `<div class="next-door-label">Continue with</div><div class="next-door-question">${step.text}</div>`;
-        } else {
-          nextHtml = `<div class="next-door-label">Next</div><div class="next-door-pause">${step.text}</div>`;
-        }
-      }
-      $q("#nextDoor").innerHTML = nextHtml;
-
-      const threadEl = $q("#reflectionThread");
-      const threadText = $q("#reflectionThreadText");
-      if (data.pulse?.thread) {
-        threadText.textContent = data.pulse.thread;
-        threadEl.style.display = "block";
-        $q("#pulseThreadText").textContent = data.pulse.thread;
-        $q("#pulseThread").classList.add("visible");
-      } else {
-        threadEl.style.display = "none";
-      }
-
-      $q("#reflectionSection").classList.add("visible");
-      const card = $q("#reflectionCard");
-      card.style.animation = "none";
-      card.offsetHeight;
-      card.style.animation = "";
-      setTimeout(() => $q("#reflectionSection").scrollIntoView({ behavior: "smooth", block: "center" }), 100);
-    }
-
-    function renderFallback(message) {
-      const fallbacks = [
-        { reflection: "What you describe does not sound like weakness. It sounds like prolonged carrying. Sometimes the life that looks calm from the outside is the one asking most urgently for relief.", nextStep: { type: "letter", text: "You Are Not Tired Because You Are Weak", link: "/letter-01.html" } },
-        { reflection: "Too much adjustment can make a woman disappear in very polite ways. When your attention is always turned outward, your own center begins to feel far away.", nextStep: { type: "letter", text: "The Female Life of Constant Adjustment", link: "/letter-02.html" } },
-        { reflection: "Composure can become a role long after it stops feeling true. What once protected you may now be costing you contact with yourself.", nextStep: { type: "letter", text: "You Do Not Need Another Identity", link: "/letter-03.html" } },
-        { reflection: "That is already enough for a beginning. Clarity does not always arrive first. Sometimes the first real movement is simply no longer agreeing inwardly with what is draining you.", nextStep: { type: "question", text: "What part of you is asking to come back into the center?" } },
-      ];
-      renderReflection(fallbacks[Math.floor(Math.random() * fallbacks.length)]);
-    }
-
-    function showDeeperLayer() {
-      $q("#loadingState").classList.remove("visible");
-      $q("#reflectionSection").classList.remove("visible");
-      $q("#deeperSection").classList.add("visible");
-      $q("#deeperSection").scrollIntoView({ behavior: "smooth", block: "center" });
-      $q("#submitBtn").disabled = false;
-      $q("#writeField").value = "";
-      selectedChip = null;
-      $q("#submitBtn").classList.remove("visible");
-    }
-
-    function setupActions() {
-      $q("#newQuestionBtn").addEventListener("click", () => {
-        setQuestion(ALL_QUESTIONS[Math.floor(Math.random() * ALL_QUESTIONS.length)]);
-        $q("#pulseSection").scrollIntoView({ behavior: "smooth", block: "center" });
-      });
-      $q("#saveReflectionBtn").addEventListener("click", () => {
-        const text = $q("#reflectionText").textContent;
-        if (!text) return;
-        const saved = JSON.parse(localStorage.getItem("khora-reflections") || "[]");
-        saved.push({ date: new Date().toISOString(), question: currentQuestion?.q || "", reflection: text });
-        localStorage.setItem("khora-reflections", JSON.stringify(saved));
-        const btn = $q("#saveReflectionBtn");
-        btn.textContent = "Saved";
-        btn.style.color = "var(--gold)";
-        btn.style.borderColor = "var(--gold)";
-        setTimeout(() => { btn.textContent = "Save this reflection"; btn.style.color = ""; btn.style.borderColor = ""; }, 2000);
-      });
-    }
+    function setupActions(){$q("#newQuestionBtn").addEventListener("click",()=>{setQuestion(ALL_QUESTIONS[Math.floor(Math.random()*ALL_QUESTIONS.length)]);$q("#pulseSection").scrollIntoView({behavior:"smooth",block:"center"})});$q("#saveReflectionBtn").addEventListener("click",()=>{const t=$q("#reflectionText").textContent;if(!t)return;const s=JSON.parse(localStorage.getItem("khora-reflections")||"[]");s.push({date:new Date().toISOString(),question:currentQuestion?.q||"",reflection:t});localStorage.setItem("khora-reflections",JSON.stringify(s));const b=$q("#saveReflectionBtn");b.textContent="Saved";b.style.color="var(--gold)";b.style.borderColor="var(--gold)";setTimeout(()=>{b.textContent="Save this reflection";b.style.color="";b.style.borderColor=""},2000)})}
 
     init();
   </script>
