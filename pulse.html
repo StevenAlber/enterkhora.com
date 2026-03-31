@@ -11,7 +11,6 @@
   <meta property="og:description" content="A quiet intelligence that meets you in one exact place and opens the right next door." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://enterkhora.com/pulse.html" />
-  <meta name="twitter:card" content="summary" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -101,17 +100,14 @@
     .eyebrow { font-size: 0.78rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.05rem; }
     .ornament { width: 62px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 0 auto 1.9rem; opacity: 0.9; }
 
-    /* ATMOSPHERE */
     .atmosphere { padding: 9rem 0 3.5rem; text-align: center; }
     .atmosphere h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 300; letter-spacing: -0.01em; margin-bottom: 1rem; }
     .atmosphere-sub { font-family: "Cormorant Garamond", serif; font-size: clamp(1.08rem, 1.8vw, 1.32rem); color: var(--text-soft); font-style: italic; max-width: 560px; margin: 0 auto; line-height: 1.55; }
 
-    /* PULSE THREAD */
     .pulse-thread { display: none; text-align: center; padding: 0 0 1.5rem; }
     .pulse-thread.visible { display: block; }
     .pulse-thread-text { font-family: "Cormorant Garamond", serif; font-size: 1.08rem; font-style: italic; color: var(--gold); max-width: 540px; margin: 0 auto; line-height: 1.5; }
 
-    /* PULSE QUESTION */
     .pulse-section { padding: 2rem 0 4rem; }
     .pulse-card { max-width: 780px; margin: 0 auto; background: var(--paper-strong); border: 1px solid var(--line-soft); border-radius: 32px; box-shadow: var(--shadow); backdrop-filter: blur(12px); padding: 2.8rem 2.4rem; text-align: center; transition: box-shadow 0.4s ease; }
     .pulse-question { font-family: "Cormorant Garamond", serif; font-size: clamp(1.55rem, 3vw, 2.2rem); font-weight: 400; line-height: 1.32; color: var(--text); margin-bottom: 2rem; font-style: italic; }
@@ -136,7 +132,6 @@
     .pulse-submit:hover { background: #394830; transform: translateY(-1px); }
     .pulse-submit:disabled { opacity: 0.5; pointer-events: none; }
 
-    /* REFLECTION */
     .reflection-section { padding: 0 0 4rem; display: none; }
     .reflection-section.visible { display: block; }
     .reflection-card { max-width: 700px; margin: 0 auto; background: rgba(255,255,255,0.72); border: 1px solid var(--line-soft); border-radius: 28px; box-shadow: var(--shadow); backdrop-filter: blur(12px); padding: 2.6rem 2.4rem; opacity: 0; transform: translateY(16px); animation: reflectionIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
@@ -154,7 +149,6 @@
     .next-door-question { font-family: "Cormorant Garamond", serif; font-size: 1.12rem; font-style: italic; color: var(--text); line-height: 1.5; }
     .next-door-pause { font-family: "DM Sans", sans-serif; font-size: 0.88rem; color: var(--text-soft); line-height: 1.55; }
 
-    /* PULSE THREAD IN REFLECTION */
     .reflection-thread { margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--line-soft); }
     .reflection-thread-text { font-family: "Cormorant Garamond", serif; font-size: 0.95rem; font-style: italic; color: var(--gold-soft); line-height: 1.5; }
 
@@ -162,7 +156,6 @@
     .btn-continue { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0.75rem 1.4rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,0.65); font-family: "DM Sans", sans-serif; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-deep); cursor: pointer; transition: all 0.25s ease; text-decoration: none; backdrop-filter: blur(8px); }
     .btn-continue:hover { border-color: var(--gold-soft); transform: translateY(-1px); box-shadow: var(--shadow-soft); }
 
-    /* LOADING */
     .loading-state { display: none; text-align: center; padding: 3rem 0; }
     .loading-state.visible { display: block; }
     .loading-dots { display: inline-flex; gap: 6px; align-items: center; }
@@ -175,10 +168,154 @@
     .error-msg { display: none; text-align: center; padding: 1.5rem; margin: 1rem auto; max-width: 500px; font-size: 0.88rem; color: var(--text-soft); background: rgba(255,255,255,0.5); border: 1px solid var(--line-soft); border-radius: 16px; }
     .error-msg.visible { display: block; }
 
-    /* DEEPER LAYER INVITATION (soft premium) */
     .deeper-section { padding: 0 0 4rem; display: none; }
     .deeper-section.visible { display: block; }
     .deeper-card { max-width: 700px; margin: 0 auto; background: rgba(255,255,255,0.72); border: 1px solid var(--line-soft); border-radius: 28px; box-shadow: var(--shadow); backdrop-filter: blur(12px); padding: 2.6rem 2.4rem; opacity: 0; transform: translateY(16px); animation: reflectionIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+    /* ─── FEATURED VISUAL CARDS ─── */
+    .featured-section {
+      padding: 1rem 0 5rem;
+    }
+
+    .featured-header {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+
+    .featured-header h2 {
+      font-size: clamp(1.65rem, 3vw, 2.4rem);
+      margin-bottom: 0.4rem;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feat-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-decoration: none;
+      color: #fff;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      box-shadow: 0 12px 40px rgba(40, 36, 28, 0.12);
+      cursor: pointer;
+    }
+
+    .feat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 56px rgba(40, 36, 28, 0.18);
+    }
+
+    .feat-card-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* Atmospheric gradient backgrounds */
+    .feat-bg-morning {
+      background: linear-gradient(160deg, #e8ddd0 0%, #c4b59a 30%, #8a7d6a 65%, #5c544a 100%);
+    }
+    .feat-bg-evening {
+      background: linear-gradient(145deg, #d4c4a8 0%, #a89070 30%, #6b5d4f 60%, #3d3630 100%);
+    }
+    .feat-bg-forest {
+      background: linear-gradient(155deg, #c8d4c0 0%, #7a8f6f 35%, #4a5e42 65%, #2e3b28 100%);
+    }
+    .feat-bg-dusk {
+      background: linear-gradient(150deg, #d8cfc4 0%, #b09e8a 30%, #7a6b5c 60%, #4a3f36 100%);
+    }
+    .feat-bg-mist {
+      background: linear-gradient(160deg, #e0ddd8 0%, #b5ada4 35%, #8a8078 65%, #5a524c 100%);
+    }
+    .feat-bg-warmth {
+      background: linear-gradient(145deg, #e4d5c0 0%, #c4a880 30%, #8a7050 60%, #5a4430 100%);
+    }
+    .feat-bg-ivory {
+      background: linear-gradient(155deg, #f0e8dc 0%, #d4c4a8 30%, #a08c6e 60%, #6a5a44 100%);
+    }
+    .feat-bg-sage {
+      background: linear-gradient(150deg, #d4dac8 0%, #98a88a 35%, #5e7050 65%, #3a4830 100%);
+    }
+    .feat-bg-stone {
+      background: linear-gradient(160deg, #dcd6cc 0%, #b0a898 30%, #7a7268 60%, #4e4840 100%);
+    }
+
+    .feat-card-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(30, 28, 24, 0.72) 0%, rgba(30, 28, 24, 0.15) 55%, transparent 100%);
+      z-index: 1;
+    }
+
+    /* Subtle texture overlay */
+    .feat-card-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.2) 0%, transparent 40%);
+      z-index: 1;
+    }
+
+    .feat-card-content {
+      position: relative;
+      z-index: 2;
+      padding: 1.6rem 1.4rem;
+    }
+
+    .feat-card-type {
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 0.55rem;
+    }
+
+    .feat-card-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.25rem, 2vw, 1.55rem);
+      font-weight: 400;
+      line-height: 1.22;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .feat-card-desc {
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .feat-card-arrow {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 2;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.25s, transform 0.25s;
+    }
+
+    .feat-card:hover .feat-card-arrow {
+      color: rgba(255,255,255,0.8);
+      transform: translateX(3px);
+    }
 
     /* THEME SELECTOR */
     .themes-section { padding: 2rem 0 5rem; }
@@ -192,7 +329,6 @@
     .theme-icon { font-size: 1.5rem; margin-bottom: 0.5rem; opacity: 0.8; }
     .theme-name { font-family: "Cormorant Garamond", serif; font-size: 1.05rem; color: var(--text); line-height: 1.3; }
 
-    /* TODAY'S PATH */
     .todays-path { padding: 0 0 5rem; }
     .path-card { max-width: 620px; margin: 0 auto; background: rgba(255,255,255,0.58); border: 1px solid var(--line-soft); border-radius: 28px; padding: 2.2rem 2rem; box-shadow: var(--shadow-soft); backdrop-filter: blur(10px); }
     .path-title { font-family: "DM Sans", sans-serif; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; }
@@ -205,7 +341,6 @@
     .path-step-text a { color: var(--green-deep); text-decoration: none; border-bottom: 1px solid var(--line-soft); transition: border-color 0.25s; }
     .path-step-text a:hover { border-color: var(--gold); }
 
-    /* CLOSING */
     .closing { padding: 2rem 0 5rem; text-align: center; }
     .closing-divider { width: 100%; max-width: 180px; height: 1px; background: linear-gradient(to right, transparent, var(--gold-soft), transparent); margin: 0 auto 2rem; }
     .closing-question { font-family: "Cormorant Garamond", serif; font-size: clamp(1.2rem, 2.2vw, 1.7rem); font-style: italic; color: var(--text); line-height: 1.45; max-width: 580px; margin: 0 auto; }
@@ -213,7 +348,11 @@
     .footer { padding: 1.5rem 0 3rem; text-align: center; }
     .footer p { font-family: "Cormorant Garamond", serif; font-size: 1rem; color: var(--text-soft); }
 
-    @media (max-width: 980px) { .theme-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 980px) {
+      .theme-grid { grid-template-columns: repeat(2, 1fr); }
+      .featured-grid { grid-template-columns: 1fr; max-width: 480px; }
+      .feat-card { min-height: 280px; }
+    }
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(247, 243, 236, 0.96); backdrop-filter: blur(20px); padding: 1.5rem 1.2rem; gap: 1.2rem; border-bottom: 1px solid var(--line-soft); }
@@ -229,6 +368,8 @@
       .path-card { padding: 1.6rem 1.25rem; border-radius: 24px; }
       .chips { gap: 0.45rem; }
       .chip { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
+      .feat-card { min-height: 260px; }
+      .feat-card-content { padding: 1.3rem 1.1rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -267,7 +408,6 @@
       </div>
     </section>
 
-    <!-- PULSE THREAD (shows when returning visitor has patterns) -->
     <div class="pulse-thread" id="pulseThread">
       <div class="container">
         <p class="pulse-thread-text" id="pulseThreadText"></p>
@@ -296,7 +436,6 @@
 
     <div class="error-msg" id="errorMsg">The Companion is resting. Please try again in a moment.</div>
 
-    <!-- SOFT DEEPER LAYER INVITATION -->
     <section class="deeper-section" id="deeperSection">
       <div class="container">
         <div class="deeper-card">
@@ -310,12 +449,8 @@
             <div class="next-door-pause" style="margin-bottom: 0.6rem;">
               Persistent Pulse memory. Saved reflections across sessions. Deeper correspondence. Guided paths over 7 and 21 days. A quieter, more continuous interior space.
             </div>
-            <div class="next-door-pause" style="margin-bottom: 1.2rem;">
-              €39 per month. Cancel anytime.
-            </div>
-            <a href="#" id="subscribeBtn" class="btn-continue" style="background: var(--green-deep); color: #fff; border-color: var(--green-deep); padding: 0.85rem 2rem;">
-              Enter the private layer
-            </a>
+            <div class="next-door-pause" style="margin-bottom: 1.2rem;">€39 per month. Cancel anytime.</div>
+            <a href="#" id="subscribeBtn" class="btn-continue" style="background: var(--green-deep); color: #fff; border-color: var(--green-deep); padding: 0.85rem 2rem;">Enter the private layer</a>
           </div>
           <div style="margin-top: 1.4rem;">
             <a href="/letters.html" class="btn-continue">Continue with the free letters</a>
@@ -324,7 +459,6 @@
       </div>
     </section>
 
-    <!-- REFLECTION -->
     <section class="reflection-section" id="reflectionSection">
       <div class="container">
         <div class="reflection-card" id="reflectionCard">
@@ -340,6 +474,17 @@
             <button class="btn-continue" id="saveReflectionBtn">Save this reflection</button>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURED VISUAL CARDS ═══ -->
+    <section class="featured-section" id="featuredSection">
+      <div class="container">
+        <div class="featured-header">
+          <div class="eyebrow">Inside Khora today</div>
+          <h2>Where to go from here</h2>
+        </div>
+        <div class="featured-grid" id="featuredGrid"></div>
       </div>
     </section>
 
@@ -387,6 +532,7 @@
   <script>
     const API_ENDPOINT = "https://khora-companion.khorasystems.workers.dev";
 
+    // ── 25 PULSE QUESTIONS ──
     const QUESTIONS = {
       "over-functioning": [
         { q: "What feels over-managed in you today?", chips: ["Everything at once", "My emotions", "Other people's needs", "The way I appear"] },
@@ -434,6 +580,22 @@
 
     const ALL_QUESTIONS = Object.entries(QUESTIONS).flatMap(([theme, qs]) => qs.map(q => ({ ...q, theme })));
 
+    // ── FEATURED CARDS (12 cards, show 3 per day) ──
+    const FEATURED_CARDS = [
+      { type: "Letter of the day", title: "You Are Not Tired Because You Are Weak", desc: "A first recognition for the woman whose exhaustion has been mistaken for fragility.", link: "/letter-01.html", bg: "feat-bg-morning" },
+      { type: "Quiet truth", title: "Functioning Is Not the Same as Being Inwardly Alive", desc: "The world assumes you are well because you have never given it a reason to wonder otherwise.", link: "/letter-01.html", bg: "feat-bg-mist" },
+      { type: "Return note", title: "You May Only Need Your Own Self Back", desc: "Not a new identity. Not a better version. The one you left behind somewhere along the way.", link: "/letter-03.html", bg: "feat-bg-forest" },
+      { type: "Letter of the day", title: "The Female Life of Constant Adjustment", desc: "A letter about the quiet violence of over-adaptation and how capable women slowly disappear.", link: "/letter-02.html", bg: "feat-bg-dusk" },
+      { type: "Interior signal", title: "The Loneliness of Being Surrounded by People Who Assume You Are Fine", desc: "Competence creates its own kind of invisibility. This names it.", link: "/letter-06.html", bg: "feat-bg-evening" },
+      { type: "Quiet truth", title: "A Life Can Remain Functional Long After It Stops Feeling Honest", desc: "When even beautiful things begin to feel borrowed.", link: "/letter-09.html", bg: "feat-bg-stone" },
+      { type: "Letter of the day", title: "Rest Is Not a Moral Failure", desc: "For the woman who cannot stop without guilt — and the radical act of being still.", link: "/letter-07.html", bg: "feat-bg-sage" },
+      { type: "Return note", title: "The Weight Was Never Meant for One Person", desc: "The first step toward setting it down is admitting it was never yours to carry alone.", link: "/letter-10.html", bg: "feat-bg-warmth" },
+      { type: "Interior signal", title: "What the World Calls Strength Is Often Over-Adjustment with Good Manners", desc: "Praise for the very traits that slowly separate a woman from herself.", link: "/letter-02.html", bg: "feat-bg-ivory" },
+      { type: "Letter of the day", title: "The Cost of Being Easy to Live With", desc: "What happens when agreeableness becomes self-erasure — and the room never hears your truth.", link: "/letter-04.html", bg: "feat-bg-dusk" },
+      { type: "Quiet truth", title: "You Do Not Need to Collapse in Order to Deserve Recognition", desc: "The exhaustion you carry deserves to be named, not managed further.", link: "/letter-08.html", bg: "feat-bg-morning" },
+      { type: "Return note", title: "Somewhere Along the Way, the Woman Who Built All of This Stopped Being the One Who Lives in It", desc: "A door back to the center.", link: "/letter-03.html", bg: "feat-bg-forest" },
+    ];
+
     const PATHS = [
       { title: "Today's path: Over-functioning", steps: [
         { label: "Read", text: '<a href="/letter-01.html">You Are Not Tired Because You Are Weak</a>' },
@@ -475,9 +637,7 @@
     const $q = s => document.querySelector(s);
     const $qa = s => document.querySelectorAll(s);
 
-    // ── SOFT PREMIUM THRESHOLDS ──
     const FREE_LIMIT = 7;
-    const SOFT_SIGNAL_START = 3;
 
     function init() {
       const idx = dayIndex() % ALL_QUESTIONS.length;
@@ -486,10 +646,35 @@
       renderPath(PATHS[pathIdx]);
       const cIdx = dayIndex() % CLOSING_QUESTIONS.length;
       $q("#closingQuestion").textContent = CLOSING_QUESTIONS[cIdx];
+      renderFeaturedCards();
       setupNav();
       setupThemes();
       setupInput();
       setupActions();
+    }
+
+    // ── FEATURED CARDS RENDERING ──
+    function renderFeaturedCards() {
+      const grid = $q("#featuredGrid");
+      const day = dayIndex();
+      // Show 3 cards, rotating through the pool
+      const startIdx = (day * 3) % FEATURED_CARDS.length;
+      const cards = [];
+      for (let i = 0; i < 3; i++) {
+        cards.push(FEATURED_CARDS[(startIdx + i) % FEATURED_CARDS.length]);
+      }
+
+      grid.innerHTML = cards.map(card => `
+        <a href="${card.link}" class="feat-card">
+          <div class="feat-card-bg ${card.bg}"></div>
+          <span class="feat-card-arrow">→</span>
+          <div class="feat-card-content">
+            <div class="feat-card-type">${card.type}</div>
+            <div class="feat-card-title">${card.title}</div>
+            <div class="feat-card-desc">${card.desc}</div>
+          </div>
+        </a>
+      `).join("");
     }
 
     function setQuestion(qObj) {
@@ -566,7 +751,6 @@
       const message = $q("#writeField").value.trim() || selectedChip;
       if (!message) return;
 
-      // Check soft premium
       if (sessionReflectionCount >= FREE_LIMIT) {
         showDeeperLayer();
         return;
@@ -613,7 +797,6 @@
     function renderReflection(data) {
       $q("#reflectionText").textContent = data.reflection || "";
 
-      // Next door
       let nextHtml = "";
       const step = data.nextStep;
       if (step) {
@@ -627,13 +810,11 @@
       }
       $q("#nextDoor").innerHTML = nextHtml;
 
-      // Pulse thread in reflection
       const threadEl = $q("#reflectionThread");
       const threadText = $q("#reflectionThreadText");
       if (data.pulse?.thread) {
         threadText.textContent = data.pulse.thread;
         threadEl.style.display = "block";
-        // Also show in top area
         $q("#pulseThreadText").textContent = data.pulse.thread;
         $q("#pulseThread").classList.add("visible");
       } else {
