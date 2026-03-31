@@ -17,16 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
   <style>
-    :root {
-      --bg: #F7F3EC; --bg-soft: #EFE8DD;
-      --paper: rgba(255,255,255,0.62); --paper-strong: rgba(255,255,255,0.76);
-      --text: #2E302B; --text-soft: #66685F; --text-faint: #8A8A80;
-      --line: #d8cfbf; --line-soft: rgba(168,140,87,0.16);
-      --gold: #A88C57; --gold-soft: #C2AD84;
-      --green: #6A7A63; --green-deep: #475542; --green-pale: #E4E9DF;
-      --shadow: 0 20px 60px rgba(63,57,41,0.08); --shadow-soft: 0 10px 30px rgba(63,57,41,0.05);
-      --radius: 28px; --max: 1160px; --reading: 720px;
-    }
+    :root{--bg:#F7F3EC;--bg-soft:#EFE8DD;--paper:rgba(255,255,255,0.62);--paper-strong:rgba(255,255,255,0.76);--text:#2E302B;--text-soft:#66685F;--text-faint:#8A8A80;--line:#d8cfbf;--line-soft:rgba(168,140,87,0.16);--gold:#A88C57;--gold-soft:#C2AD84;--green:#6A7A63;--green-deep:#475542;--green-pale:#E4E9DF;--shadow:0 20px 60px rgba(63,57,41,0.08);--shadow-soft:0 10px 30px rgba(63,57,41,0.05);--radius:28px;--max:1160px;--reading:720px}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth;font-size:18px}
     body{font-family:"DM Sans",sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(196,175,132,0.13),transparent 34%),radial-gradient(circle at bottom right,rgba(80,100,72,0.08),transparent 38%),linear-gradient(180deg,#F9F5EF 0%,#F7F3EC 100%);line-height:1.72;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;min-height:100vh}
@@ -47,7 +38,6 @@
 
     main,footer{position:relative;z-index:1}
     .container{width:min(var(--max),calc(100% - 2.4rem));margin:0 auto}
-    .narrow{max-width:var(--reading);margin-inline:auto}
     h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:400;line-height:1.08;letter-spacing:-.02em;color:var(--text)}
     .eyebrow{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.05rem}
     .ornament{width:62px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:0 auto 1.9rem;opacity:.9}
@@ -60,7 +50,7 @@
     .pulse-thread-text{font-family:"Cormorant Garamond",serif;font-size:1.08rem;font-style:italic;color:var(--gold);max-width:540px;margin:0 auto;line-height:1.5}
 
     .pulse-section{padding:2rem 0 4rem}
-    .pulse-card{max-width:780px;margin:0 auto;background:var(--paper-strong);border:1px solid var(--line-soft);border-radius:32px;box-shadow:var(--shadow);backdrop-filter:blur(12px);padding:2.8rem 2.4rem;text-align:center;transition:box-shadow .4s}
+    .pulse-card{max-width:780px;margin:0 auto;background:var(--paper-strong);border:1px solid var(--line-soft);border-radius:32px;box-shadow:var(--shadow);backdrop-filter:blur(12px);padding:2.8rem 2.4rem;text-align:center}
     .pulse-question{font-family:"Cormorant Garamond",serif;font-size:clamp(1.55rem,3vw,2.2rem);font-weight:400;line-height:1.32;color:var(--text);margin-bottom:2rem;font-style:italic}
 
     .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-bottom:1.5rem}
@@ -119,7 +109,8 @@
 
     .feat-card{position:relative;border-radius:24px;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;color:#fff;transition:transform .35s,box-shadow .35s;box-shadow:0 12px 40px rgba(40,36,28,0.12);cursor:pointer}
     .feat-card:hover{transform:translateY(-4px);box-shadow:0 20px 56px rgba(40,36,28,0.18)}
-    .feat-card-bg{position:absolute;inset:0;z-index:0}
+    .feat-card-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center}
+    /* Gradient fallbacks */
     .feat-bg-morning{background:linear-gradient(160deg,#e8ddd0 0%,#c4b59a 30%,#8a7d6a 65%,#5c544a 100%)}
     .feat-bg-evening{background:linear-gradient(145deg,#d4c4a8 0%,#a89070 30%,#6b5d4f 60%,#3d3630 100%)}
     .feat-bg-forest{background:linear-gradient(155deg,#c8d4c0 0%,#7a8f6f 35%,#4a5e42 65%,#2e3b28 100%)}
@@ -129,13 +120,7 @@
     .feat-bg-ivory{background:linear-gradient(155deg,#f0e8dc 0%,#d4c4a8 30%,#a08c6e 60%,#6a5a44 100%)}
     .feat-bg-sage{background:linear-gradient(150deg,#d4dac8 0%,#98a88a 35%,#5e7050 65%,#3a4830 100%)}
     .feat-bg-stone{background:linear-gradient(160deg,#dcd6cc 0%,#b0a898 30%,#7a7268 60%,#4e4840 100%)}
-    .feat-card-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(30,28,24,0.72)0%,rgba(30,28,24,0.15)55%,transparent 100%);z-index:1}
-    .feat-card-bg::before{content:"";position:absolute;inset:0;opacity:.08;background-image:radial-gradient(circle at 20% 30%,rgba(255,255,255,0.4)0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(255,255,255,0.2)0%,transparent 40%);z-index:1}
-
-    /* SVG Ornament Layer */
-    .feat-card-ornament{position:absolute;top:0;right:0;width:65%;height:65%;z-index:1;opacity:.12;pointer-events:none}
-    .feat-card-ornament svg{width:100%;height:100%}
-    .feat-card:hover .feat-card-ornament{opacity:.18;transition:opacity .5s}
+    .feat-card-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(30,28,24,0.78)0%,rgba(30,28,24,0.25)50%,rgba(30,28,24,0.05)100%);z-index:1}
 
     .feat-card-content{position:relative;z-index:2;padding:1.6rem 1.4rem}
     .feat-card-type{font-family:"DM Sans",sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:.55rem}
@@ -182,18 +167,11 @@
 </head>
 <body>
 
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-mark">Khora</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="/">Home</a></li>
-        <li><a href="/pulse.html" class="active">Pulse</a></li>
-        <li><a href="/letters.html">Letters</a></li>
-        <li><a href="/about.html">About</a></li>
-      </ul>
-    </div>
-  </nav>
+  <nav class="nav" id="nav"><div class="nav-inner">
+    <a href="/" class="nav-mark">Khora</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks"><li><a href="/">Home</a></li><li><a href="/pulse.html" class="active">Pulse</a></li><li><a href="/letters.html">Letters</a></li><li><a href="/about.html">About</a></li></ul>
+  </div></nav>
 
   <main>
     <section class="atmosphere"><div class="container"><div class="eyebrow">Your interior pulse</div><div class="ornament"></div><h1>Begin here.</h1><p class="atmosphere-sub">A quiet intelligence that meets you in one exact place<br/>and opens the right next door.</p></div></section>
@@ -256,22 +234,6 @@
   <script>
     const API_ENDPOINT = "https://khora-companion.khorasystems.workers.dev";
 
-    // ── SVG ORNAMENTS ──
-    const ORNAMENTS = {
-      branch: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M25 175 Q65 130 95 85 Q115 55 175 25" stroke="white" fill="none" stroke-width="0.9" stroke-linecap="round"/><ellipse cx="50" cy="148" rx="7" ry="13" transform="rotate(-35 50 148)" stroke="white" fill="none" stroke-width="0.6"/><ellipse cx="72" cy="118" rx="6" ry="11" transform="rotate(-42 72 118)" stroke="white" fill="none" stroke-width="0.6"/><ellipse cx="95" cy="82" rx="6" ry="11" transform="rotate(-50 95 82)" stroke="white" fill="none" stroke-width="0.6"/><ellipse cx="120" cy="55" rx="5" ry="10" transform="rotate(-55 120 55)" stroke="white" fill="none" stroke-width="0.6"/><ellipse cx="150" cy="35" rx="5" ry="9" transform="rotate(-60 150 35)" stroke="white" fill="none" stroke-width="0.6"/><path d="M55 155 Q40 145 45 130" stroke="white" fill="none" stroke-width="0.5" stroke-linecap="round"/><path d="M100 78 Q115 68 120 75" stroke="white" fill="none" stroke-width="0.5" stroke-linecap="round"/></svg>`,
-      bloom: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="10" stroke="white" fill="none" stroke-width="0.7"/><path d="M100 90 Q92 65 100 48 Q108 65 100 90" stroke="white" fill="none" stroke-width="0.6"/><path d="M110 100 Q135 92 152 100 Q135 108 110 100" stroke="white" fill="none" stroke-width="0.6"/><path d="M100 110 Q108 135 100 152 Q92 135 100 110" stroke="white" fill="none" stroke-width="0.6"/><path d="M90 100 Q65 108 48 100 Q65 92 90 100" stroke="white" fill="none" stroke-width="0.6"/><path d="M107 93 Q125 72 140 62" stroke="white" fill="none" stroke-width="0.5"/><path d="M107 107 Q125 128 140 138" stroke="white" fill="none" stroke-width="0.5"/><path d="M93 107 Q75 128 60 138" stroke="white" fill="none" stroke-width="0.5"/><path d="M93 93 Q75 72 60 62" stroke="white" fill="none" stroke-width="0.5"/><circle cx="140" cy="62" r="3" stroke="white" fill="none" stroke-width="0.4"/><circle cx="140" cy="138" r="3" stroke="white" fill="none" stroke-width="0.4"/><circle cx="60" cy="138" r="3" stroke="white" fill="none" stroke-width="0.4"/><circle cx="60" cy="62" r="3" stroke="white" fill="none" stroke-width="0.4"/></svg>`,
-      wreath: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="55" stroke="white" fill="none" stroke-width="0.5"/><circle cx="100" cy="100" r="62" stroke="white" fill="none" stroke-width="0.3" stroke-dasharray="4 8"/><ellipse cx="100" cy="42" rx="4" ry="9" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="140" cy="55" rx="4" ry="9" transform="rotate(55 140 55)" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="155" cy="100" rx="4" ry="9" transform="rotate(90 155 100)" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="140" cy="145" rx="4" ry="9" transform="rotate(125 140 145)" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="100" cy="158" rx="4" ry="9" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="60" cy="145" rx="4" ry="9" transform="rotate(-125 60 145)" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="45" cy="100" rx="4" ry="9" transform="rotate(-90 45 100)" stroke="white" fill="none" stroke-width="0.5"/><ellipse cx="60" cy="55" rx="4" ry="9" transform="rotate(-55 60 55)" stroke="white" fill="none" stroke-width="0.5"/></svg>`,
-      tendril: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M15 185 Q50 150 70 110 Q90 70 130 45 Q155 30 185 15" stroke="white" fill="none" stroke-width="0.8" stroke-linecap="round"/><path d="M55 145 Q42 132 48 118" stroke="white" fill="none" stroke-width="0.5" stroke-linecap="round"/><circle cx="46" cy="115" r="2.5" stroke="white" fill="none" stroke-width="0.4"/><path d="M78 100 Q90 85 105 82" stroke="white" fill="none" stroke-width="0.5" stroke-linecap="round"/><circle cx="108" cy="80" r="2.5" stroke="white" fill="none" stroke-width="0.4"/><path d="M115 58 Q130 48 142 52" stroke="white" fill="none" stroke-width="0.5" stroke-linecap="round"/><circle cx="145" cy="50" r="2" stroke="white" fill="none" stroke-width="0.4"/><path d="M65 130 Q80 138 78 155" stroke="white" fill="none" stroke-width="0.4" stroke-linecap="round"/><path d="M95 78 Q82 72 85 58" stroke="white" fill="none" stroke-width="0.4" stroke-linecap="round"/></svg>`
-    };
-
-    const ORNAMENT_MAP = {
-      "Letter of the day": "branch",
-      "Quiet truth": "bloom",
-      "Return note": "wreath",
-      "Interior signal": "tendril"
-    };
-
-    // ── QUESTIONS ──
     const QUESTIONS = {
       "over-functioning": [
         { q: "What feels over-managed in you today?", chips: ["Everything at once", "My emotions", "Other people's needs", "The way I appear"] },
@@ -318,15 +280,15 @@
     };
     const ALL_QUESTIONS = Object.entries(QUESTIONS).flatMap(([theme, qs]) => qs.map(q => ({ ...q, theme })));
 
-    // ── FEATURED CARDS ──
+    // ── FEATURED CARDS — img overrides gradient ──
     const FEATURED_CARDS = [
-      { type: "Letter of the day", title: "You Are Not Tired Because You Are Weak", desc: "A first recognition for the woman whose exhaustion has been mistaken for fragility.", link: "/letter-01.html", bg: "feat-bg-morning" },
+      { type: "Letter of the day", title: "You Are Not Tired Because You Are Weak", desc: "A first recognition for the woman whose exhaustion has been mistaken for fragility.", link: "/letter-01.html", bg: "feat-bg-morning", img: "/card-01.webp" },
       { type: "Quiet truth", title: "Functioning Is Not the Same as Being Inwardly Alive", desc: "The world assumes you are well because you have never given it a reason to wonder otherwise.", link: "/letter-01.html", bg: "feat-bg-mist" },
       { type: "Return note", title: "You May Only Need Your Own Self Back", desc: "Not a new identity. Not a better version. The one you left behind somewhere along the way.", link: "/letter-03.html", bg: "feat-bg-forest" },
-      { type: "Letter of the day", title: "The Female Life of Constant Adjustment", desc: "A letter about the quiet violence of over-adaptation and how capable women slowly disappear.", link: "/letter-02.html", bg: "feat-bg-dusk" },
+      { type: "Letter of the day", title: "The Female Life of Constant Adjustment", desc: "A letter about the quiet violence of over-adaptation and how capable women slowly disappear.", link: "/letter-02.html", bg: "feat-bg-dusk", img: "/card-02.webp" },
       { type: "Interior signal", title: "The Loneliness of Being Surrounded by People Who Assume You Are Fine", desc: "Competence creates its own kind of invisibility. This names it.", link: "/letter-06.html", bg: "feat-bg-evening" },
       { type: "Quiet truth", title: "A Life Can Remain Functional Long After It Stops Feeling Honest", desc: "When even beautiful things begin to feel borrowed.", link: "/letter-09.html", bg: "feat-bg-stone" },
-      { type: "Letter of the day", title: "Rest Is Not a Moral Failure", desc: "For the woman who cannot stop without guilt — and the radical act of being still.", link: "/letter-07.html", bg: "feat-bg-sage" },
+      { type: "Letter of the day", title: "Rest Is Not a Moral Failure", desc: "For the woman who cannot stop without guilt — and the radical act of being still.", link: "/letter-07.html", bg: "feat-bg-sage", img: "/card-03.webp" },
       { type: "Return note", title: "The Weight Was Never Meant for One Person", desc: "The first step toward setting it down is admitting it was never yours to carry alone.", link: "/letter-10.html", bg: "feat-bg-warmth" },
       { type: "Interior signal", title: "What the World Calls Strength Is Often Over-Adjustment with Good Manners", desc: "Praise for the very traits that slowly separate a woman from herself.", link: "/letter-02.html", bg: "feat-bg-ivory" },
       { type: "Letter of the day", title: "The Cost of Being Easy to Live With", desc: "What happens when agreeableness becomes self-erasure — and the room never hears your truth.", link: "/letter-04.html", bg: "feat-bg-dusk" },
@@ -349,7 +311,7 @@
     const FREE_LIMIT=7;
 
     function init(){
-      const idx=dayIndex()%ALL_QUESTIONS.length;setQuestion(ALL_QUESTIONS[idx]);
+      setQuestion(ALL_QUESTIONS[dayIndex()%ALL_QUESTIONS.length]);
       renderPath(PATHS[dayIndex()%PATHS.length]);
       $q("#closingQuestion").textContent=CLOSING_QUESTIONS[dayIndex()%CLOSING_QUESTIONS.length];
       renderFeaturedCards();setupNav();setupThemes();setupInput();setupActions();
@@ -359,9 +321,11 @@
       const grid=$q("#featuredGrid"),day=dayIndex(),startIdx=(day*3)%FEATURED_CARDS.length,cards=[];
       for(let i=0;i<3;i++)cards.push(FEATURED_CARDS[(startIdx+i)%FEATURED_CARDS.length]);
       grid.innerHTML=cards.map(card=>{
-        const ornKey=ORNAMENT_MAP[card.type]||"branch";
-        const ornSvg=ORNAMENTS[ornKey];
-        return `<a href="${card.link}" class="feat-card"><div class="feat-card-bg ${card.bg}"></div><div class="feat-card-ornament">${ornSvg}</div><span class="feat-card-arrow">→</span><div class="feat-card-content"><div class="feat-card-type">${card.type}</div><div class="feat-card-title">${card.title}</div><div class="feat-card-desc">${card.desc}</div></div></a>`;
+        const bgStyle = card.img
+          ? `background-image:url('${card.img}');background-size:cover;background-position:center`
+          : "";
+        const bgClass = card.img ? "" : card.bg;
+        return `<a href="${card.link}" class="feat-card"><div class="feat-card-bg ${bgClass}" style="${bgStyle}"></div><span class="feat-card-arrow">→</span><div class="feat-card-content"><div class="feat-card-type">${card.type}</div><div class="feat-card-title">${card.title}</div><div class="feat-card-desc">${card.desc}</div></div></a>`;
       }).join("");
     }
 
