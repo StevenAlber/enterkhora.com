@@ -110,7 +110,6 @@
     .feat-card{position:relative;border-radius:24px;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;color:#fff;transition:transform .35s,box-shadow .35s;box-shadow:0 12px 40px rgba(40,36,28,0.12);cursor:pointer}
     .feat-card:hover{transform:translateY(-4px);box-shadow:0 20px 56px rgba(40,36,28,0.18)}
     .feat-card-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center}
-    /* Gradient fallbacks */
     .feat-bg-morning{background:linear-gradient(160deg,#e8ddd0 0%,#c4b59a 30%,#8a7d6a 65%,#5c544a 100%)}
     .feat-bg-evening{background:linear-gradient(145deg,#d4c4a8 0%,#a89070 30%,#6b5d4f 60%,#3d3630 100%)}
     .feat-bg-forest{background:linear-gradient(155deg,#c8d4c0 0%,#7a8f6f 35%,#4a5e42 65%,#2e3b28 100%)}
@@ -280,20 +279,20 @@
     };
     const ALL_QUESTIONS = Object.entries(QUESTIONS).flatMap(([theme, qs]) => qs.map(q => ({ ...q, theme })));
 
-    // ── FEATURED CARDS — img overrides gradient ──
+    // ── FEATURED CARDS — each card has its own unique image ──
     const FEATURED_CARDS = [
       { type: "Letter of the day", title: "You Are Not Tired Because You Are Weak", desc: "A first recognition for the woman whose exhaustion has been mistaken for fragility.", link: "/letter-01.html", img: "/card-01.webp" },
       { type: "Quiet truth", title: "Functioning Is Not the Same as Being Inwardly Alive", desc: "The world assumes you are well because you have never given it a reason to wonder otherwise.", link: "/letter-01.html", img: "/card-02.webp" },
       { type: "Return note", title: "You May Only Need Your Own Self Back", desc: "Not a new identity. Not a better version. The one you left behind somewhere along the way.", link: "/letter-03.html", img: "/card-03.webp" },
-      { type: "Letter of the day", title: "The Female Life of Constant Adjustment", desc: "A letter about the quiet violence of over-adaptation and how capable women slowly disappear.", link: "/letter-02.html", img: "/card-02.webp" },
-      { type: "Interior signal", title: "The Loneliness of Being Surrounded by People Who Assume You Are Fine", desc: "Competence creates its own kind of invisibility. This names it.", link: "/letter-06.html", img: "/card-01.webp" },
-      { type: "Quiet truth", title: "A Life Can Remain Functional Long After It Stops Feeling Honest", desc: "When even beautiful things begin to feel borrowed.", link: "/letter-09.html", img: "/card-03.webp" },
-      { type: "Letter of the day", title: "Rest Is Not a Moral Failure", desc: "For the woman who cannot stop without guilt — and the radical act of being still.", link: "/letter-07.html", img: "/card-03.webp" },
-      { type: "Return note", title: "The Weight Was Never Meant for One Person", desc: "The first step toward setting it down is admitting it was never yours to carry alone.", link: "/letter-10.html", img: "/card-01.webp" },
-      { type: "Interior signal", title: "What the World Calls Strength Is Often Over-Adjustment with Good Manners", desc: "Praise for the very traits that slowly separate a woman from herself.", link: "/letter-02.html", img: "/card-02.webp" },
-      { type: "Letter of the day", title: "The Cost of Being Easy to Live With", desc: "What happens when agreeableness becomes self-erasure — and the room never hears your truth.", link: "/letter-04.html", img: "/card-01.webp" },
-      { type: "Quiet truth", title: "You Do Not Need to Collapse in Order to Deserve Recognition", desc: "The exhaustion you carry deserves to be named, not managed further.", link: "/letter-08.html", img: "/card-02.webp" },
-      { type: "Return note", title: "Somewhere Along the Way, the Woman Who Built All of This Stopped Being the One Who Lives in It", desc: "A door back to the center.", link: "/letter-03.html", img: "/card-03.webp" },
+      { type: "Letter of the day", title: "The Female Life of Constant Adjustment", desc: "A letter about the quiet violence of over-adaptation and how capable women slowly disappear.", link: "/letter-02.html", img: "/card-04.webp" },
+      { type: "Interior signal", title: "The Loneliness of Being Surrounded by People Who Assume You Are Fine", desc: "Competence creates its own kind of invisibility. This names it.", link: "/letter-06.html", img: "/card-05.webp" },
+      { type: "Quiet truth", title: "A Life Can Remain Functional Long After It Stops Feeling Honest", desc: "When even beautiful things begin to feel borrowed.", link: "/letter-09.html", img: "/card-06.webp" },
+      { type: "Letter of the day", title: "Rest Is Not a Moral Failure", desc: "For the woman who cannot stop without guilt — and the radical act of being still.", link: "/letter-07.html", img: "/card-07.webp" },
+      { type: "Return note", title: "The Weight Was Never Meant for One Person", desc: "The first step toward setting it down is admitting it was never yours to carry alone.", link: "/letter-10.html", img: "/card-08.webp" },
+      { type: "Interior signal", title: "What the World Calls Strength Is Often Over-Adjustment with Good Manners", desc: "Praise for the very traits that slowly separate a woman from herself.", link: "/letter-02.html", img: "/card-09.webp" },
+      { type: "Letter of the day", title: "The Cost of Being Easy to Live With", desc: "What happens when agreeableness becomes self-erasure — and the room never hears your truth.", link: "/letter-04.html", img: "/card-10.webp" },
+      { type: "Quiet truth", title: "You Do Not Need to Collapse in Order to Deserve Recognition", desc: "The exhaustion you carry deserves to be named, not managed further.", link: "/letter-08.html", img: "/card-11.webp" },
+      { type: "Return note", title: "Somewhere Along the Way, the Woman Who Built All of This Stopped Being the One Who Lives in It", desc: "A door back to the center.", link: "/letter-03.html", img: "/card-12.webp" },
     ];
 
     const PATHS = [
