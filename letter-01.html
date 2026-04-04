@@ -15,7 +15,7 @@
     .letter-art{max-width:var(--reading);margin:0 auto;padding:1.5rem 1.2rem 0}
     .letter-art img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:20px;display:block;box-shadow:0 16px 48px rgba(63,57,41,0.10)}
 
-    .letter-hero{padding:2.5rem 0 2rem;text-align:center}.letter-hero .eyebrow{font-size:0.78rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}.letter-hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;line-height:1.12;letter-spacing:-0.02em;color:var(--text);max-width:700px;margin:0 auto}.ornament{width:62px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:2rem auto;opacity:0.9}.letter-body{max-width:var(--reading);margin:0 auto;padding:0 1.2rem 5rem}.letter-body p{font-family:"Cormorant Garamond",serif;font-size:clamp(1.08rem,1.6vw,1.22rem);line-height:1.78;color:var(--text);margin-bottom:1.4rem;text-align:justify}.letter-body p.emphasis{font-size:clamp(1.24rem,2vw,1.48rem);color:var(--green-deep);text-align:center;margin:2.2rem auto;max-width:600px}.letter-body p.soft{color:var(--text-soft);font-style:italic}.letter-end{max-width:var(--reading);margin:0 auto;padding:0 1.2rem 4rem;text-align:center}.letter-end .divider{width:140px;height:1px;background:linear-gradient(to right,transparent,var(--gold-soft),transparent);margin:0 auto 2rem}.letter-end a.next-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:"DM Sans",sans-serif;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-deep);text-decoration:none;padding:0.75rem 1.5rem;border:1px solid var(--line);border-radius:999px;transition:all 0.25s;margin:0.5rem}.letter-end a.next-link:hover{border-color:var(--gold);transform:translateY(-1px)}.footer{padding:1.5rem 0 3rem;text-align:center}.footer p{font-family:"Cormorant Garamond",serif;font-size:1rem;color:var(--text-soft)}@media(max-width:640px){html{font-size:16px}.letter-body{padding:0 0.7rem 4rem}.letter-art{padding:1rem 0.7rem 0}.letter-art img{border-radius:16px}}
+    .letter-hero{padding:2.5rem 0 2rem;text-align:center}.letter-hero .eyebrow{font-size:0.78rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}.letter-hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;line-height:1.12;letter-spacing:-0.02em;color:var(--text);max-width:700px;margin:0 auto}.ornament{width:62px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:2rem auto;opacity:0.9}.letter-body{max-width:var(--reading);margin:0 auto;padding:0 1.2rem 5rem}.letter-body p{font-family:"Cormorant Garamond",serif;font-size:clamp(1.08rem,1.6vw,1.22rem);line-height:1.78;color:var(--text);margin-bottom:1.4rem;text-align:justify}.letter-body p.emphasis{font-size:clamp(1.24rem,2vw,1.48rem);color:var(--green-deep);text-align:center;margin:2.2rem auto;max-width:600px}.letter-body p.emphasis-large{font-size:clamp(1.48rem,2.5vw,1.85rem);color:var(--green-deep);font-style:italic;text-align:center;margin:2.2rem auto;max-width:600px}.letter-body p.soft{color:var(--text-soft);font-style:italic}.letter-body p.pair{margin-bottom:0.4rem}.letter-end{max-width:var(--reading);margin:0 auto;padding:0 1.2rem 4rem;text-align:center}.letter-end .divider{width:140px;height:1px;background:linear-gradient(to right,transparent,var(--gold-soft),transparent);margin:0 auto 2rem}.letter-end a.next-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:"DM Sans",sans-serif;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-deep);text-decoration:none;padding:0.75rem 1.5rem;border:1px solid var(--line);border-radius:999px;transition:all 0.25s;margin:0.5rem}.letter-end a.next-link:hover{border-color:var(--gold);transform:translateY(-1px)}.footer{padding:1.5rem 0 3rem;text-align:center}.footer p{font-family:"Cormorant Garamond",serif;font-size:1rem;color:var(--text-soft)}@media(max-width:640px){html{font-size:16px}.letter-body{padding:0 0.7rem 4rem}.letter-art{padding:1rem 0.7rem 0}.letter-art img{border-radius:16px}}
   </style>
 </head>
 <body>
@@ -25,7 +25,7 @@
   </nav>
   <main>
     <div class="letter-art">
-      <img id="letterArt" src="card-01.webp" alt="KHORA art of the day" />
+      <img id="letterArt" src="card-01.webp" alt="KHORA art" />
     </div>
     <section class="letter-hero">
       <div class="eyebrow">Private Letter One</div>
@@ -74,15 +74,5 @@
     </div>
   </main>
   <footer class="footer"><div><p>KHORA — built slowly, honestly, in plain sight.</p></div></footer>
-
-  <script>
-    // Same rotation logic as letters.html — letter-01 gets card at offset 0, letter-02 at offset 1, letter-03 at offset 2
-    const TOTAL_CARDS = 12;
-    const LETTER_OFFSET = 0; // letter-01 = 0, letter-02 = 1, letter-03 = 2
-    const dayIndex = Math.floor(Date.now() / 86400000);
-    const cardNum = ((dayIndex + LETTER_OFFSET) % TOTAL_CARDS) + 1;
-    const padded = String(cardNum).padStart(2, '0');
-    document.getElementById('letterArt').src = 'card-' + padded + '.webp';
-  </script>
 </body>
 </html>
