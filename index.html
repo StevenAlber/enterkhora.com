@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <style>
-    :root{--bg:#F7F3EC;--bg-soft:#EFE8DD;--paper:rgba(255,255,255,0.62);--paper-strong:rgba(255,255,255,0.76);--text:#2E302B;--text-soft:#66685F;--text-faint:#8A8A80;--line:#d8cfbf;--line-soft:rgba(168,140,87,0.16);--gold:#A88C57;--gold-soft:#C2AD84;--green:#6A7A63;--green-deep:#475542;--green-pale:#E4E9DF;--shadow:0 20px 60px rgba(63,57,41,0.08);--shadow-soft:0 10px 30px rgba(63,57,41,0.05);--max:1160px;--reading:720px}
+    :root{--bg:#F7F3EC;--bg-soft:#EFE8DD;--paper:rgba(255,255,255,0.62);--paper-strong:rgba(255,255,255,0.76);--text:#2E302B;--text-soft:#66685F;--text-faint:#8A8A80;--line:#d8cfbf;--line-soft:rgba(168,140,87,0.16);--gold:#A88C57;--gold-soft:#C2AD84;--green:#6A7A63;--green-deep:#475542;--green-pale:#E4E9DF;--shadow:0 20px 60px rgba(63,57,41,0.08);--shadow-soft:0 10px 30px rgba(63,57,41,0.05);--max:1160px;--reading:720px;--nav-h:64px}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth;font-size:18px}
     body{font-family:"DM Sans",sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(196,175,132,0.13),transparent 34%),radial-gradient(circle at bottom right,rgba(80,100,72,0.08),transparent 38%),linear-gradient(180deg,#F9F5EF 0%,#F7F3EC 100%);line-height:1.72;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -23,7 +23,7 @@
 
     .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 1.2rem;transition:background .4s,box-shadow .4s,backdrop-filter .4s}
     .nav.scrolled{background:rgba(247,243,236,0.88);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--line-soft)}
-    .nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+    .nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
     .nav-mark{font-family:"Cormorant Garamond",serif;font-size:1.35rem;font-weight:400;letter-spacing:.18em;color:var(--text);text-decoration:none;text-transform:uppercase}
     .nav-links{display:flex;gap:2.2rem;list-style:none}
     .nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-soft);text-decoration:none;transition:color .25s;position:relative}
@@ -57,8 +57,8 @@
     .hero-subtitle{margin-top:1.65rem;font-family:"Cormorant Garamond",serif;font-size:clamp(1.28rem,2vw,1.62rem);line-height:1.45;color:var(--text);max-width:650px}
     .hero-text{margin-top:1.3rem;max-width:645px}
     .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
-    .hero-video{border-radius:24px;overflow:hidden;box-shadow:var(--shadow);background:var(--bg-soft)}
-    .hero-video video{width:100%;display:block}
+    .hero-video{border-radius:24px;overflow:hidden;box-shadow:var(--shadow);background:var(--bg-soft);aspect-ratio:4/5}
+    .hero-video video{width:100%;height:100%;object-fit:cover;display:block}
 
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:.95rem 1.45rem;border-radius:999px;border:1px solid transparent;text-decoration:none;font-size:.86rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;transition:transform .25s,background .25s,border-color .25s,color .25s,box-shadow .25s;cursor:pointer;white-space:nowrap}
     .btn:focus-visible{outline:2px solid rgba(183,154,90,0.5);outline-offset:2px}
@@ -107,8 +107,8 @@
     .footer p{font-family:"Cormorant Garamond",serif;font-size:1rem;color:var(--text-soft)}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    @media(max-width:980px){.hero-grid,.split,.cards,.status-strip{grid-template-columns:1fr}.hero{min-height:auto;padding-top:5.3rem}.hero-grid{gap:2rem}.quote-block,.founder-note,.capture{max-width:100%}.status-strip{display:none}}
-    @media(max-width:768px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(247,243,236,0.96);backdrop-filter:blur(20px);padding:1.5rem 1.2rem;gap:1.2rem;border-bottom:1px solid var(--line-soft)}.nav-toggle{display:block}}
+    @media(max-width:980px){.hero-grid,.split,.cards,.status-strip{grid-template-columns:1fr}.hero{min-height:auto;padding-top:2rem}.hero-grid{gap:2rem}.quote-block,.founder-note,.capture{max-width:100%}.status-strip{display:none}}
+    @media(max-width:768px){.nav{position:sticky;top:0;background:#F7F3EC}.nav-inner{flex-wrap:wrap;height:auto;min-height:var(--nav-h)}.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;width:100%;padding:1rem 0 1.5rem;gap:1.2rem;border-top:1px solid var(--line-soft)}.nav-toggle{display:block}}
     @media(max-width:640px){html{font-size:16px}.section{padding:4.6rem 0}.container{width:min(var(--max),calc(100% - 1.35rem))}.hero-actions{flex-direction:column;align-items:stretch}.btn{width:100%}.quote-block,.card,.founder-note,.capture,.status-strip{border-radius:24px}.hero-video{border-radius:20px}.quote-block,.card,.founder-note,.capture{padding-left:1.25rem;padding-right:1.25rem}.mini-pulse-card{padding:1.6rem 1.25rem;border-radius:22px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.card-link,.card-link .card{transition:none}}
   </style>
@@ -140,7 +140,7 @@
           <div class="status-item"><span class="status-label">For</span><span class="status-value">Women returning to themselves</span></div>
         </div>
       </div>
-      <aside class="hero-video" aria-label="Meet Rita"><video controls playsinline preload="auto"><source src="khora-intro.mp4" type="video/mp4"></video></aside>
+      <aside class="hero-video" aria-label="Meet Rita"><video controls playsinline preload="metadata" poster="khora-poster.jpg"><source src="khora-intro.mp4" type="video/mp4"></video></aside>
     </div></section>
 
     <section class="mini-pulse"><div class="container"><div class="mini-pulse-card">
@@ -263,17 +263,7 @@
     const nav=document.getElementById("nav"),toggle=document.getElementById("navToggle"),links=document.getElementById("navLinks");
     window.addEventListener("scroll",()=>nav.classList.toggle("scrolled",window.scrollY>20));
     toggle.addEventListener("click",()=>{const o=links.classList.toggle("open");toggle.setAttribute("aria-expanded",o)});
-    links.querySelectorAll("a").forEach(a=>{
-      a.addEventListener("click",(e)=>{
-        links.classList.remove("open");
-        toggle.setAttribute("aria-expanded","false");
-        if(a.getAttribute("href").startsWith("#")){
-          e.preventDefault();
-          const target=document.querySelector(a.getAttribute("href"));
-          if(target) setTimeout(()=>target.scrollIntoView({behavior:"smooth"}),150);
-        }
-      });
-    });
+    links.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>links.classList.remove("open")));
 
     const MINI_PULSE_QUESTIONS=["What feels over-managed in you today?","What are you holding together that no one fully sees?","Where have you been adjusting too much lately?","What role in your life feels too polished to still be true?","What part of you is asking to come back into the center?","What in you needs less performance today?","What truth in you has been waiting for a calmer room?","What have you been feeling without showing?","Where have you been strong for too long without relief?","What would rest mean if it were not something you had to earn?"];
     document.getElementById("miniPulseQ").textContent=MINI_PULSE_QUESTIONS[Math.floor(Date.now()/86400000)%MINI_PULSE_QUESTIONS.length];
