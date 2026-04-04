@@ -25,7 +25,7 @@
   </nav>
   <main>
     <div class="letter-art">
-      <img id="letterArt" src="card-03.webp" alt="KHORA art of the day" />
+      <img id="letterArt" src="card-03.webp" alt="KHORA art" />
     </div>
     <section class="letter-hero">
       <div class="eyebrow">Private Letter Three</div>
@@ -89,14 +89,5 @@
     </div>
   </main>
   <footer class="footer"><div><p>KHORA — built slowly, honestly, in plain sight.</p></div></footer>
-
-  <script>
-    const TOTAL_CARDS = 12;
-    const LETTER_OFFSET = 2; // letter-03
-    const dayIndex = Math.floor(Date.now() / 86400000);
-    const cardNum = ((dayIndex + LETTER_OFFSET) % TOTAL_CARDS) + 1;
-    const padded = String(cardNum).padStart(2, '0');
-    document.getElementById('letterArt').src = 'card-' + padded + '.webp';
-  </script>
 </body>
 </html>
