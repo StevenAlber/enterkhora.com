@@ -110,7 +110,7 @@
     .nav-links a.active::after { width: 100%; }
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
     .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--text); margin: 5px 0; transition: transform 0.3s ease, opacity 0.3s ease; }
-    .hero { min-height: 100svh; display: flex; align-items: center; padding: 3.25rem 0 5.25rem; }
+    .hero { min-height: 100svh; display: flex; align-items: center; padding: 3.25rem 0 3rem; }
     .hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr); gap: 4rem; align-items: center; }
     .hero-copy { max-width: 700px; }
     .hero-mark { display: inline-flex; align-items: center; gap: 0.7rem; margin-bottom: 1.15rem; color: var(--gold); font-size: 0.82rem; letter-spacing: 0.22em; text-transform: uppercase; }
@@ -170,11 +170,13 @@
     @media (max-width: 980px) {
       .hero-grid, .split, .cards, .status-strip { grid-template-columns: 1fr; }
       .hero { min-height: auto; padding-top: 5.3rem; }
+      .hero-grid { gap: 1.5rem; }
       .hero-card, .quote-block, .founder-note, .capture { max-width: 100%; }
+      .status-strip { display: none; }
     }
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; z-index: 200; background: rgba(247, 243, 236, 0.98); backdrop-filter: blur(20px); padding: 1.5rem 1.2rem; gap: 1.2rem; border-bottom: 1px solid var(--line-soft); box-shadow: 0 10px 30px rgba(63,57,41,0.1); }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; bottom: 0; z-index: 200; background: #F7F3EC; padding: 2rem 1.5rem; gap: 1.5rem; }
       .nav-toggle { display: block; }
     }
     @media (max-width: 640px) {
@@ -255,8 +257,8 @@
         </div>
 
         <!-- RITA VIDEO -->
-        <aside aria-label="Meet Rita" style="border-radius:24px; overflow:hidden; box-shadow: 0 20px 60px rgba(63,57,41,0.12); background:#1a1a1a;">
-          <video controls playsinline preload="metadata" style="width:100%; display:block;">
+        <aside aria-label="Meet Rita" style="border-radius:24px; overflow:hidden; box-shadow: 0 20px 60px rgba(63,57,41,0.12);">
+          <video controls playsinline preload="auto" style="width:100%; display:block; background:#1a1a1a;">
             <source src="khora-intro.mp4" type="video/mp4">
           </video>
         </aside>
