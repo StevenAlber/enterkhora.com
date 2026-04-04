@@ -174,7 +174,7 @@
     }
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(247, 243, 236, 0.96); backdrop-filter: blur(20px); padding: 1.5rem 1.2rem; gap: 1.2rem; border-bottom: 1px solid var(--line-soft); }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; z-index: 200; background: rgba(247, 243, 236, 0.98); backdrop-filter: blur(20px); padding: 1.5rem 1.2rem; gap: 1.2rem; border-bottom: 1px solid var(--line-soft); box-shadow: 0 10px 30px rgba(63,57,41,0.1); }
       .nav-toggle { display: block; }
     }
     @media (max-width: 640px) {
@@ -255,8 +255,8 @@
         </div>
 
         <!-- RITA VIDEO -->
-        <aside class="hero-card" aria-label="Meet Rita" style="padding:0;">
-          <video controls playsinline preload="metadata" style="width:100%; display:block; border-radius:32px;">
+        <aside aria-label="Meet Rita" style="border-radius:24px; overflow:hidden; box-shadow: 0 20px 60px rgba(63,57,41,0.12); background:#1a1a1a;">
+          <video controls playsinline preload="metadata" style="width:100%; display:block;">
             <source src="khora-intro.mp4" type="video/mp4">
           </video>
         </aside>
@@ -442,8 +442,13 @@
     const toggle = document.getElementById("navToggle");
     const links = document.getElementById("navLinks");
     window.addEventListener("scroll", () => { nav.classList.toggle("scrolled", window.scrollY > 20); });
-    toggle.addEventListener("click", () => { links.classList.toggle("open"); });
-    links.querySelectorAll("a").forEach(a => { a.addEventListener("click", () => links.classList.remove("open")); });
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      links.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", links.classList.contains("open"));
+    });
+    links.querySelectorAll("a").forEach(a => { a.addEventListener("click", () => { links.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); }); });
+    document.addEventListener("click", (e) => { if (!nav.contains(e.target)) { links.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); } });
     const MINI_PULSE_QUESTIONS = [
       "What feels over-managed in you today?",
       "What are you holding together that no one fully sees?",
