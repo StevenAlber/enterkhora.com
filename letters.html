@@ -241,17 +241,29 @@
       border-radius: 28px;
       box-shadow: var(--shadow-soft);
       backdrop-filter: blur(10px);
-      padding: 2rem 2.2rem;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1.8rem;
-      align-items: start;
+      overflow: hidden;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .letter-link:hover .letter-item {
       border-color: var(--gold-soft);
       box-shadow: var(--shadow);
+    }
+
+    /* ─── LETTER IMAGE ─── */
+    .letter-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+    }
+
+    .letter-body {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.8rem;
+      align-items: start;
+      padding: 2rem 2.2rem;
     }
 
     .letter-num {
@@ -390,14 +402,14 @@
       html { font-size: 16px; }
       .container { width: min(var(--max), calc(100% - 1.35rem)); }
       .letters-hero { padding: 7.5rem 0 2.5rem; }
-      .letter-item {
+      .letter-body {
         grid-template-columns: 1fr;
         gap: 0.6rem;
         padding: 1.5rem 1.25rem;
-        border-radius: 22px;
       }
       .letter-num { font-size: 1.6rem; text-align: left; min-width: auto; }
       .subscribe-card { padding: 1.8rem 1.25rem; border-radius: 22px; }
+      .letter-item { border-radius: 22px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -444,130 +456,160 @@
 
           <a href="/letter-01.html" class="letter-link">
             <article class="letter-item">
-              <div class="letter-num">01</div>
-              <div class="letter-content">
-                <h3>You Are Not Tired Because You Are Weak</h3>
-                <p>A first recognition for the woman whose exhaustion has been mistaken for fragility, when in truth it may be the cost of carrying too much for too long.</p>
-                <span class="letter-theme">Over-functioning</span>
-                <span class="letter-theme">Fatigue</span>
-                <br /><span class="letter-read">Read letter →</span>
+              <img class="letter-img" src="/card-01.webp" alt="" loading="lazy" />
+              <div class="letter-body">
+                <div class="letter-num">01</div>
+                <div class="letter-content">
+                  <h3>You Are Not Tired Because You Are Weak</h3>
+                  <p>A first recognition for the woman whose exhaustion has been mistaken for fragility, when in truth it may be the cost of carrying too much for too long.</p>
+                  <span class="letter-theme">Over-functioning</span>
+                  <span class="letter-theme">Fatigue</span>
+                  <br /><span class="letter-read">Read letter →</span>
+                </div>
               </div>
             </article>
           </a>
 
           <a href="/letter-02.html" class="letter-link">
             <article class="letter-item">
-              <div class="letter-num">02</div>
-              <div class="letter-content">
-                <h3>The Female Life of Constant Adjustment</h3>
-                <p>A letter about the quiet violence of over-adaptation and the way capable women slowly disappear inside lives that continue to look completely fine.</p>
-                <span class="letter-theme">Adjustment</span>
-                <span class="letter-theme">Invisibility</span>
-                <br /><span class="letter-read">Read letter →</span>
+              <img class="letter-img" src="/card-02.webp" alt="" loading="lazy" />
+              <div class="letter-body">
+                <div class="letter-num">02</div>
+                <div class="letter-content">
+                  <h3>The Female Life of Constant Adjustment</h3>
+                  <p>A letter about the quiet violence of over-adaptation and the way capable women slowly disappear inside lives that continue to look completely fine.</p>
+                  <span class="letter-theme">Adjustment</span>
+                  <span class="letter-theme">Invisibility</span>
+                  <br /><span class="letter-read">Read letter →</span>
+                </div>
               </div>
             </article>
           </a>
 
           <a href="/letter-03.html" class="letter-link">
             <article class="letter-item">
-              <div class="letter-num">03</div>
-              <div class="letter-content">
-                <h3>You Do Not Need Another Identity</h3>
-                <p>A refusal of the endless self-improvement marketplace and a return to something rarer than reinvention: your own center.</p>
-                <span class="letter-theme">Identity</span>
-                <span class="letter-theme">Return</span>
-                <br /><span class="letter-read">Read letter →</span>
+              <img class="letter-img" src="/card-03.webp" alt="" loading="lazy" />
+              <div class="letter-body">
+                <div class="letter-num">03</div>
+                <div class="letter-content">
+                  <h3>You Do Not Need Another Identity</h3>
+                  <p>A refusal of the endless self-improvement marketplace and a return to something rarer than reinvention: your own center.</p>
+                  <span class="letter-theme">Identity</span>
+                  <span class="letter-theme">Return</span>
+                  <br /><span class="letter-read">Read letter →</span>
+                </div>
               </div>
             </article>
           </a>
 
           <a href="/letter-04.html" class="letter-link">
             <article class="letter-item">
-              <div class="letter-num">04</div>
-              <div class="letter-content">
-                <h3>The Cost of Being Easy to Live With</h3>
-                <p>A letter about the invisible price women pay for making everyone else's life smooth — and what happens when agreeableness becomes self-erasure.</p>
-                <span class="letter-theme">Boundaries</span>
-                <span class="letter-theme">Truth</span>
-                <br /><span class="letter-read">Read letter →</span>
+              <img class="letter-img" src="/card-04.webp" alt="" loading="lazy" />
+              <div class="letter-body">
+                <div class="letter-num">04</div>
+                <div class="letter-content">
+                  <h3>The Cost of Being Easy to Live With</h3>
+                  <p>A letter about the invisible price women pay for making everyone else's life smooth — and what happens when agreeableness becomes self-erasure.</p>
+                  <span class="letter-theme">Boundaries</span>
+                  <span class="letter-theme">Truth</span>
+                  <br /><span class="letter-read">Read letter →</span>
+                </div>
               </div>
             </article>
           </a>
 
           <a href="/letter-05.html" class="letter-link">
             <article class="letter-item">
-              <div class="letter-num">05</div>
-              <div class="letter-content">
-                <h3>Where Softness Becomes Self-Erasure</h3>
-                <p>A letter about the moment gentleness stops being a gift and becomes a disappearance — and how to find your edges again.</p>
-                <span class="letter-theme">Truth</span>
-                <span class="letter-theme">Boundaries</span>
-                <br /><span class="letter-read">Read letter →</span>
+              <img class="letter-img" src="/card-05.webp" alt="" loading="lazy" />
+              <div class="letter-body">
+                <div class="letter-num">05</div>
+                <div class="letter-content">
+                  <h3>Where Softness Becomes Self-Erasure</h3>
+                  <p>A letter about the moment gentleness stops being a gift and becomes a disappearance — and how to find your edges again.</p>
+                  <span class="letter-theme">Truth</span>
+                  <span class="letter-theme">Boundaries</span>
+                  <br /><span class="letter-read">Read letter →</span>
+                </div>
               </div>
             </article>
           </a>
 
           <a href="/letter-06.html" class="letter-link">
             <article class="letter-item">
-              <div class="letter-num">06</div>
-              <div class="letter-content">
-                <h3>The Strange Grief of Being Highly Functional</h3>
-                <p>A letter for the woman who is so good at coping that no one thinks to ask how she is — and the loneliness that competence creates.</p>
-                <span class="letter-theme">Invisibility</span>
-                <span class="letter-theme">Fatigue</span>
-                <br /><span class="letter-read">Read letter →</span>
+              <img class="letter-img" src="/card-06.webp" alt="" loading="lazy" />
+              <div class="letter-body">
+                <div class="letter-num">06</div>
+                <div class="letter-content">
+                  <h3>The Strange Grief of Being Highly Functional</h3>
+                  <p>A letter for the woman who is so good at coping that no one thinks to ask how she is — and the loneliness that competence creates.</p>
+                  <span class="letter-theme">Invisibility</span>
+                  <span class="letter-theme">Fatigue</span>
+                  <br /><span class="letter-read">Read letter →</span>
+                </div>
               </div>
             </article>
           </a>
 
           <a href="/letter-07.html" class="letter-link">
             <article class="letter-item">
-              <div class="letter-num">07</div>
-              <div class="letter-content">
-                <h3>Rest Is Not a Moral Failure</h3>
-                <p>A letter for the woman who cannot stop without guilt — and the radical act of being still without justification.</p>
-                <span class="letter-theme">Rest</span>
-                <span class="letter-theme">Permission</span>
-                <br /><span class="letter-read">Read letter →</span>
+              <img class="letter-img" src="/card-07.webp" alt="" loading="lazy" />
+              <div class="letter-body">
+                <div class="letter-num">07</div>
+                <div class="letter-content">
+                  <h3>Rest Is Not a Moral Failure</h3>
+                  <p>A letter for the woman who cannot stop without guilt — and the radical act of being still without justification.</p>
+                  <span class="letter-theme">Rest</span>
+                  <span class="letter-theme">Permission</span>
+                  <br /><span class="letter-read">Read letter →</span>
+                </div>
               </div>
             </article>
           </a>
 
           <a href="/letter-08.html" class="letter-link">
             <article class="letter-item">
-              <div class="letter-num">08</div>
-              <div class="letter-content">
-                <h3>What No One Told You About Carrying Everything</h3>
-                <p>A letter about the invisible emotional labor that holds families together and slowly empties the woman at the center.</p>
-                <span class="letter-theme">Emotional labor</span>
-                <span class="letter-theme">Family</span>
-                <br /><span class="letter-read">Read letter →</span>
+              <img class="letter-img" src="/card-08.webp" alt="" loading="lazy" />
+              <div class="letter-body">
+                <div class="letter-num">08</div>
+                <div class="letter-content">
+                  <h3>What No One Told You About Carrying Everything</h3>
+                  <p>A letter about the invisible emotional labor that holds families together and slowly empties the woman at the center.</p>
+                  <span class="letter-theme">Emotional labor</span>
+                  <span class="letter-theme">Family</span>
+                  <br /><span class="letter-read">Read letter →</span>
+                </div>
               </div>
             </article>
           </a>
 
           <a href="/letter-09.html" class="letter-link">
             <article class="letter-item">
-              <div class="letter-num">09</div>
-              <div class="letter-content">
-                <h3>The Woman Who Disappeared in Plain Sight</h3>
-                <p>A letter about the slow vanishing that happens when a woman gives so much of herself to her roles that she forgets she exists underneath them.</p>
-                <span class="letter-theme">Identity</span>
-                <span class="letter-theme">Invisibility</span>
-                <br /><span class="letter-read">Read letter →</span>
+              <img class="letter-img" src="/card-09.webp" alt="" loading="lazy" />
+              <div class="letter-body">
+                <div class="letter-num">09</div>
+                <div class="letter-content">
+                  <h3>The Woman Who Disappeared in Plain Sight</h3>
+                  <p>A letter about the slow vanishing that happens when a woman gives so much of herself to her roles that she forgets she exists underneath them.</p>
+                  <span class="letter-theme">Identity</span>
+                  <span class="letter-theme">Invisibility</span>
+                  <br /><span class="letter-read">Read letter →</span>
+                </div>
               </div>
             </article>
           </a>
 
           <a href="/letter-10.html" class="letter-link">
             <article class="letter-item">
-              <div class="letter-num">10</div>
-              <div class="letter-content">
-                <h3>You Were Never Meant to Hold This Alone</h3>
-                <p>The final letter in the opening sequence — about return, about beginning, and about the woman who is ready to stop carrying the world by herself.</p>
-                <span class="letter-theme">Return</span>
-                <span class="letter-theme">Beginning</span>
-                <br /><span class="letter-read">Read letter →</span>
+              <img class="letter-img" src="/card-10.webp" alt="" loading="lazy" />
+              <div class="letter-body">
+                <div class="letter-num">10</div>
+                <div class="letter-content">
+                  <h3>You Were Never Meant to Hold This Alone</h3>
+                  <p>The final letter in the opening sequence — about return, about beginning, and about the woman who is ready to stop carrying the world by herself.</p>
+                  <span class="letter-theme">Return</span>
+                  <span class="letter-theme">Beginning</span>
+                  <br /><span class="letter-read">Read letter →</span>
+                </div>
               </div>
             </article>
           </a>
