@@ -110,16 +110,6 @@
     .feat-card{position:relative;border-radius:24px;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;color:#fff;transition:transform .35s,box-shadow .35s;box-shadow:0 12px 40px rgba(40,36,28,0.12);cursor:pointer}
     .feat-card:hover{transform:translateY(-4px);box-shadow:0 20px 56px rgba(40,36,28,0.18)}
     .feat-card-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center}
-    /* Gradient fallbacks */
-    .feat-bg-morning{background:linear-gradient(160deg,#e8ddd0 0%,#c4b59a 30%,#8a7d6a 65%,#5c544a 100%)}
-    .feat-bg-evening{background:linear-gradient(145deg,#d4c4a8 0%,#a89070 30%,#6b5d4f 60%,#3d3630 100%)}
-    .feat-bg-forest{background:linear-gradient(155deg,#c8d4c0 0%,#7a8f6f 35%,#4a5e42 65%,#2e3b28 100%)}
-    .feat-bg-dusk{background:linear-gradient(150deg,#d8cfc4 0%,#b09e8a 30%,#7a6b5c 60%,#4a3f36 100%)}
-    .feat-bg-mist{background:linear-gradient(160deg,#e0ddd8 0%,#b5ada4 35%,#8a8078 65%,#5a524c 100%)}
-    .feat-bg-warmth{background:linear-gradient(145deg,#e4d5c0 0%,#c4a880 30%,#8a7050 60%,#5a4430 100%)}
-    .feat-bg-ivory{background:linear-gradient(155deg,#f0e8dc 0%,#d4c4a8 30%,#a08c6e 60%,#6a5a44 100%)}
-    .feat-bg-sage{background:linear-gradient(150deg,#d4dac8 0%,#98a88a 35%,#5e7050 65%,#3a4830 100%)}
-    .feat-bg-stone{background:linear-gradient(160deg,#dcd6cc 0%,#b0a898 30%,#7a7268 60%,#4e4840 100%)}
     .feat-card-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(30,28,24,0.62)0%,rgba(30,28,24,0.08)50%,transparent 100%);z-index:1}
 
     .feat-card-content{position:relative;z-index:2;padding:1.6rem 1.4rem}
@@ -280,20 +270,37 @@
     };
     const ALL_QUESTIONS = Object.entries(QUESTIONS).flatMap(([theme, qs]) => qs.map(q => ({ ...q, theme })));
 
-    // ── FEATURED CARDS — img overrides gradient ──
+    /* ─── CONSISTENT IMAGE MAPPING ───
+       Each letter always uses the same image everywhere:
+       Pulse featured cards, Letters page, Home page, letter pages themselves.
+       letter-01 → card-01.webp, letter-02 → card-02.webp, etc.
+    */
+    const LETTER_IMAGES = {
+      "/letter-01.html": "/card-01.webp",
+      "/letter-02.html": "/card-02.webp",
+      "/letter-03.html": "/card-03.webp",
+      "/letter-04.html": "/card-04.webp",
+      "/letter-05.html": "/card-05.webp",
+      "/letter-06.html": "/card-06.webp",
+      "/letter-07.html": "/card-07.webp",
+      "/letter-08.html": "/card-08.webp",
+      "/letter-09.html": "/card-09.webp",
+      "/letter-10.html": "/card-10.webp",
+    };
+
     const FEATURED_CARDS = [
-      { type: "Letter of the day", title: "You Are Not Tired Because You Are Weak", desc: "A first recognition for the woman whose exhaustion has been mistaken for fragility.", link: "/letter-01.html", img: "/card-01.webp" },
-      { type: "Quiet truth", title: "Functioning Is Not the Same as Being Inwardly Alive", desc: "The world assumes you are well because you have never given it a reason to wonder otherwise.", link: "/letter-01.html", img: "/card-02.webp" },
-      { type: "Return note", title: "You May Only Need Your Own Self Back", desc: "Not a new identity. Not a better version. The one you left behind somewhere along the way.", link: "/letter-03.html", img: "/card-03.webp" },
-      { type: "Letter of the day", title: "The Female Life of Constant Adjustment", desc: "A letter about the quiet violence of over-adaptation and how capable women slowly disappear.", link: "/letter-02.html", img: "/card-02.webp" },
-      { type: "Interior signal", title: "The Loneliness of Being Surrounded by People Who Assume You Are Fine", desc: "Competence creates its own kind of invisibility. This names it.", link: "/letter-06.html", img: "/card-01.webp" },
-      { type: "Quiet truth", title: "A Life Can Remain Functional Long After It Stops Feeling Honest", desc: "When even beautiful things begin to feel borrowed.", link: "/letter-09.html", img: "/card-03.webp" },
-      { type: "Letter of the day", title: "Rest Is Not a Moral Failure", desc: "For the woman who cannot stop without guilt — and the radical act of being still.", link: "/letter-07.html", img: "/card-03.webp" },
-      { type: "Return note", title: "The Weight Was Never Meant for One Person", desc: "The first step toward setting it down is admitting it was never yours to carry alone.", link: "/letter-10.html", img: "/card-01.webp" },
-      { type: "Interior signal", title: "What the World Calls Strength Is Often Over-Adjustment with Good Manners", desc: "Praise for the very traits that slowly separate a woman from herself.", link: "/letter-02.html", img: "/card-02.webp" },
-      { type: "Letter of the day", title: "The Cost of Being Easy to Live With", desc: "What happens when agreeableness becomes self-erasure — and the room never hears your truth.", link: "/letter-04.html", img: "/card-01.webp" },
-      { type: "Quiet truth", title: "You Do Not Need to Collapse in Order to Deserve Recognition", desc: "The exhaustion you carry deserves to be named, not managed further.", link: "/letter-08.html", img: "/card-02.webp" },
-      { type: "Return note", title: "Somewhere Along the Way, the Woman Who Built All of This Stopped Being the One Who Lives in It", desc: "A door back to the center.", link: "/letter-03.html", img: "/card-03.webp" },
+      { type: "Letter of the day", title: "You Are Not Tired Because You Are Weak", desc: "A first recognition for the woman whose exhaustion has been mistaken for fragility.", link: "/letter-01.html" },
+      { type: "Quiet truth", title: "Functioning Is Not the Same as Being Inwardly Alive", desc: "The world assumes you are well because you have never given it a reason to wonder otherwise.", link: "/letter-06.html" },
+      { type: "Return note", title: "You May Only Need Your Own Self Back", desc: "Not a new identity. Not a better version. The one you left behind somewhere along the way.", link: "/letter-03.html" },
+      { type: "Letter of the day", title: "The Female Life of Constant Adjustment", desc: "A letter about the quiet violence of over-adaptation and how capable women slowly disappear.", link: "/letter-02.html" },
+      { type: "Interior signal", title: "The Loneliness of Being Surrounded by People Who Assume You Are Fine", desc: "Competence creates its own kind of invisibility. This names it.", link: "/letter-06.html" },
+      { type: "Quiet truth", title: "A Life Can Remain Functional Long After It Stops Feeling Honest", desc: "When even beautiful things begin to feel borrowed.", link: "/letter-09.html" },
+      { type: "Letter of the day", title: "Rest Is Not a Moral Failure", desc: "For the woman who cannot stop without guilt — and the radical act of being still.", link: "/letter-07.html" },
+      { type: "Return note", title: "The Weight Was Never Meant for One Person", desc: "The first step toward setting it down is admitting it was never yours to carry alone.", link: "/letter-10.html" },
+      { type: "Interior signal", title: "What the World Calls Strength Is Often Over-Adjustment with Good Manners", desc: "Praise for the very traits that slowly separate a woman from herself.", link: "/letter-02.html" },
+      { type: "Letter of the day", title: "The Cost of Being Easy to Live With", desc: "What happens when agreeableness becomes self-erasure — and the room never hears your truth.", link: "/letter-04.html" },
+      { type: "Quiet truth", title: "You Do Not Need to Collapse in Order to Deserve Recognition", desc: "The exhaustion you carry deserves to be named, not managed further.", link: "/letter-08.html" },
+      { type: "Return note", title: "Somewhere Along the Way, the Woman Who Built All of This Stopped Being the One Who Lives in It", desc: "A door back to the center.", link: "/letter-03.html" },
     ];
 
     const PATHS = [
@@ -321,11 +328,10 @@
       const grid=$q("#featuredGrid"),day=dayIndex(),startIdx=(day*3)%FEATURED_CARDS.length,cards=[];
       for(let i=0;i<3;i++)cards.push(FEATURED_CARDS[(startIdx+i)%FEATURED_CARDS.length]);
       grid.innerHTML=cards.map(card=>{
-        const bgStyle = card.img
-          ? `background-image:url('${card.img}');background-size:cover;background-position:center`
-          : "";
-        const bgClass = card.img ? "" : card.bg;
-        return `<a href="${card.link}" class="feat-card"><div class="feat-card-bg ${bgClass}" style="${bgStyle}"></div><span class="feat-card-arrow">→</span><div class="feat-card-content"><div class="feat-card-type">${card.type}</div><div class="feat-card-title">${card.title}</div><div class="feat-card-desc">${card.desc}</div></div></a>`;
+        /* FIX: Always use the image that belongs to this letter */
+        const img = LETTER_IMAGES[card.link] || "/card-01.webp";
+        const bgStyle = `background-image:url('${img}');background-size:cover;background-position:center`;
+        return `<a href="${card.link}" class="feat-card"><div class="feat-card-bg" style="${bgStyle}"></div><span class="feat-card-arrow">→</span><div class="feat-card-content"><div class="feat-card-type">${card.type}</div><div class="feat-card-title">${card.title}</div><div class="feat-card-desc">${card.desc}</div></div></a>`;
       }).join("");
     }
 
