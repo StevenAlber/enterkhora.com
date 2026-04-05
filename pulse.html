@@ -101,7 +101,6 @@
     .deeper-section{padding:0 0 4rem;display:none}.deeper-section.visible{display:block}
     .deeper-card{max-width:700px;margin:0 auto;background:rgba(255,255,255,0.72);border:1px solid var(--line-soft);border-radius:28px;box-shadow:var(--shadow);backdrop-filter:blur(12px);padding:2.6rem 2.4rem;opacity:0;transform:translateY(16px);animation:reflectionIn .8s cubic-bezier(.22,1,.36,1) forwards}
 
-    /* ─── FEATURED VISUAL CARDS ─── */
     .featured-section{padding:1rem 0 5rem}
     .featured-header{text-align:center;margin-bottom:2.2rem}
     .featured-header h2{font-size:clamp(1.65rem,3vw,2.4rem);margin-bottom:.4rem}
@@ -149,6 +148,8 @@
     .footer{padding:1.5rem 0 3rem;text-align:center}
     .footer p{font-family:"Cormorant Garamond",serif;font-size:1rem;color:var(--text-soft)}
 
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
     @media(max-width:980px){.theme-grid{grid-template-columns:repeat(2,1fr)}.featured-grid{grid-template-columns:1fr;max-width:480px}.feat-card{min-height:280px}}
     @media(max-width:768px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(247,243,236,0.96);backdrop-filter:blur(20px);padding:1.5rem 1.2rem;gap:1.2rem;border-bottom:1px solid var(--line-soft)}.nav-toggle{display:block}}
     @media(max-width:640px){html{font-size:16px}.container{width:min(var(--max),calc(100% - 1.35rem))}.atmosphere{padding:7.5rem 0 2.5rem}.pulse-card,.reflection-card,.deeper-card{padding:2rem 1.25rem;border-radius:24px}.theme-grid{grid-template-columns:1fr 1fr;gap:.65rem}.theme-card{padding:1rem .85rem;border-radius:16px}.path-card{padding:1.6rem 1.25rem;border-radius:24px}.chips{gap:.45rem}.chip{padding:.45rem .9rem;font-size:.8rem}.feat-card{min-height:260px}.feat-card-content{padding:1.3rem 1.1rem}}
@@ -172,7 +173,11 @@
       <div class="pulse-question" id="pulseQuestion"></div>
       <div class="chips" id="chips"></div>
       <div class="or-divider"><span>or write your own</span></div>
-      <div class="write-area"><textarea class="write-field" id="writeField" placeholder="Say only what feels true…" rows="3" maxlength="1000"></textarea><p class="write-hint">Answer in your own language. There is no wrong way to begin.</p></div>
+      <div class="write-area">
+        <label for="writeField" class="sr-only">Your reflection</label>
+        <textarea class="write-field" id="writeField" placeholder="Say only what feels true…" rows="3" maxlength="1000" aria-label="Write your own reflection" aria-describedby="writeHint"></textarea>
+        <p class="write-hint" id="writeHint">Answer in your own language. There is no wrong way to begin.</p>
+      </div>
       <button class="pulse-submit" id="submitBtn">Reflect with me</button>
     </div></div></section>
 
@@ -270,11 +275,6 @@
     };
     const ALL_QUESTIONS = Object.entries(QUESTIONS).flatMap(([theme, qs]) => qs.map(q => ({ ...q, theme })));
 
-    /* ─── CONSISTENT IMAGE MAPPING ───
-       Each letter always uses the same image everywhere:
-       Pulse featured cards, Letters page, Home page, letter pages themselves.
-       letter-01 → card-01.webp, letter-02 → card-02.webp, etc.
-    */
     const LETTER_IMAGES = {
       "/letter-01.html": "/card-01.webp",
       "/letter-02.html": "/card-02.webp",
@@ -317,7 +317,12 @@
     const $q=s=>document.querySelector(s),$qa=s=>document.querySelectorAll(s);
     const FREE_LIMIT=7;
 
+    /* FIX: persist reflection count per day in localStorage */
+    function getDailyCount(){const k="khora_pulse_"+new Date().toISOString().split("T")[0];return parseInt(localStorage.getItem(k))||0}
+    function saveDailyCount(n){const k="khora_pulse_"+new Date().toISOString().split("T")[0];localStorage.setItem(k,n)}
+
     function init(){
+      sessionReflectionCount=getDailyCount();
       setQuestion(ALL_QUESTIONS[dayIndex()%ALL_QUESTIONS.length]);
       renderPath(PATHS[dayIndex()%PATHS.length]);
       $q("#closingQuestion").textContent=CLOSING_QUESTIONS[dayIndex()%CLOSING_QUESTIONS.length];
@@ -328,7 +333,6 @@
       const grid=$q("#featuredGrid"),day=dayIndex(),startIdx=(day*3)%FEATURED_CARDS.length,cards=[];
       for(let i=0;i<3;i++)cards.push(FEATURED_CARDS[(startIdx+i)%FEATURED_CARDS.length]);
       grid.innerHTML=cards.map(card=>{
-        /* FIX: Always use the image that belongs to this letter */
         const img = LETTER_IMAGES[card.link] || "/card-01.webp";
         const bgStyle = `background-image:url('${img}');background-size:cover;background-position:center`;
         return `<a href="${card.link}" class="feat-card"><div class="feat-card-bg" style="${bgStyle}"></div><span class="feat-card-arrow">→</span><div class="feat-card-content"><div class="feat-card-type">${card.type}</div><div class="feat-card-title">${card.title}</div><div class="feat-card-desc">${card.desc}</div></div></a>`;
@@ -339,11 +343,16 @@
     function selectChip(el,t){$qa(".chip").forEach(c=>c.classList.remove("selected"));el.classList.add("selected");selectedChip=t;$q("#writeField").value="";$q("#submitBtn").classList.add("visible")}
     function renderPath(p){$q("#pathTitle").textContent=p.title;$q("#pathSteps").innerHTML=p.steps.map((s,i)=>`<li class="path-step"><div class="path-step-num">${i+1}</div><div><div class="path-step-label">${s.label}</div><div class="path-step-text">${s.text}</div></div></li>`).join("")}
 
-    function setupNav(){const n=$q("#nav"),t=$q("#navToggle"),l=$q("#navLinks");window.addEventListener("scroll",()=>n.classList.toggle("scrolled",window.scrollY>20));t.addEventListener("click",()=>{const o=l.classList.toggle("open");t.setAttribute("aria-expanded",o)});l.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>l.classList.remove("open")))}
+    /* FIX: outside-click closes mobile menu */
+    function setupNav(){const n=$q("#nav"),t=$q("#navToggle"),l=$q("#navLinks");window.addEventListener("scroll",()=>n.classList.toggle("scrolled",window.scrollY>20));t.addEventListener("click",()=>{const o=l.classList.toggle("open");t.setAttribute("aria-expanded",o)});document.addEventListener("click",(e)=>{if(!n.contains(e.target))l.classList.remove("open")});l.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>l.classList.remove("open")))}
+
     function setupThemes(){$qa(".theme-card").forEach(card=>{card.addEventListener("click",()=>{const th=card.dataset.theme;$qa(".theme-card").forEach(c=>c.classList.remove("active"));card.classList.add("active");currentTheme=th;const tq=QUESTIONS[th];if(tq?.length){setQuestion({...tq[dayIndex()%tq.length],theme:th})}$q("#pulseSection").scrollIntoView({behavior:"smooth",block:"center"})})})}
     function setupInput(){const w=$q("#writeField"),s=$q("#submitBtn");w.addEventListener("input",()=>{const h=w.value.trim().length>0;if(h){selectedChip=null;$qa(".chip").forEach(c=>c.classList.remove("selected"))}s.classList.toggle("visible",h||!!selectedChip)});s.addEventListener("click",submit);w.addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.metaKey||e.ctrlKey)){e.preventDefault();submit()}})}
 
-    async function submit(){const message=$q("#writeField").value.trim()||selectedChip;if(!message)return;if(sessionReflectionCount>=FREE_LIMIT){showDeeperLayer();return}$q("#submitBtn").disabled=true;$q("#errorMsg").classList.remove("visible");$q("#reflectionSection").classList.remove("visible");$q("#loadingState").classList.add("visible");$q("#loadingState").scrollIntoView({behavior:"smooth",block:"center"});try{const res=await fetch(API_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},credentials:"include",body:JSON.stringify({message,theme:currentTheme||currentQuestion?.theme||null,question:currentQuestion?.q||null})});if(!res.ok)throw new Error("API error");const data=await res.json();$q("#loadingState").classList.remove("visible");sessionReflectionCount=data.pulse?.reflectionCount||(sessionReflectionCount+1);renderReflection(data)}catch(err){console.error("Companion error:",err);$q("#loadingState").classList.remove("visible");sessionReflectionCount++;renderFallback(message)}$q("#submitBtn").disabled=false;$q("#writeField").value="";selectedChip=null;$q("#submitBtn").classList.remove("visible")}
+    /* FIX: helper for clarity */
+    function getSubmitMessage(){return $q("#writeField").value.trim()||selectedChip}
+
+    async function submit(){const message=getSubmitMessage();if(!message)return;if(sessionReflectionCount>=FREE_LIMIT){showDeeperLayer();return}$q("#submitBtn").disabled=true;$q("#errorMsg").classList.remove("visible");$q("#reflectionSection").classList.remove("visible");$q("#loadingState").classList.add("visible");$q("#loadingState").scrollIntoView({behavior:"smooth",block:"center"});try{const res=await fetch(API_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},credentials:"include",body:JSON.stringify({message,theme:currentTheme||currentQuestion?.theme||null,question:currentQuestion?.q||null})});if(!res.ok)throw new Error("API error");const data=await res.json();$q("#loadingState").classList.remove("visible");sessionReflectionCount=data.pulse?.reflectionCount||(sessionReflectionCount+1);saveDailyCount(sessionReflectionCount);renderReflection(data)}catch(err){console.error("Companion error:",err);$q("#loadingState").classList.remove("visible");sessionReflectionCount++;saveDailyCount(sessionReflectionCount);renderFallback(message)}$q("#submitBtn").disabled=false;$q("#writeField").value="";selectedChip=null;$q("#submitBtn").classList.remove("visible")}
 
     function renderReflection(data){$q("#reflectionText").textContent=data.reflection||"";let h="";const s=data.nextStep;if(s){if(s.type==="letter"&&s.link)h=`<div class="next-door-label">Read next</div><a href="${s.link}" class="next-door-link">${s.text} <span class="arrow">→</span></a>`;else if(s.type==="question")h=`<div class="next-door-label">Continue with</div><div class="next-door-question">${s.text}</div>`;else h=`<div class="next-door-label">Next</div><div class="next-door-pause">${s.text}</div>`}$q("#nextDoor").innerHTML=h;const te=$q("#reflectionThread"),tt=$q("#reflectionThreadText");if(data.pulse?.thread){tt.textContent=data.pulse.thread;te.style.display="block";$q("#pulseThreadText").textContent=data.pulse.thread;$q("#pulseThread").classList.add("visible")}else{te.style.display="none"}$q("#reflectionSection").classList.add("visible");const c=$q("#reflectionCard");c.style.animation="none";c.offsetHeight;c.style.animation="";setTimeout(()=>$q("#reflectionSection").scrollIntoView({behavior:"smooth",block:"center"}),100)}
 
