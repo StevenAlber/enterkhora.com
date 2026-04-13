@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videos — KHORA</title>
+<meta name="description" content="Short moments from a life lived slowly. Video diary from KHORA.">
+<meta name="theme-color" content="#faf8f3">
+<meta property="og:title" content="Videos — KHORA">
+<meta property="og:description" content="Short moments from a life lived slowly. Video diary from KHORA.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+::selection{background:rgba(168,140,87,0.18);color:#2E302B}
+:root{--bg:#F7F3EC;--bg-soft:#EFE8DD;--paper:rgba(255,255,255,0.62);--text:#2E302B;--text-soft:#66685F;--text-faint:#8A8A80;--line:#d8cfbf;--line-soft:rgba(168,140,87,0.16);--gold:#A88C57;--gold-soft:#C2AD84;--green:#6A7A63;--green-deep:#475542;--nav-h:64px;--max:1160px;--shadow:0 20px 60px rgba(63,57,41,0.08)}
+html{scroll-behavior:smooth;font-size:18px}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(196,175,132,0.13),transparent 34%),radial-gradient(circle at bottom right,rgba(80,100,72,0.08),transparent 38%),linear-gradient(180deg,#F9F5EF 0%,#F7F3EC 100%);line-height:1.72;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-weight:300}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 18% 18%,rgba(255,255,255,0.36),transparent 40%),radial-gradient(ellipse at 78% 78%,rgba(255,255,255,0.22),transparent 34%);z-index:0}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:0.045;background-image:linear-gradient(to right,rgba(47,49,44,0.05)1px,transparent 1px),linear-gradient(to bottom,rgba(47,49,44,0.04)1px,transparent 1px);background-size:26px 26px;mix-blend-mode:multiply;z-index:0}
+main,footer,nav{position:relative;z-index:1}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.15;color:var(--text)}
+a{text-decoration:none;color:inherit;transition:.3s}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 1.2rem;transition:background .4s,box-shadow .4s,backdrop-filter .4s}
+.nav.scrolled{background:rgba(247,243,236,0.88);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--line-soft)}
+.nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
+.nav-mark{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;letter-spacing:.18em;color:var(--text);text-transform:uppercase}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-soft);position:relative}
+.nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{color:var(--text)}.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--gold)}.nav-links a.active::after{width:100%}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
+.nav-toggle span{display:block;width:22px;height:1.5px;background:var(--text);margin:5px 0;transition:transform .3s,opacity .3s}
+@media(max-width:768px){.nav{position:sticky;top:0;background:#F7F3EC}.nav-inner{flex-wrap:wrap;height:auto;min-height:var(--nav-h)}.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;width:100%;padding:1rem 0 1.5rem;gap:1.2rem;border-top:1px solid var(--line-soft)}.nav-toggle{display:block}}
+
+.w{max-width:960px;margin:0 auto;padding:0 24px}
+@media(min-width:768px){.w{padding:0 40px}}
+
+.fade{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.fade.in{opacity:1;transform:translateY(0)}
+
+.video-head{padding:120px 0 60px;text-align:center}
+.eyebrow{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.05rem}
+.ornament{width:62px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:0 auto 1.9rem;opacity:.9}
+.video-head h1{font-size:clamp(2.6rem,5vw,3.8rem);font-weight:300;margin-bottom:16px;letter-spacing:.06em}
+.video-intro{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,1.8vw,1.35rem);color:var(--text-soft);max-width:520px;margin:20px auto 0;line-height:1.65;font-style:italic}
+
+/* Video entries */
+.videos{padding:60px 0}
+.vid-entry{margin-bottom:80px}
+.vid-entry:last-child{margin-bottom:0}
+
+.vid-wrap{
+  position:relative;width:100%;border-radius:20px;overflow:hidden;
+  border:1px solid var(--line-soft);box-shadow:var(--shadow);
+  background:#1a1a18;aspect-ratio:16/9;
+}
+.vid-wrap video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:brightness(1.06) contrast(0.94) saturate(0.9) sepia(0.15) hue-rotate(-5deg);
+}
+.vid-wrap video[data-playing]{filter:none}
+
+.vid-play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:64px;height:64px;border:2px solid rgba(255,255,255,0.5);
+  border-radius:999px;background:rgba(30,28,24,0.3);
+  color:rgba(255,255,255,0.85);font-size:1.2rem;line-height:1;
+  cursor:pointer;z-index:3;backdrop-filter:blur(4px);
+  transition:background .25s,border-color .25s,transform .25s;
+  display:flex;align-items:center;justify-content:center;
+}
+.vid-play:hover{background:rgba(30,28,24,0.5);border-color:rgba(255,255,255,0.8);transform:translate(-50%,-50%) scale(1.05)}
+.vid-play svg{width:20px;height:20px;fill:rgba(255,255,255,0.9);margin-left:3px}
+
+.vid-meta{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-top:20px;padding-bottom:12px;border-bottom:1px solid var(--line-soft);
+}
+.vid-cat{font-size:.68rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold)}
+.vid-date{font-size:.72rem;color:var(--text-faint);letter-spacing:.08em}
+.vid-dur{font-size:.68rem;color:var(--text-faint);letter-spacing:.08em}
+
+.vid-text{margin-top:20px;max-width:640px}
+.vid-text h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:16px;font-weight:300}
+.vid-text p{font-size:1rem;color:var(--text-soft);line-height:1.9;margin-bottom:16px}
+.vid-text p:last-child{margin-bottom:0}
+
+/* CTA */
+.video-cta{text-align:center;padding:80px 0;border-top:1px solid var(--line-soft)}
+.video-cta p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-soft);margin-bottom:24px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.7;font-style:italic}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:.95rem 1.45rem;border-radius:999px;border:1px solid var(--line);text-decoration:none;font-size:.78rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;transition:transform .25s,border-color .25s,color .25s;cursor:pointer;background:rgba(255,255,255,0.46);color:var(--green-deep);backdrop-filter:blur(8px)}
+.btn:hover{border-color:var(--gold);color:var(--text);transform:translateY(-1px)}
+
+footer{padding:40px 20px;text-align:center}
+footer p{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-soft)}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav"><div class="nav-inner">
+  <a href="/" class="nav-mark">Khora</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/">Home</a></li>
+    <li><a href="/pulse.html">Pulse</a></li>
+    <li><a href="/letters.html">Letters</a></li>
+    <li><a href="/journal.html">Journal</a></li>
+    <li><a href="/videos.html" class="active">Videos</a></li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+</div></nav>
+
+<main>
+<div class="w">
+
+<header class="video-head fade">
+  <div class="eyebrow">Moving diary</div>
+  <div class="ornament"></div>
+  <h1>Videos</h1>
+  <p class="video-intro">Short moments from a life lived slowly. No scripts. No edits. Just what was there.</p>
+</header>
+
+<section class="videos">
+
+<article class="vid-entry fade" data-sort="2026-04-13">
+<div class="vid-wrap">
+  <video playsinline preload="metadata" poster="">
+    <source src="video-01.mp4" type="video/mp4">
+  </video>
+  <button class="vid-play" type="button" aria-label="Play video">
+    <svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+  </button>
+</div>
+<div class="vid-meta">
+  <span class="vid-cat">Nature</span>
+  <span class="vid-dur">1 min</span>
+  <span class="vid-date">April 2026</span>
+</div>
+<div class="vid-text">
+<h2>The sea does not hurry</h2>
+<p>Wave after wave. The same rhythm, the same patience. The ocean never rushes to finish what it started. There is something in that for every woman who has been told she is taking too long to arrive.</p>
+</div>
+</article>
+
+<!-- ADD NEW VIDEO ENTRIES HERE
+<article class="vid-entry fade" data-sort="YYYY-MM-DD">
+<div class="vid-wrap">
+  <video playsinline preload="metadata" poster="">
+    <source src="video-02.mp4" type="video/mp4">
+  </video>
+  <button class="vid-play" type="button" aria-label="Play video">
+    <svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+  </button>
+</div>
+<div class="vid-meta">
+  <span class="vid-cat">Category</span>
+  <span class="vid-dur">30 sec</span>
+  <span class="vid-date">Month Year</span>
+</div>
+<div class="vid-text">
+<h2>Title</h2>
+<p>Description text.</p>
+</div>
+</article>
+-->
+
+</section>
+
+<section class="video-cta">
+<p>Still images hold memory. Moving ones hold breath. Both are true here.</p>
+<a href="/journal.html" class="btn">See the Journal</a>
+</section>
+
+</div>
+</main>
+
+<footer><div class="w"><p>KHORA — built slowly, honestly, in plain sight.</p></div></footer>
+
+<script>
+/* Nav */
+const nav=document.getElementById("nav");
+window.addEventListener("scroll",()=>nav.classList.toggle("scrolled",window.scrollY>20));
+const toggle=document.getElementById("navToggle"),links=document.getElementById("navLinks");
+toggle.addEventListener("click",()=>{const o=links.classList.toggle("open");toggle.setAttribute("aria-expanded",o)});
+document.addEventListener("click",(e)=>{if(!nav.contains(e.target))links.classList.remove("open")});
+links.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>links.classList.remove("open")));
+
+/* Fade in */
+const f=document.querySelectorAll('.fade');
+const obs=new IntersectionObserver(function(e){for(var i=0;i<e.length;i++)if(e[i].isIntersecting)e[i].target.classList.add('in')},{threshold:.15});
+for(var i=0;i<f.length;i++)obs.observe(f[i]);
+
+/* Auto-sort newest first */
+function sortVideos(){
+  var sec=document.querySelector('.videos');
+  var items=Array.from(sec.querySelectorAll('.vid-entry'));
+  items.sort(function(a,b){
+    var as=a.getAttribute('data-sort')||'0000';
+    var bs=b.getAttribute('data-sort')||'0000';
+    return bs.localeCompare(as);
+  });
+  items.forEach(function(el){sec.appendChild(el)});
+}
+sortVideos();
+
+/* Video play/pause — controls only on play (Safari dark overlay fix) */
+const allVideos=document.querySelectorAll('video');
+document.addEventListener("visibilitychange",()=>{if(document.hidden){allVideos.forEach(v=>v.pause())}});
+allVideos.forEach(v=>{v.addEventListener("play",()=>{allVideos.forEach(o=>{if(o!==v)o.pause()})})});
+
+document.querySelectorAll(".vid-wrap").forEach(wrapper=>{
+  const video=wrapper.querySelector("video");
+  const playBtn=wrapper.querySelector(".vid-play");
+  if(!video||!playBtn)return;
+
+  playBtn.addEventListener("click",async()=>{
+    video.setAttribute("controls","controls");
+    video.setAttribute("data-playing","");
+    playBtn.style.display="none";
+    try{await video.play()}catch(err){console.log(err);playBtn.style.display="";video.removeAttribute("data-playing")}
+  });
+
+  video.addEventListener("play",()=>{playBtn.style.display="none";video.setAttribute("data-playing","")});
+  video.addEventListener("pause",()=>{if(!video.ended){video.removeAttribute("controls");video.removeAttribute("data-playing");playBtn.style.display=""}});
+  video.addEventListener("ended",()=>{video.removeAttribute("controls");video.removeAttribute("data-playing");video.currentTime=0;playBtn.style.display=""});
+});
+</script>
+</body>
+</html>
