@@ -423,10 +423,17 @@ const f=document.querySelectorAll('.fade');
 const o=new IntersectionObserver(function(e){for(var i=0;i<e.length;i++)if(e[i].isIntersecting)e[i].target.classList.add('in')},{threshold:.15});
 for(var i=0;i<f.length;i++)o.observe(f[i]);
 // Auto-sort: newest entries first
-var entries=document.querySelector('.entries');
-var items=Array.from(entries.querySelectorAll('.entry'));
-items.sort(function(a,b){return(b.getAttribute('data-sort')||'').localeCompare(a.getAttribute('data-sort')||'')});
-items.forEach(function(el){entries.appendChild(el)});
+function sortEntries(){
+  var sec=document.querySelector('.entries');
+  var items=Array.from(sec.querySelectorAll('.entry'));
+  items.sort(function(a,b){
+    var as=a.getAttribute('data-sort')||'0000-00';
+    var bs=b.getAttribute('data-sort')||'0000-00';
+    return bs.localeCompare(as);
+  });
+  items.forEach(function(el){sec.appendChild(el)});
+}
+sortEntries();
 
 document.querySelectorAll('.cat').forEach(function(btn){
   btn.addEventListener('click',function(){
@@ -436,6 +443,7 @@ document.querySelectorAll('.cat').forEach(function(btn){
     document.querySelectorAll('.entry').forEach(function(entry){
       if(filter==='all'||entry.getAttribute('data-cat')===filter){entry.style.display='';entry.classList.add('in')}else{entry.style.display='none'}
     });
+    sortEntries();
   });
 });
 </script>
